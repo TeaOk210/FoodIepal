@@ -7,27 +7,26 @@ import android.database.sqlite.SQLiteOpenHelper
 class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, null, DB_VERSION) {
 
     companion object {
-        private val Table_Name = "Person"
+         val Table_Name = "Person"
 
-        private val _ID = "_id"
-        private val Name = "Name"
-        private val Login = "Login"
-        private val Password = "Password"
+         val _ID = "_id"
+         val Login = "Login"
+         val Password = "Password"
 
-        private val DB_NAME = "REG"
-        private val DB_VERSION = 1
+         val DB_NAME = "REG.db"
+         val DB_VERSION = 1
 
-        private val CREATE_TABLE = ("CREATE TABLE "
+         val CREATE_TABLE = ("CREATE TABLE "
                 + Table_Name + "(" + _ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT," + Name + Login + Password + " TEXT );")
+                + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Login + Password + " TEXT );")
     }
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL(CREATE_TABLE)
+    override fun onCreate(db: SQLiteDatabase) {
+        db.execSQL(CREATE_TABLE)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL(CREATE_TABLE)
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL(" DROP TABLE IF EXISTS " + Table_Name)
         onCreate(db)
     }
 }
