@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SQLITE</string>
+    <string name="Login">Логин:</string>
+    <string name="LoginTXT">Login</string>
+    <string name="PassTXT">Password</string>
+    <string name="Pass">Пароль:</string>
+
 </resources>
