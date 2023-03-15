@@ -9,7 +9,6 @@ import com.example.sqlite.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
     lateinit var dbManager: DBManager
-    val String = listOf<String>( DataBaseHalper._ID, DataBaseHalper.Login, DataBaseHalper.Password)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,10 +32,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Login)
         }
 
-            binding.Up.setOnClickListener() {
-            val Login = binding.Login.toString()
-            val Password = binding.password.toString()
-            dbManager.update(_id = Long.MIN_VALUE, Login, Password)
-            }
+            //binding.Up.setOnClickListener() {
+            //val Login = binding.Login.toString()
+            //val Password = binding.password.toString()
+            //dbManager.update(_id = Long.MIN_VALUE, Login, Password)
+            //}
     }
 }

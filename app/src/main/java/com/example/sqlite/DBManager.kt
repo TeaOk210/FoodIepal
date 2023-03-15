@@ -4,17 +4,19 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import java.sql.SQLException
 
 class DBManager(c: Context) {
         private lateinit var dbHelper : DataBaseHalper
-        private lateinit var  context: Context
+        private lateinit var context: Context
         private lateinit var database : SQLiteDatabase
 
-        fun open() : DBManager {
-            dbHelper = DataBaseHalper(context)
-            database = dbHelper.writableDatabase
-            return this
-        }
+    @Throws(SQLException::class)
+    fun open(): DBManager? {
+        dbHelper = DatabaseHelper(context)
+        database = dbHelper.writableDatabase
+        return this
+    }
 
         fun close() {
             dbHelper.close()
