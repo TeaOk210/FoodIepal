@@ -4,5 +4,10 @@
     <string name="LoginTXT">Login</string>
     <string name="PassTXT">Password</string>
     <string name="Pass">Пароль:</string>
+    <string name="BtnReg">Зарегестрироваться</string>
+    <string name="BtnLog">Войти</string>
+    <string name="Register">Регистрация</string>
+    <string name="SignIn">Вход</string>
+
 
 </resources>
