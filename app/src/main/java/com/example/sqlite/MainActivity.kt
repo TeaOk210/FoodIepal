@@ -3,7 +3,8 @@ package com.example.sqlite
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.SimpleCursorAdapter
+import com.example.sqlite.Fragments.fragment_registr
+import com.example.sqlite.Utils.DBManager
 import com.example.sqlite.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,13 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.password, fragment_pass.newInstance())
+            .replace(R.id.Registr, fragment_registr.newInstance())
             .commit()
 
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.Login, fragment_login.newInstance())
-            .commit()
 
         binding.In.setOnClickListener() {
             val Login = Intent(this, SignIn::class.java)
@@ -35,9 +32,8 @@ class MainActivity : AppCompatActivity() {
             binding.Up.setOnClickListener() {
                 val Main = Intent(this, MainMenu::class.java)
                 startActivity(Main)
-                val Login = binding.Login.toString()
-                val Password = binding.password.toString()
-                dbManager.insert(Login, Password)
+
+
             }
     }
 }

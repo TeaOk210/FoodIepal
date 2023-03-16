@@ -1,11 +1,10 @@
-package com.example.sqlite
+package com.example.sqlite.Utils
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.widget.Toast
-import java.sql.SQLException
 
 class DBManager(private val context: Context) {
         private lateinit var dbHelper : DataBaseHalper
