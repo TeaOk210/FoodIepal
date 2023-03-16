@@ -14,11 +14,11 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
          val Password = "Password"
 
          val DB_NAME = "REG.db"
-         val DB_VERSION = 1
+         val DB_VERSION = 2
 
-         val CREATE_TABLE = ("CREATE TABLE "
+        val CREATE_TABLE = ("CREATE TABLE "
                 + Table_Name + "(" + _ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Login + Password + " TEXT );")
+                + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Login + " TEXT, " + Password + " TEXT );")
     }
 
     override fun onCreate(db: SQLiteDatabase) {

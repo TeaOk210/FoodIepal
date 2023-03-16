@@ -32,10 +32,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(Login)
         }
 
-            //binding.Up.setOnClickListener() {
-            //val Login = binding.Login.toString()
-            //val Password = binding.password.toString()
-            //dbManager.update(_id = Long.MIN_VALUE, Login, Password)
-            //}
+            binding.Up.setOnClickListener() {
+                val Main = Intent(this, MainMenu::class.java)
+                startActivity(Main)
+                val Login = binding.Login.toString()
+                val Password = binding.password.toString()
+                dbManager.insert(Login, Password)
+            }
     }
 }

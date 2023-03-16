@@ -4,19 +4,18 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.widget.Toast
 import java.sql.SQLException
 
-class DBManager(c: Context) {
+class DBManager(private val context: Context) {
         private lateinit var dbHelper : DataBaseHalper
-        private lateinit var context: Context
         private lateinit var database : SQLiteDatabase
 
-    @Throws(SQLException::class)
-    fun open(): DBManager? {
-        dbHelper = DatabaseHelper(context)
-        database = dbHelper.writableDatabase
-        return this
-    }
+        fun open(): DBManager {
+            dbHelper = DataBaseHalper(context)
+            database = dbHelper.writableDatabase
+            return this
+        }
 
         fun close() {
             dbHelper.close()
@@ -27,6 +26,8 @@ class DBManager(c: Context) {
             contentValue.put(DataBaseHalper.Login, Login)
             contentValue.put(DataBaseHalper.Password, Password)
             database.insert(DataBaseHalper.Table_Name, null, contentValue)
+
+            Toast.makeText(context, "Вы успешно зарегистрировались", Toast.LENGTH_SHORT).show()
         }
 
         fun fetch() : Cursor {
