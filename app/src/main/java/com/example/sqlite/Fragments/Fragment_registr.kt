@@ -1,13 +1,14 @@
 package com.example.sqlite.Fragments
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.sqlite.R
 import com.example.sqlite.Utils.DBManager
+import com.example.sqlite.Utils.DataBaseHalper
 import com.example.sqlite.databinding.FragmentRegistrBinding
 
 class fragment_registr : Fragment() {
@@ -17,23 +18,53 @@ class fragment_registr : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentRegistrBinding.inflate(inflater)
+        binding = FragmentRegistrBinding.inflate(inflater)
         dbManager = DBManager(requireActivity())
         dbManager.open()
-
-        fun Registration(){
-            val Login = binding.LogTxt.toString()
-            val Pass = binding.passTXT.toString()
-            val PassConf = binding.passConf.toString()
-            if(PassConf == Pass) {
-                dbManager.insert(Login, Pass)
-            }
-    }
-
         return binding.root
     }
 
     companion object {
         fun newInstance() = fragment_registr()
+    }
+
+    @SuppressLint("Range")
+    fun checkRegistrationFields(): Boolean {
+        val login = binding.LogTxt.text.toString()
+        val password = binding.passTXT.text.toString()
+        val passwordConf = binding.passConf.text.toString()
+
+        // Проверка на пустые поля
+        if (login.isEmpty() || password.isEmpty() || passwordConf.isEmpty()) {
+            Toast.makeText(activity, "Заполните все поля", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        // Проверка на совпадение паролей
+        if (password != passwordConf) {
+            Toast.makeText(activity, "Пароли не совпадают!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        // Проверка на наличие пользователя с таким логином в БД
+        val cursor = dbManager.fetch()
+        if (cursor.moveToFirst()) {
+            do {
+                val dbLogin = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Login))
+                if (dbLogin == login) {
+                    Toast.makeText(activity, "Пользователь с таким логином уже зарегистрирован", Toast.LENGTH_SHORT).show()
+                    return false
+                }
+            } while (cursor.moveToNext())
+        }
+
+        return true
+    }
+
+
+    fun Registration() {
+        val login = binding.LogTxt.text.toString()
+        val password = binding.passTXT.text.toString()
+        dbManager.insert(login, password)
     }
 }

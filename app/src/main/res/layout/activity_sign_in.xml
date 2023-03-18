@@ -9,24 +9,11 @@
     tools:context=".MainActivity">
 
     <FrameLayout
-        android:id="@+id/passwordLog"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="470dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/LoginLog"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="120dp"
-        android:layout_marginBottom="550dp"
+        android:layout_marginBottom="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -38,8 +25,8 @@
 
     <Button
         android:id="@+id/In"
-        android:layout_width="343dp"
-        android:layout_height="77dp"
+        android:layout_width="363dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#7979d2 "
         android:text="@string/BtnReg"
