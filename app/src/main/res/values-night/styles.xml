@@ -1,7 +1,7 @@
 <resources>
 
-    <style name="Widget.Theme.SQLITE.MyView" parent="">
-        <item name="android:background">@color/gray_600</item>
-        <item name="exampleColor">@color/light_blue_600</item>
+    <style name="Widget.Theme.FoodIepal.MyView" parent="">
+        <item name="android:background">@color/teal_200</item>
+        <item name="exampleColor">@color/purple_200</item>
     </style>
 </resources>
