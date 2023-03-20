@@ -1,4 +1,4 @@
-package com.example.sqlite.Utils
+package com.example.FoodIepal.Utils
 
 import android.content.ContentValues
 import android.content.Context
@@ -30,7 +30,11 @@ class DBManager(private val context: Context) {
         }
 
         fun fetch() : Cursor {
-            val colums : Array<String> = arrayOf(DataBaseHalper._ID, DataBaseHalper.Login, DataBaseHalper.Password)
+            val colums : Array<String> = arrayOf(
+                DataBaseHalper._ID,
+                DataBaseHalper.Login,
+                DataBaseHalper.Password
+            )
             val Cursor = database.query(DataBaseHalper.Table_Name, colums, null, null, null, null, null)
             if(Cursor!= null) {
                 Cursor.moveToFirst()
@@ -46,6 +50,6 @@ class DBManager(private val context: Context) {
         }
 
         fun delete(_id: Long) {
-            database.delete(DataBaseHalper.Table_Name, DataBaseHalper._ID+ "=" + _id, null)
+            database.delete(DataBaseHalper.Table_Name, DataBaseHalper._ID + "=" + _id, null)
         }
 }

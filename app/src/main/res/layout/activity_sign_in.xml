@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:backgroundTint="#4080bf"
-    tools:context=".MainActivity">
+    tools:context="com.example.FoodIepal.MainActivity">
 
     <FrameLayout
         android:id="@+id/LoginLog"

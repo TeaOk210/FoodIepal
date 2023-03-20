@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".MainMenu">
+    tools:context="com.example.FoodIepal.MainMenu">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

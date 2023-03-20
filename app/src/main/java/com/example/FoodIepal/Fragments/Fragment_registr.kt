@@ -1,4 +1,4 @@
-package com.example.sqlite.Fragments
+package com.example.FoodIepal.Fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.sqlite.Utils.DBManager
-import com.example.sqlite.Utils.DataBaseHalper
-import com.example.sqlite.databinding.FragmentRegistrBinding
+import com.example.FoodIepal.Utils.DBManager
+import com.example.FoodIepal.Utils.DataBaseHalper
+import com.example.FoodIepal.databinding.FragmentRegistrBinding
 
 class fragment_registr : Fragment() {
     lateinit var binding: FragmentRegistrBinding

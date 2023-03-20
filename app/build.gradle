@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.sqlite'
+    namespace 'com.example.FoodIepal'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.sqlite"
+        applicationId "com.example.FoodIepal"
         minSdk 24
         targetSdk 33
         versionCode 1

@@ -1,4 +1,4 @@
-package com.example.sqlite.Utils
+package com.example.FoodIepal.Utils
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

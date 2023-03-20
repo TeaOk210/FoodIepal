@@ -1,14 +1,15 @@
-package com.example.sqlite
+package com.example.FoodIepal
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.sqlite.Fragments.fragment_login
-import com.example.sqlite.Fragments.fragment_registr
-import com.example.sqlite.Utils.DBManager
-import com.example.sqlite.databinding.ActivitySignInBinding
+import com.example.FoodIepal.Fragments.fragment_login
+import com.example.FoodIepal.Fragments.fragment_registr
+import com.example.FoodIepal.R
+import com.example.FoodIepal.Utils.DBManager
+import com.example.FoodIepal.databinding.ActivitySignInBinding
 
 class SignIn : AppCompatActivity() {
     lateinit var binding : ActivitySignInBinding

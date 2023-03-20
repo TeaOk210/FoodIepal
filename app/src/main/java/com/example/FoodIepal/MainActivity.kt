@@ -1,11 +1,12 @@
-package com.example.sqlite
+package com.example.FoodIepal
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.sqlite.Fragments.fragment_registr
-import com.example.sqlite.Utils.DBManager
-import com.example.sqlite.databinding.ActivityMainBinding
+import com.example.FoodIepal.Fragments.fragment_registr
+import com.example.FoodIepal.R
+import com.example.FoodIepal.Utils.DBManager
+import com.example.FoodIepal.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
