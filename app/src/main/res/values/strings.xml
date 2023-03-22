@@ -11,6 +11,8 @@
     <string name="SignIn">Вход</string>
     <string name="RegQuest">Уже есть аккаунт?</string>
     <string name="LogQuest">Нет аккаунта?</string>
-
+    <string name="Home">Главная</string>
+    <string name="Basket">Корзина</string>
+    <string name="favourites">Избранное</string>
 
 </resources>
