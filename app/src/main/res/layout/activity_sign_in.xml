@@ -1,19 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
+ <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    android:backgroundTint="#4080bf"
-    tools:context="com.example.FoodIepal.MainActivity">
+    android:backgroundTint="#000000"
+    tools:context="com.example.FoodIepal.SignIn">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="317dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="OnClickSign"
+        android:text="@string/LogQuest"
+        android:textColor="#A66900	"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
         android:id="@+id/LoginLog"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="120dp"
-        android:layout_marginBottom="400dp"
+        android:layout_marginBottom="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -24,43 +40,31 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/In"
-        android:layout_width="363dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#7979d2 "
-        android:text="@string/BtnReg"
-        android:textSize="24sp"
+        android:id="@+id/Up"
+        android:layout_width="210dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="320dp"
+        android:backgroundTint="#FFA100"
+        android:text="@string/BtnLog"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.358"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
-        app:toggleCheckedStateOnClick="false" />
-
-    <Button
-        android:id="@+id/Up"
-        android:layout_width="293dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="100dp"
-        android:backgroundTint="#7979d2 "
-        android:text="@string/BtnLog"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/In"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginLog"
+        app:layout_constraintVertical_bias="0.196" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:text="@string/SignIn"
-        android:textColor="#FFFFFF"
+        android:textColor="#FF8E00	"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

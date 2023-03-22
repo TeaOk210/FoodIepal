@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    android:backgroundTint="#4080bf"
+    android:backgroundTint="#000000"
     android:theme="@style/Theme.AppCompat.NoActionBar"
     tools:context="com.example.FoodIepal.MainActivity">
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="105dp"
-        android:layout_marginBottom="350dp"
+        android:layout_marginBottom="450dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,31 +25,18 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/In"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:backgroundTint="#7979d2 "
-        android:text="@string/BtnLog"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/Up"
-        android:layout_width="365dp"
-        android:layout_height="104dp"
+        android:layout_width="311dp"
+        android:layout_height="52dp"
         android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="100dp"
-        android:backgroundTint="#7979d2 "
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#FFA100"
         android:text="@string/BtnReg"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/In"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Registr" />
 
     <TextView
         android:id="@+id/textView"
@@ -58,12 +45,27 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/Register"
-        android:textColor="#FFFFFF"
+        android:textColor="#FF8E00	"
         android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/Registr"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:minHeight="48dp"
+        android:onClick="OnClickReg"
+        android:text="@string/RegQuest"
+        android:textColor="#A66900	"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

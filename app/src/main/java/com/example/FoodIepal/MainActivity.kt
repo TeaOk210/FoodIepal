@@ -3,6 +3,7 @@ package com.example.FoodIepal
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.FoodIepal.Fragments.fragment_registr
 import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.DBManager
@@ -27,11 +28,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
 
-        binding.In.setOnClickListener() {
-            val Login = Intent(this, SignIn::class.java)
-            startActivity(Login)
-        }
-
         binding.Up.setOnClickListener() {
             registrationFragment = supportFragmentManager.findFragmentById(R.id.Registr) as fragment_registr
             if (registrationFragment.checkRegistrationFields()) {
@@ -40,5 +36,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Main)
             }
         }
+    }
+
+    fun OnClickReg(view: View) {
+        val Login = Intent(this, SignIn::class.java)
+        startActivity(Login)
     }
 }

@@ -14,7 +14,7 @@
             android:id="@+id/linearLayout4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="50dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/PassConfirm"
-                android:textColor="#000000"
+                android:textColor="#D6CBCB"
                 android:textSize="20sp" />
 
             <EditText
@@ -38,6 +38,7 @@
                 android:ems="10"
                 android:hint="@string/PassTXT"
                 android:inputType="textPassword"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -46,7 +47,7 @@
             android:id="@+id/linearLayout3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="50dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pass"
-                android:textColor="#000000"
+                android:textColor="#D6CBCB"
                 android:textSize="20sp" />
 
             <EditText
@@ -70,6 +71,7 @@
                 android:ems="10"
                 android:hint="@string/PassTXT"
                 android:inputType="textPassword"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -92,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Login"
-                android:textColor="#000000"
+                android:textColor="#D6CBCB"
                 android:textSize="20sp" />
 
             <EditText
@@ -103,7 +105,7 @@
                 android:ems="10"
                 android:hint="@string/LoginTXT"
                 android:inputType="textPersonName"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 tools:visibility="visible" />
 

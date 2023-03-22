@@ -9,6 +9,8 @@
     <string name="BtnLog">Войти</string>
     <string name="Register">Регистрация</string>
     <string name="SignIn">Вход</string>
+    <string name="RegQuest">Уже есть аккаунт?</string>
+    <string name="LogQuest">Нет аккаунта?</string>
 
 
 </resources>
