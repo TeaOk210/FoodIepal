@@ -2,9 +2,6 @@ package com.example.FoodIepal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.FoodIepal.Fragments.HomeFragment
-import com.example.FoodIepal.Fragments.fragment_login
-import com.example.FoodIepal.R
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 
 class MainMenu : AppCompatActivity() {
