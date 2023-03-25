@@ -2,6 +2,7 @@ package com.example.FoodIepal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.FoodIepal.Fragments.Fragment_HomeMenu
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 
 class MainMenu : AppCompatActivity() {
@@ -14,7 +15,7 @@ class MainMenu : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.MenuFrag, HomeFragment.newInstance(1))
+            .replace(R.id.MenuFrag, Fragment_HomeMenu.newInstance())
             .commit()
     }
 }
