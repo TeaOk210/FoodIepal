@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.FoodIepal.Fragments.FragmentBascet
 import com.example.FoodIepal.Fragments.FragmentFavorite
 import com.example.FoodIepal.Fragments.FragmentHome
 import com.example.FoodIepal.Fragments.FragmentRecipeFullScreen
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainMenu : AppCompatActivity() {
     lateinit var binding : ActivityMainMenuBinding
@@ -19,7 +22,7 @@ class MainMenu : AppCompatActivity() {
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         loadFragment(FragmentHome.newInstance())
-        BottomNav = binding.BottomMenu as BottomNavigationView
+        BottomNav = binding.BottomMenu
         BottomNav.setOnItemSelectedListener{
             when(it.itemId) {
                 R.id.home -> {
