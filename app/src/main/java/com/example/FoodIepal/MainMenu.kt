@@ -2,10 +2,12 @@ package com.example.FoodIepal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.FoodIepal.Fragments.FragmentBascet
 import com.example.FoodIepal.Fragments.FragmentFavorite
 import com.example.FoodIepal.Fragments.FragmentHome
+import com.example.FoodIepal.Fragments.FragmentRecipeFullScreen
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -34,7 +36,7 @@ class MainMenu : AppCompatActivity() {
                 }
             else -> {
                 false
-            }
+                }
             }
         }
     }
@@ -43,5 +45,9 @@ class MainMenu : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.MenuFrag,fragment)
         transaction.commit()
+    }
+
+    fun OnClickFullScreen(view: View){
+        loadFragment(FragmentRecipeFullScreen.newInstance())
     }
 }

@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.FragmentHome">
+    tools:context=".Fragments.FragmentRecipeFullScreen">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecipeList"
+    <TextView
+        android:id="@+id/TextViewFullScr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onClick="OnClickHome" />
-
+        android:gravity="center"
+        android:text="TextView" />
 </FrameLayout>
