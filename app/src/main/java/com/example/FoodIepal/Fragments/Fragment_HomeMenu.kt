@@ -22,13 +22,9 @@ class Fragment_HomeMenu : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeMenuBinding.inflate(inflater)
-        return binding.root
         populateList()
         SetUpAdapter()
-    }
-
-    companion object {
-        fun newInstance() = Fragment_HomeMenu()
+        return binding.root
     }
 
     fun populateList() {
@@ -38,6 +34,7 @@ class Fragment_HomeMenu : Fragment() {
             val time = i *5
             val Kkal = i * 100
             val recipeItem = RecipeItem(name = name, text = text, time = time, Kkal = Kkal)
+            RecipeItemList.add(recipeItem)
         }
     }
 
@@ -45,5 +42,9 @@ class Fragment_HomeMenu : Fragment() {
         adapter = RecipeAdapter(requireActivity(), RecipeItemList )
         binding.RecipeList.adapter = adapter
         binding.RecipeList.layoutManager = LinearLayoutManager(requireActivity())
+    }
+
+    companion object {
+        fun newInstance() = Fragment_HomeMenu()
     }
 }
