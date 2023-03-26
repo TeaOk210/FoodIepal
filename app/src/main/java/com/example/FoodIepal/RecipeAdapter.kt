@@ -30,6 +30,7 @@ class RecipeAdapter(private val context: Context, private val recipeItemList:Mut
             binding.RecipeName.text = RecipeItem.name
             binding.RecipeTime.text = RecipeItem.time.toString()
             binding.RecipeKkal.text = RecipeItem.Kkal.toString()
+            binding.RecipePhoto.setImageResource(R.drawable.food)
         }
     }
 }
