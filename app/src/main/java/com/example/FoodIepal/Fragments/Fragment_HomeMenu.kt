@@ -28,7 +28,7 @@ class Fragment_HomeMenu : Fragment() {
     }
 
     fun populateList() {
-        for (i in 1..20) {
+        for (i in 1..200) {
             val name = "Recipe name $i"
             val text = "opisanie recepta" + i*200
             val time = i *5
