@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.FoodIepal.Fragments.FragmentBascet
@@ -14,14 +15,18 @@ import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainMenu : AppCompatActivity() {
+class MainMenu : FragmentActivity() {
     lateinit var binding : ActivityMainMenuBinding
     lateinit var BottomNav : BottomNavigationView
+    private lateinit var adapter: MyPagerAdapter
+    private lateinit var viewPager: ViewPager2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loadFragment(FragmentHome.newInstance())
+        adapter = MyPagerAdapter(this)
+        viewPager = binding.ViewPager
+        viewPager.adapter = adapter
         BottomNav = binding.BottomMenu
         BottomNav.setOnItemSelectedListener{
             when(it.itemId) {
@@ -37,8 +42,8 @@ class MainMenu : AppCompatActivity() {
                     loadFragment(FragmentFavorite.newInstance())
                     true
                 }
-            else -> {
-                false
+                else -> {
+                    false
                 }
             }
         }

@@ -1,12 +1,13 @@
 package com.example.FoodIepal
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.FoodIepal.Fragments.FragmentBascet
 import com.example.FoodIepal.Fragments.FragmentFavorite
 import com.example.FoodIepal.Fragments.FragmentHome
 
-class MyPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class MyPagerAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
     override fun getItemCount() = 3
 
     override fun createFragment(position: Int): Fragment {
