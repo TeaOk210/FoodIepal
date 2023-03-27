@@ -18,4 +18,6 @@ class MyPagerAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment
             else -> FragmentHome.newInstance()
         }
     }
+
+    override
 }
