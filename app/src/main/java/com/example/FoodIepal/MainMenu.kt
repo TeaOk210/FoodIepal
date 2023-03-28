@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.example.FoodIepal.Fragments.FragmentBascet
-import com.example.FoodIepal.Fragments.FragmentFavorite
-import com.example.FoodIepal.Fragments.FragmentHome
-import com.example.FoodIepal.Fragments.FragmentRecipeFullScreen
+import com.example.FoodIepal.Fragments.*
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -21,29 +18,27 @@ class MainMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        adapter = MyPagerAdapter(this)
-        viewPager = binding.ViewPager
-        viewPager.adapter = adapter
-        BottomNav = binding.BottomMenu
-        BottomNav.setOnItemSelectedListener{
-            when(it.itemId) {
-                R.id.home -> {
-                    loadFragment(FragmentHome.newInstance())
-                    true
-                }
-                R.id.bascet -> {
-                    loadFragment(FragmentBascet.newInstance())
-                    true
-                }
-                R.id.favorites -> {
-                    loadFragment(FragmentFavorite.newInstance())
-                    true
-                }
-                else -> {
-                    false
-                }
-            }
-        }
+        loadFragment(FragmentMenu.newInstance())
+       BottomNav = binding.BottomMenu
+       BottomNav.setOnItemSelectedListener{
+           when(it.itemId) {
+               R.id.home -> {
+                   loadFragment(FragmentHome.newInstance())
+                   true
+               }
+               R.id.bascet -> {
+                   loadFragment(FragmentBascet.newInstance())
+                   true
+               }
+               R.id.favorites -> {
+                   loadFragment(FragmentFavorite.newInstance())
+                   true
+               }
+               else -> {
+                   false
+               }
+           }
+       }
     }
 
     private  fun loadFragment(fragment: Fragment){
@@ -52,7 +47,7 @@ class MainMenu : AppCompatActivity() {
         transaction.commit()
     }
 
-//    fun OnClickFullScreen(view: View){
-//        loadFragment(FragmentRecipeFullScreen.newInstance())
-//    }
+    fun OnClickFullScreen(view: View){
+        loadFragment(FragmentRecipeFullScreen.newInstance())
+    }
 }
