@@ -12,13 +12,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainMenu : AppCompatActivity() {
     lateinit var binding : ActivityMainMenuBinding
     lateinit var BottomNav : BottomNavigationView
-   private lateinit var adapter: MyPagerAdapter
-   private lateinit var viewPager: ViewPager2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loadFragment(FragmentMenu.newInstance())
+        loadFragment(FragmentHome.newInstance())
        BottomNav = binding.BottomMenu
        BottomNav.setOnItemSelectedListener{
            when(it.itemId) {

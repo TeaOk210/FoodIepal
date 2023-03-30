@@ -1,5 +1,6 @@
 package com.example.FoodIepal.Fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,26 +19,31 @@ class FragmentHome : Fragment() {
     var RecipeItemList = ArrayList<RecipeItem>()
     lateinit var adapter: RecipeAdapter
     lateinit var binding : FragmentHomeMenuBinding
+    var ItemCount: Int = 0
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeMenuBinding.inflate(inflater)
-        populateList()
         SetUpAdapter()
+        binding.button.setOnClickListener{
+            ItemCount++
+            populateList()
+            adapter.notifyDataSetChanged()
+        }
         return binding.root
     }
 
     fun populateList() {
-        for (i in 1..200) {
-            val name = "Recipe name $i"
-            val text = "opisanie recepta"
-            val time = i *5
-            val Kkal = i * 100
-            val recipeItem = RecipeItem(name = name, text = text, time = time, Kkal = Kkal, RecipeImageResId = R.drawable.food)
-            RecipeItemList.add(recipeItem)
+        val i: Int = ItemCount
+        val name = "Recipe name $i"
+        val text = "opisanie recepta"
+        val time = i *5
+        val Kkal = i * 100
+        val recipeItem = RecipeItem(name = name, text = text, time = time, Kkal = Kkal, RecipeImageResId = R.drawable.food)
+        RecipeItemList.add(recipeItem)
         }
-    }
 
     fun SetUpAdapter(){
         adapter = RecipeAdapter(requireActivity(), RecipeItemList )
