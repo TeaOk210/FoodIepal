@@ -26,8 +26,8 @@ class RecipeAdapter(private val context: Context, private val recipeItemList:Mut
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(RecipeItem: RecipeItem) {
-            binding.RecipeName.text = RecipeItem.text
             binding.RecipeName.text = RecipeItem.name
+            binding.RecipeText.text = RecipeItem.text
             binding.RecipeTime.text = RecipeItem.time.toString()
             binding.RecipeKkal.text = RecipeItem.Kkal.toString()
             binding.RecipePhoto.setImageResource(R.drawable.food)

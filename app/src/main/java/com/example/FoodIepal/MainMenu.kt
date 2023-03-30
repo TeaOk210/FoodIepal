@@ -2,6 +2,7 @@ package com.example.FoodIepal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -17,7 +18,7 @@ class MainMenu : AppCompatActivity() {
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         loadFragment(FragmentHome.newInstance())
-       BottomNav = binding.BottomMenu
+        BottomNav = binding.BottomMenu
        BottomNav.setOnItemSelectedListener{
            when(it.itemId) {
                R.id.home -> {

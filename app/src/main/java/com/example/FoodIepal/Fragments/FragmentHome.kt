@@ -1,6 +1,7 @@
 package com.example.FoodIepal.Fragments
 
 import android.annotation.SuppressLint
+import android.content.ClipData.Item
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,8 +38,8 @@ class FragmentHome : Fragment() {
 
     fun populateList() {
         val i: Int = ItemCount
-        val name = "Recipe name $i"
-        val text = "opisanie recepta"
+        val name = "Recipe name"
+        val text = "opisanie recepta, it is recipe number $i"
         val time = i *5
         val Kkal = i * 100
         val recipeItem = RecipeItem(name = name, text = text, time = time, Kkal = Kkal, RecipeImageResId = R.drawable.food)
