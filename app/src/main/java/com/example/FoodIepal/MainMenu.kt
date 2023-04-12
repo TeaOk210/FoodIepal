@@ -1,14 +1,19 @@
 package com.example.FoodIepal
 
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.FoodIepal.Fragments.*
+import com.example.FoodIepal.Utils.FatSecretGet
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.json.JSONException
+import org.json.JSONObject
 
 class MainMenu : AppCompatActivity() {
     lateinit var binding : ActivityMainMenuBinding
