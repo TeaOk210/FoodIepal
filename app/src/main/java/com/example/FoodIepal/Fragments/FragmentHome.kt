@@ -39,7 +39,7 @@ class FragmentHome : Fragment() {
             ItemCount++
             populateList()
             adapter.notifyDataSetChanged()
-            getFood(ItemCount.toLong() + 1)
+//            getFood(ItemCount.toLong() + 1)
         }
         return binding.root
     }
@@ -71,41 +71,41 @@ class FragmentHome : Fragment() {
         fun newInstance() = FragmentHome()
     }
 
-    private fun getFood(id: Long) {
-        class FoodAsyncTask(val mFatSecretGet: FatSecretGet) :
-            AsyncTask<String, String, String>() {
-            override fun doInBackground(vararg arg0: String): String {
-                val foodGet: JSONObject? = mFatSecretGet.getFood(id);
-                try {
-                    if (foodGet != null) {
-                        val food_name: String = foodGet.getString("food_name");
-                        val servings: JSONObject = foodGet.getJSONObject("servings");
-                        val serving: JSONObject = servings.getJSONObject("serving");
-                        val calories: String = serving.getString("calories");
-                        val carbohydrate: String = serving.getString("carbohydrate");
-                        val protein: String = serving.getString("protein");
-                        val fat: String = serving.getString("fat");
-                        val serving_description: String = serving.getString("serving_description");
-
-                        Log.e("serving_description", serving_description);
-                        Log.e("food_name", food_name);
-                        Log.e("calories", calories);
-                        Log.e("carbohydrate", carbohydrate);
-                        Log.e("protein", protein);
-                        Log.e("fat", fat);
-                    }
-
-                } catch (exception: JSONException) {
-                    return "Error";
-                }
-                return ""
-            }
-            override fun onPostExecute(result: String) {
-                super.onPostExecute(result);
-                if (result == "Error") {
-                    Toast.makeText(activity, "No Items Containing Your Search", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }.execute()
-    }
+//    private fun getFood(id: Long) {
+//        class FoodAsyncTask(val mFatSecretGet: FatSecretGet) :
+//            AsyncTask<String, String, String>() {
+//            override fun doInBackground(vararg arg0: String): String {
+//                val foodGet: JSONObject? = mFatSecretGet.getFood(id);
+//                try {
+//                    if (foodGet != null) {
+//                        val food_name: String = foodGet.getString("food_name");
+//                        val servings: JSONObject = foodGet.getJSONObject("servings");
+//                        val serving: JSONObject = servings.getJSONObject("serving");
+//                        val calories: String = serving.getString("calories");
+//                        val carbohydrate: String = serving.getString("carbohydrate");
+//                        val protein: String = serving.getString("protein");
+//                        val fat: String = serving.getString("fat");
+//                        val serving_description: String = serving.getString("serving_description");
+//
+//                        Log.e("serving_description", serving_description);
+//                        Log.e("food_name", food_name);
+//                        Log.e("calories", calories);
+//                        Log.e("carbohydrate", carbohydrate);
+//                        Log.e("protein", protein);
+//                        Log.e("fat", fat);
+//                    }
+//
+//                } catch (exception: JSONException) {
+//                    return "Error";
+//                }
+//                return ""
+//            }
+//            override fun onPostExecute(result: String) {
+//                super.onPostExecute(result);
+//                if (result == "Error") {
+//                    Toast.makeText(activity, "No Items Containing Your Search", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }.execute()
+//    }
 }

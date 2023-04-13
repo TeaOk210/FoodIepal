@@ -17,7 +17,7 @@ class fragment_registr : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRegistrBinding.inflate(inflater)
         dbManager = DBManager(requireActivity())
         dbManager.open()
