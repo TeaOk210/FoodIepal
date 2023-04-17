@@ -37,6 +37,8 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
         db.execSQL(CREATE_TABLE_FOOD)
 
         db.execSQL("insert into $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time) values('Test', 'Test', 'Test', 'Test', 'Test') ")
+        db.execSQL("insert into $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time) values('Test1', 'Test1', 'Test1', 'Test1', 'Test1') ")
+        db.execSQL("insert into $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time) values('Test2', 'Test2', 'Test2', 'Test2', 'Test2') ")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {

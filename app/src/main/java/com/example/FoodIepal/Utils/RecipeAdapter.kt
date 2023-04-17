@@ -1,12 +1,13 @@
-package com.example.FoodIepal
+package com.example.FoodIepal.Utils
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.FoodIepal.R
 import com.example.FoodIepal.databinding.RecipeItemLayoutBinding
 
-class RecipeAdapter(private val context: Context, private val recipeItemList:MutableList<RecipeItem>)
+class RecipeAdapter(private val context: Context, private var recipeItemList:ArrayList<RecipeItem>)
     : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
@@ -16,6 +17,11 @@ class RecipeAdapter(private val context: Context, private val recipeItemList:Mut
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val RecipeItem = recipeItemList[position]
         holder.bind(RecipeItem)
+    }
+
+    fun filteredList(filterList: ArrayList<RecipeItem>) {
+        recipeItemList = filterList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
@@ -28,8 +34,8 @@ class RecipeAdapter(private val context: Context, private val recipeItemList:Mut
         fun bind(RecipeItem: RecipeItem) {
             binding.RecipeName.text = RecipeItem.name
             binding.RecipeText.text = RecipeItem.text
-            binding.RecipeTime.text = RecipeItem.time.toString()
-            binding.RecipeKkal.text = RecipeItem.Kkal.toString()
+            binding.RecipeTime.text = RecipeItem.time + "min"
+            binding.RecipeKkal.text = RecipeItem.Kkal + "K"
             binding.RecipePhoto.setImageResource(R.drawable.food)
         }
     }

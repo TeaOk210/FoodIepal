@@ -30,7 +30,7 @@ class FatSecretGet {
         val template = arrayOfNulls<String>(1)
         params.add("method=food.get")
         params.add("food_id=$ab")
-        params.add("oauth_signature=" + sign(APP_METHOD, APP_URL, *params.toTypedArray()))
+        params.add("oauth_signature=" + sign(APP_METHOD, APP_URL, params.toTypedArray()))
         var food: JSONObject? = null
         try {
             val url = URL(APP_URL + "?" + paramify(params.toTypedArray()))

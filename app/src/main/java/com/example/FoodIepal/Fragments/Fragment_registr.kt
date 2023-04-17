@@ -62,6 +62,8 @@ class fragment_registr : Fragment() {
     }
 
 
+
+
     fun Registration() {
         val login = binding.LogTxt.text.toString()
         val password = binding.passTXT.text.toString()

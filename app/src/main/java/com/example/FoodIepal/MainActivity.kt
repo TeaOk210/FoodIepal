@@ -42,4 +42,9 @@ class MainActivity : AppCompatActivity() {
         val Login = Intent(this, SignIn::class.java)
         startActivity(Login)
     }
+
+    fun skip(view: View) {
+        val Main = Intent(this, MainMenu::class.java)
+        startActivity(Main)
+    }
 }

@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.R
-import com.example.FoodIepal.RecipeAdapter
-import com.example.FoodIepal.RecipeItem
-import com.example.FoodIepal.databinding.FragmentBascetBinding
+import com.example.FoodIepal.Utils.RecipeAdapter
+import com.example.FoodIepal.Utils.RecipeItem
 import com.example.FoodIepal.databinding.FragmentFavoriteBinding
 
 class FragmentFavorite : Fragment() {
@@ -32,7 +31,7 @@ class FragmentFavorite : Fragment() {
             val text = "opisanie recepta"
             val time = i *1
             val Kkal = i * 300
-            val recipeItem = RecipeItem(name = name, text = text, time = time, Kkal = Kkal, RecipeImageResId = R.drawable.food)
+            val recipeItem = RecipeItem(name = name, text = text, time = time.toString(), Kkal = Kkal.toString(), RecipeImageResId = R.drawable.food)
             RecipeItemList.add(recipeItem)
         }
     }

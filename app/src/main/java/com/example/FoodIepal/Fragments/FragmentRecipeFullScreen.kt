@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.FoodIepal.R
-import com.example.FoodIepal.RecipeAdapter
-import com.example.FoodIepal.RecipeItem
+import com.example.FoodIepal.Utils.RecipeAdapter
 import com.example.FoodIepal.databinding.FragmentRecipeFullScreenBinding
 
 class FragmentRecipeFullScreen : Fragment() {
