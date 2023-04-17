@@ -30,30 +30,25 @@ class FragmentHome : Fragment() {
 
         SetUpAdapter() // add RV
 
-        // add items for Recycler View
-        binding.button.setOnClickListener {
-            ItemCount++
-            populateList()
-            adapter.notifyDataSetChanged()
-//            getFood(ItemCount.toLong() + 1)
-        }
+        populateList()
         return binding.root
     }
 
     private fun populateList() {
-        val i: Int = ItemCount
-        val name = "Recipe name"
-        val text = "opisanie recepta, it is recipe number $i"
-        val time = i * 5
-        val Kkal = i * 100
-        val recipeItem = RecipeItem(
-            name = name,
-            text = text,
-            time = time.toString(),
-            Kkal = Kkal.toString(),
-            RecipeImageResId = R.drawable.food
-        )
-        RecipeItemList.add(recipeItem)
+        for (i in 1..50) {
+            val name = "Recipe name"
+            val text = "opisanie recepta, it is recipe number $i"
+            val time = i * 5
+            val Kkal = i * 100
+            val recipeItem = RecipeItem(
+                name = name,
+                text = text,
+                time = time.toString(),
+                Kkal = Kkal.toString(),
+                RecipeImageResId = R.drawable.food
+            )
+            RecipeItemList.add(recipeItem)
+        }
     }
 
     private fun SetUpAdapter() {
