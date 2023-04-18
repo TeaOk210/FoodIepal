@@ -2,6 +2,8 @@ package com.example.FoodIepal.Fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.RecipeAdapter
 import com.example.FoodIepal.Utils.RecipeItem
 import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
+import org.w3c.dom.Text
 
 
 @Suppress("DEPRECATION")
@@ -19,7 +22,6 @@ class FragmentHome : Fragment() {
     private val RecipeItemList = ArrayList<RecipeItem>()
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
-    private var ItemCount: Int = 0
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -27,6 +29,18 @@ class FragmentHome : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeMenuBinding.inflate(inflater)
+        binding.SearchEditText.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                filter(s.toString())
+            }
+
+        })
 
         SetUpAdapter() // add RV
 
@@ -59,6 +73,28 @@ class FragmentHome : Fragment() {
 
     companion object {
         fun newInstance() = FragmentHome()
+    }
+
+    private fun filter(text: String) {
+        val filteredlist: ArrayList<RecipeItem> = ArrayList()
+        for (item in RecipeItemList) {
+            if (item.name.toLowerCase().contains(text.toLowerCase())) {
+                filteredlist.add(item)
+            }
+            if (item.text.toLowerCase().contains(text.toLowerCase())) {
+                filteredlist.add(item)
+            }
+            if (item.time.toLowerCase().contains(text.toLowerCase())) {
+                filteredlist.add(item)
+            }
+            if (item.Kkal.toLowerCase().contains(text.toLowerCase())) {
+                filteredlist.add(item)
+            }
+        }
+        adapter.filteredList(filteredlist)
+        if (filteredlist.isEmpty()) {
+            Toast.makeText(requireActivity(), "Такого нет...", Toast.LENGTH_SHORT).show()
+        }
     }
 /*
     private fun getFood(id: Long) {

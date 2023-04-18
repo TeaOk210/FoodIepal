@@ -29,10 +29,6 @@ class MainMenu : AppCompatActivity() {
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         loadFragment(FragmentHome.newInstance())
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.SearchFrag, FragmentSearch.newInstance())
-            .commit()
         BottomNav = binding.BottomMenu
        BottomNav.setOnItemSelectedListener{
            when(it.itemId) {

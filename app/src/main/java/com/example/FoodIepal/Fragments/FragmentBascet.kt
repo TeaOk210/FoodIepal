@@ -20,21 +20,10 @@ class FragmentBascet : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBascetBinding.inflate(inflater)
-        populateList()
         setUpAdapter()
         return binding.root
     }
 
-    fun populateList() {
-        for(i in 1..20) {
-            val name = "2 Recipe name $i"
-            val text = "opisanie recepta"
-            val time = i *10
-            val Kkal = i * 200
-            val recipeItem = RecipeItem(name = name, text = text, time = time.toString(), Kkal = Kkal.toString(), RecipeImageResId = R.drawable.food)
-            RecipeItemList.add(recipeItem)
-        }
-    }
 
     fun setUpAdapter() {
         adapter = RecipeAdapter(requireActivity(), RecipeItemList )
