@@ -6,22 +6,20 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.RecipeAdapter
 import com.example.FoodIepal.Utils.RecipeItem
 import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
-import org.w3c.dom.Text
 
 
 @Suppress("DEPRECATION")
 class FragmentHome : Fragment() {
-
     private val RecipeItemList = ArrayList<RecipeItem>()
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
+
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -29,6 +27,7 @@ class FragmentHome : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeMenuBinding.inflate(inflater)
+
         binding.SearchEditText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -39,12 +38,11 @@ class FragmentHome : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 filter(s.toString())
             }
-
         })
 
         SetUpAdapter() // add RV
-
         populateList()
+
         return binding.root
     }
 
@@ -57,8 +55,8 @@ class FragmentHome : Fragment() {
             val recipeItem = RecipeItem(
                 name = name,
                 text = text,
-                time = time.toString(),
-                Kkal = Kkal.toString(),
+                time = time,
+                Kkal = Kkal,
                 RecipeImageResId = R.drawable.food
             )
             RecipeItemList.add(recipeItem)
@@ -82,12 +80,6 @@ class FragmentHome : Fragment() {
                 filteredlist.add(item)
             }
             if (item.text.toLowerCase().contains(text.toLowerCase())) {
-                filteredlist.add(item)
-            }
-            if (item.time.toLowerCase().contains(text.toLowerCase())) {
-                filteredlist.add(item)
-            }
-            if (item.Kkal.toLowerCase().contains(text.toLowerCase())) {
                 filteredlist.add(item)
             }
         }

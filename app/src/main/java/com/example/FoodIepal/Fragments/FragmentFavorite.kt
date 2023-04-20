@@ -31,7 +31,7 @@ class FragmentFavorite : Fragment() {
             val text = "opisanie recepta"
             val time = i *1
             val Kkal = i * 300
-            val recipeItem = RecipeItem(name = name, text = text, time = time.toString(), Kkal = Kkal.toString(), RecipeImageResId = R.drawable.food)
+            val recipeItem = RecipeItem(name = name, text = text, time = time, Kkal = Kkal, RecipeImageResId = R.drawable.food)
             RecipeItemList.add(recipeItem)
         }
     }

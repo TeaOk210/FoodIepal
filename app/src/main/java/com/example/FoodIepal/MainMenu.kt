@@ -57,6 +57,10 @@ class MainMenu : AppCompatActivity() {
         transaction.commit()
     }
 
+    fun onClickFilterListener(view: View) {
+        loadFragment(FragmentFilter.newInstance())
+    }
+
     fun OnClickFullScreen(view: View){
         loadFragment(FragmentRecipeFullScreen.newInstance())
     }

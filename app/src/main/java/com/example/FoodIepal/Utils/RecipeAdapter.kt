@@ -34,8 +34,8 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
         fun bind(RecipeItem: RecipeItem) {
             binding.RecipeName.text = RecipeItem.name
             binding.RecipeText.text = RecipeItem.text
-            binding.RecipeTime.text = RecipeItem.time + "min"
-            binding.RecipeKkal.text = RecipeItem.Kkal + "K"
+            binding.RecipeTime.text = RecipeItem.time.toString()
+            binding.RecipeKkal.text = RecipeItem.Kkal.toString()
             binding.RecipePhoto.setImageResource(R.drawable.food)
         }
     }

@@ -33,10 +33,11 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="60dp"
+            android:layout_width="55dp"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ilter_style"
+            android:background="@drawable/filter_style"
+            android:onClick="onClickFilterListener"
             android:src="@drawable/baseline_filter_list_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/SearchEditText"
