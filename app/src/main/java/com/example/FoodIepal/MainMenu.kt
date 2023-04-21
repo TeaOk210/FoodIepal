@@ -1,25 +1,13 @@
 package com.example.FoodIepal
 
-import android.os.AsyncTask
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.transaction
-import androidx.viewpager2.widget.ViewPager2
 import com.example.FoodIepal.Fragments.*
-import com.example.FoodIepal.Utils.FatSecretGet
-import com.example.FoodIepal.Utils.RecipeAdapter
-import com.example.FoodIepal.Utils.RecipeItem
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.json.JSONException
-import org.json.JSONObject
 
 class MainMenu : AppCompatActivity() {
     lateinit var binding : ActivityMainMenuBinding
@@ -30,7 +18,7 @@ class MainMenu : AppCompatActivity() {
         setContentView(binding.root)
         loadFragment(FragmentHome.newInstance())
         BottomNav = binding.BottomMenu
-       BottomNav.setOnItemSelectedListener{
+        BottomNav.setOnItemSelectedListener{
            when(it.itemId) {
                R.id.home -> {
                    loadFragment(FragmentHome.newInstance())
@@ -58,7 +46,8 @@ class MainMenu : AppCompatActivity() {
     }
 
     fun onClickFilterListener(view: View) {
-        loadFragment(FragmentFilter.newInstance())
+        val filter = Intent(this, Filter::class.java)
+        startActivity(filter)
     }
 
     fun OnClickFullScreen(view: View){
