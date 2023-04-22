@@ -16,7 +16,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:text="Kkal:"
-        android:textColor="@color/white"
+        android:textColor="#FF8E00"
         android:textSize="24sp" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:text="От:"
-        android:textColor="@color/white"
+        android:textColor="#A66900"
         android:textSize="24sp" />
 
     <EditText
@@ -56,7 +56,7 @@
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/minKk"
         android:text="До:"
-        android:textColor="@color/white"
+        android:textColor="#A66900"
         android:textSize="24sp" />
 
     <EditText
@@ -79,8 +79,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:onClick="onClickContinueListener"
         android:text="Продолжить"
-        android:textColor="#0776A0"
+        android:textColor="#A66900"
         android:textSize="28sp" />
 
     <TextView
@@ -93,7 +94,7 @@
         android:layout_marginBottom="10dp"
         android:onClick="onClickExitListener"
         android:text="Отмена"
-        android:textColor="#0776A0"
+        android:textColor="#A66900"
         android:textSize="28sp" />
 
     <TextView
@@ -105,7 +106,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:text="Time:"
-        android:textColor="@color/white"
+        android:textColor="#FF8E00"
         android:textSize="24sp" />
 
     <TextView

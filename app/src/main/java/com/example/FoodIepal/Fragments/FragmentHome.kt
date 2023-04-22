@@ -19,15 +19,12 @@ class FragmentHome : Fragment() {
     private val RecipeItemList = ArrayList<RecipeItem>()
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
-
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeMenuBinding.inflate(inflater)
-
         binding.SearchEditText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -39,11 +36,40 @@ class FragmentHome : Fragment() {
                 filter(s.toString())
             }
         })
-
         SetUpAdapter() // add RV
         populateList()
 
         return binding.root
+    }
+
+
+    companion object {
+        fun newInstance() = FragmentHome()
+
+    }
+
+    fun getData(args: Bundle? = arguments) {
+        val minKk = args?.getString("minKk")
+        val maxKk = args?.getString("maxKk")
+        Toast.makeText(requireActivity(), "$minKk", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), "$maxKk", Toast.LENGTH_SHORT).show()
+    }
+
+
+    private fun filter(text: String) {
+        val filteredlist: ArrayList<RecipeItem> = ArrayList()
+        for (item in RecipeItemList) {
+            if (item.name.toLowerCase().contains(text.toLowerCase())) {
+                filteredlist.add(item)
+            }
+            if (item.text.toLowerCase().contains(text.toLowerCase())) {
+                filteredlist.add(item)
+            }
+        }
+        adapter.filteredList(filteredlist)
+        if (filteredlist.isEmpty()) {
+            Toast.makeText(requireActivity(), "Такого нет...", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun populateList() {
@@ -69,62 +95,4 @@ class FragmentHome : Fragment() {
         binding.RecipeList.layoutManager = LinearLayoutManager(requireActivity())
     }
 
-    companion object {
-        fun newInstance() = FragmentHome()
-    }
-
-    private fun filter(text: String) {
-        val filteredlist: ArrayList<RecipeItem> = ArrayList()
-        for (item in RecipeItemList) {
-            if (item.name.toLowerCase().contains(text.toLowerCase())) {
-                filteredlist.add(item)
-            }
-            if (item.text.toLowerCase().contains(text.toLowerCase())) {
-                filteredlist.add(item)
-            }
-        }
-        adapter.filteredList(filteredlist)
-        if (filteredlist.isEmpty()) {
-            Toast.makeText(requireActivity(), "Такого нет...", Toast.LENGTH_SHORT).show()
-        }
-    }
-/*
-    private fun getFood(id: Long) {
-        class FoodAsyncTask(val mFatSecretGet: FatSecretGet) :
-            AsyncTask<String, String, String>() {
-            override fun doInBackground(vararg arg0: String): String {
-                val foodGet: JSONObject? = mFatSecretGet.getFood(id);
-                try {
-                    if (foodGet != null) {
-                        val food_name: String = foodGet.getString("food_name");
-                        val servings: JSONObject = foodGet.getJSONObject("servings");
-                        val serving: JSONObject = servings.getJSONObject("serving");
-                        val calories: String = serving.getString("calories");
-                        val carbohydrate: String = serving.getString("carbohydrate");
-                        val protein: String = serving.getString("protein");
-                        val fat: String = serving.getString("fat");
-                        val serving_description: String = serving.getString("serving_description");
-
-                        Log.e("serving_description", serving_description);
-                        Log.e("food_name", food_name);
-                        Log.e("calories", calories);
-                        Log.e("carbohydrate", carbohydrate);
-                        Log.e("protein", protein);
-                        Log.e("fat", fat);
-                    }
-
-                } catch (exception: JSONException) {
-                    return "Error";
-                }
-                return ""
-            }
-            override fun onPostExecute(result: String) {
-                super.onPostExecute(result);
-                if (result == "Error") {
-                    Toast.makeText(activity, "No Items Containing Your Search", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }.execute()
-    }
-*/
 }
