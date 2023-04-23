@@ -4,8 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.FoodIepal.Fragments.FragmentHome
 import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.ActivityFilterBinding
@@ -25,6 +30,7 @@ class Filter : AppCompatActivity() {
     }
 
     fun onClickContinueListener(view: View) {
+        dataModel.Kkal.value = IntRange(binding.minKk.text.toString().toInt(), binding.maxKk.text.toString().toInt())
         finish()
     }
 
