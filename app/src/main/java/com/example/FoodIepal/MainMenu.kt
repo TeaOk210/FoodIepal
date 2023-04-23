@@ -1,5 +1,6 @@
 package com.example.FoodIepal
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -45,14 +46,6 @@ class MainMenu : AppCompatActivity() {
            }
        }
     }
-
-    override fun onRestart() {
-        super.onRestart()
-        val intent = Intent(this, Filter::class.java)
-        val bundle: Bundle? = intent.getBundleExtra("Data")
-        loadFragment(FragmentHome.newInstance(bundle!!))
-    }
-
 
     private  fun loadFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()

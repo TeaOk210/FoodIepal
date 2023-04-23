@@ -1,5 +1,6 @@
 package com.example.FoodIepal
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +10,6 @@ import com.example.FoodIepal.databinding.ActivityFilterBinding
 
 class Filter : AppCompatActivity() {
     lateinit var binding: ActivityFilterBinding
-    val fragment = FragmentHome()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +23,6 @@ class Filter : AppCompatActivity() {
 
     fun onClickContinueListener(view: View) {
         finish()
-        val bundle = Bundle()
-        val intent = Intent(this, MainMenu::class.java)
-        bundle.putInt("minKk", binding.minKk.text.toString().toIntOrNull()!!)
-        bundle.putInt("maxKk", binding.maxKk.text.toString().toIntOrNull()!!)
-        intent.getBundleExtra("Data")
     }
+
 }
