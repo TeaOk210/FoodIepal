@@ -22,11 +22,11 @@ class Filter : AppCompatActivity() {
     }
 
     fun onClickContinueListener(view: View) {
-        val bundle = Bundle()
-        bundle.putString("minKk", binding.minKk.toString())
-        bundle.putString("maxKk", binding.maxKk.toString())
-        fragment.arguments = bundle
-        fragment.getData()
         finish()
+        val bundle = Bundle()
+        val intent = Intent(this, MainMenu::class.java)
+        bundle.putInt("minKk", binding.minKk.text.toString().toIntOrNull()!!)
+        bundle.putInt("maxKk", binding.maxKk.text.toString().toIntOrNull()!!)
+        intent.getBundleExtra("Data")
     }
 }

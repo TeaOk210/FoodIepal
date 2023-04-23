@@ -48,10 +48,11 @@ class MainMenu : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-
-        loadFragment(FragmentHome.newInstance())
-        FragmentHome().getData()
+        val intent = Intent(this, Filter::class.java)
+        val bundle: Bundle? = intent.getBundleExtra("Data")
+        loadFragment(FragmentHome.newInstance(bundle!!))
     }
+
 
     private  fun loadFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()

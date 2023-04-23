@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -19,6 +20,8 @@ class FragmentHome : Fragment() {
     private val RecipeItemList = ArrayList<RecipeItem>()
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
+    private var minKk: Int? = null
+    private var maxKk: Int? = null
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +41,12 @@ class FragmentHome : Fragment() {
         })
         SetUpAdapter() // add RV
         populateList()
+        arguments?.let {
+            minKk = it.getInt("minKk")
+            maxKk = it.getInt("maxKk")
+        }
+
+        Log.e("Data", minKk.toString())
 
         return binding.root
     }
@@ -46,6 +55,9 @@ class FragmentHome : Fragment() {
     companion object {
         fun newInstance() = FragmentHome()
 
+        fun newInstance(bundle: Bundle): FragmentHome {
+            return FragmentHome()
+        }
     }
 
     fun getData(args: Bundle? = arguments) {
