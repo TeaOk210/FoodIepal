@@ -1,6 +1,5 @@
 package com.example.FoodIepal
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,12 +11,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.FoodIepal.Fragments.FragmentHome
-import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.ActivityFilterBinding
 
 class Filter : AppCompatActivity() {
     lateinit var binding: ActivityFilterBinding
-    private val dataModel: DataModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +27,9 @@ class Filter : AppCompatActivity() {
     }
 
     fun onClickContinueListener(view: View) {
-        dataModel.Kkal.value = IntRange(binding.minKk.text.toString().toInt(), binding.maxKk.text.toString().toInt())
+        intent = Intent(this@Filter, MainMenu::class.java)
+        intent.putExtra("minKk", binding.minKk.text.toString().toInt())
+        intent.putExtra("maxKk", binding.maxKk.text.toString().toInt())
         finish()
     }
 
