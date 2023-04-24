@@ -1,5 +1,6 @@
 package com.example.FoodIepal
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import com.example.FoodIepal.Filter.Companion.REQUEST_CODE
 import com.example.FoodIepal.Fragments.*
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -49,13 +51,20 @@ class MainMenu : AppCompatActivity() {
        }
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        val Infinity: Double = 1.0/0.0
-        val minKk = intent.extras?.getInt("minKk") ?: 0
-        val maxKk = intent.extras?.getInt("maxKk") ?: Infinity.toInt()
-        val Kkal = IntRange(minKk, maxKk)
-        dataModel.Kkal.value = Kkal
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                val Infinity: Double = 1.0/0.0
+                val minKk = data?.getIntExtra("minKk", 0) ?: 0
+                val timeMin = data?.getIntExtra("timeMin", 0) ?: 0
+                val maxKk = data?.getIntExtra("maxKk", 0) ?: Infinity.toInt()
+                val timeMax = data?.getIntExtra("timeMax", 0) ?: Infinity.toInt()
+                dataModel.Kkal.value = IntRange(minKk, maxKk)
+                dataModel.Time.value = IntRange(timeMin, timeMax)
+            }
+        }
     }
 
     private  fun loadFragment(fragment: Fragment){
@@ -65,8 +74,8 @@ class MainMenu : AppCompatActivity() {
     }
 
     fun onClickFilterListener(view: View) {
-        val filter = Intent(this, Filter::class.java)
-        startActivity(filter)
+        val intent = Intent(this, Filter::class.java)
+        startActivityForResult(intent, REQUEST_CODE)
     }
 
     fun OnClickFullScreen(view: View){

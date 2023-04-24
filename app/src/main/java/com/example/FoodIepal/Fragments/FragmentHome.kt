@@ -22,7 +22,6 @@ class FragmentHome : Fragment() {
     private val RecipeItemList = ArrayList<RecipeItem>()
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
-    val filteredlist: ArrayList<RecipeItem> = ArrayList()
     private val dataModel: DataModel by activityViewModels()
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -41,8 +40,11 @@ class FragmentHome : Fragment() {
                 filter(s.toString())
             }
         })
-        dataModel.Kkal.observe(activity as LifecycleOwner) {
-            Toast.makeText(requireActivity(), it.toString(), Toast.LENGTH_SHORT).show()
+        dataModel.Kkal.observe(activity as LifecycleOwner) {range ->
+            kalFilter(range)
+        }
+        dataModel.Time.observe(activity as LifecycleOwner) {range ->
+            timeFilter(range)
         }
         SetUpAdapter() // add RV
         populateList()
@@ -52,9 +54,28 @@ class FragmentHome : Fragment() {
     companion object {
         fun newInstance() = FragmentHome()
     }
+    fun kalFilter(range: IntRange) {
+        val filteredlist: ArrayList<RecipeItem> = ArrayList()
+        for (item in RecipeItemList) {
+            if (item.Kkal in range) {
+                filteredlist.add(item)
+            }
+        }
+        adapter.filteredList(filteredlist)
+    }
+    fun timeFilter(range: IntRange) {
+        val filteredlist: ArrayList<RecipeItem> = ArrayList()
+        for (item in RecipeItemList) {
+            if (item.time in range) {
+                filteredlist.add(item)
+            }
+        }
+        adapter.filteredList(filteredlist)
+    }
 
     @SuppressLint("DefaultLocale")
     private fun filter(text: String) {
+        val filteredlist: ArrayList<RecipeItem> = ArrayList()
         for (item in RecipeItemList) {
             if (item.name.toLowerCase().contains(text.toLowerCase())) {
                 filteredlist.add(item)

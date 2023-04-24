@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="Kkal:"
+        android:text="@string/Kkal"
         android:textColor="#FF8E00"
         android:textSize="24sp" />
 
@@ -27,7 +27,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="От:"
+        android:text="@string/Befote"
         android:textColor="#A66900"
         android:textSize="24sp" />
 
@@ -55,7 +55,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/minKk"
-        android:text="До:"
+        android:text="@string/After"
         android:textColor="#A66900"
         android:textSize="24sp" />
 
@@ -80,7 +80,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:onClick="onClickContinueListener"
-        android:text="Продолжить"
+        android:text="@string/Cont"
         android:textColor="#A66900"
         android:textSize="28sp" />
 
@@ -93,7 +93,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:onClick="onClickExitListener"
-        android:text="Отмена"
+        android:text="@string/NoCont"
         android:textColor="#A66900"
         android:textSize="28sp" />
 
@@ -105,7 +105,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="Time:"
+        android:text="@string/Time"
         android:textColor="#FF8E00"
         android:textSize="24sp" />
 
@@ -117,18 +117,48 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="TextView" />
+        android:text="@string/Befote"
+        android:textColor="#A66900"
+        android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/timeMin"
+        android:layout_width="155dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/TimeFilter"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/textView10"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:textColor="@color/white"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_below="@+id/TimeFilter"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/timeMin"
+        android:text="@string/After"
+        android:textColor="#A66900"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/timeMax"
+        android:layout_width="155dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/TimeFilter"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/textView9"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp" />
 
 </RelativeLayout>

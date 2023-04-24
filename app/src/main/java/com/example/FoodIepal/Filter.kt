@@ -1,5 +1,6 @@
 package com.example.FoodIepal
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,8 +30,15 @@ class Filter : AppCompatActivity() {
     fun onClickContinueListener(view: View) {
         intent = Intent(this@Filter, MainMenu::class.java)
         intent.putExtra("minKk", binding.minKk.text.toString().toInt())
+        intent.putExtra("timeMin", binding.minKk.text.toString().toInt())
         intent.putExtra("maxKk", binding.maxKk.text.toString().toInt())
+        intent.putExtra("timeMax", binding.maxKk.text.toString().toInt())
+        setResult(Activity.RESULT_OK, intent)
         finish()
+    }
+
+    companion object {
+        const val REQUEST_CODE = 228
     }
 
 }
