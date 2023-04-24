@@ -40,11 +40,10 @@ class FragmentHome : Fragment() {
                 filter(s.toString())
             }
         })
-        dataModel.Kkal.observe(activity as LifecycleOwner) {range ->
-            kalFilter(range)
-        }
-        dataModel.Time.observe(activity as LifecycleOwner) {range ->
-            timeFilter(range)
+        dataModel.Kkal.observe(activity as LifecycleOwner) { Krange ->
+            dataModel.Time.observe(activity as LifecycleOwner) {Trange ->
+                filters(Krange, Trange)
+            }
         }
         SetUpAdapter() // add RV
         populateList()
@@ -54,19 +53,10 @@ class FragmentHome : Fragment() {
     companion object {
         fun newInstance() = FragmentHome()
     }
-    fun kalFilter(range: IntRange) {
+    fun filters(Krange: IntRange, Trange: IntRange) {
         val filteredlist: ArrayList<RecipeItem> = ArrayList()
         for (item in RecipeItemList) {
-            if (item.Kkal in range) {
-                filteredlist.add(item)
-            }
-        }
-        adapter.filteredList(filteredlist)
-    }
-    fun timeFilter(range: IntRange) {
-        val filteredlist: ArrayList<RecipeItem> = ArrayList()
-        for (item in RecipeItemList) {
-            if (item.time in range) {
+            if(item.Kkal in Krange && item.time in Trange) {
                 filteredlist.add(item)
             }
         }

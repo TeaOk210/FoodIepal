@@ -56,11 +56,11 @@ class MainMenu : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                val Infinity: Double = 1.0/0.0
+
                 val minKk = data?.getIntExtra("minKk", 0) ?: 0
                 val timeMin = data?.getIntExtra("timeMin", 0) ?: 0
-                val maxKk = data?.getIntExtra("maxKk", 0) ?: Infinity.toInt()
-                val timeMax = data?.getIntExtra("timeMax", 0) ?: Infinity.toInt()
+                val maxKk = data?.getIntExtra("maxKk", 0) ?: 0
+                val timeMax = data?.getIntExtra("timeMax", 0) ?: 0
                 dataModel.Kkal.value = IntRange(minKk, maxKk)
                 dataModel.Time.value = IntRange(timeMin, timeMax)
             }
