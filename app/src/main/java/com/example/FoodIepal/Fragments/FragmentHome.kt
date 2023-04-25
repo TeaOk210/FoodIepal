@@ -4,11 +4,15 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.DataModel
 import com.example.FoodIepal.R
@@ -29,7 +33,12 @@ class FragmentHome : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeMenuBinding.inflate(inflater)
-        binding.SearchEditText.addTextChangedListener(object: TextWatcher {
+        dataModel.Kkal.observe(activity as LifecycleOwner) { Krange ->
+            dataModel.Time.observe(activity as LifecycleOwner) {Trange ->
+                kalTimeFilter(Krange, Trange)
+            }
+        }
+            binding.SearchEditText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -40,29 +49,35 @@ class FragmentHome : Fragment() {
                 filter(s.toString())
             }
         })
-        dataModel.Kkal.observe(activity as LifecycleOwner) { Krange ->
-            dataModel.Time.observe(activity as LifecycleOwner) {Trange ->
-                filters(Krange, Trange)
-            }
-        }
         SetUpAdapter() // add RV
         populateList()
         return binding.root
     }
 
+    fun kalTimeFilter(kkalRange: IntRange, timeRange: IntRange) {
+        val filteredList: ArrayList<RecipeItem> = ArrayList()
+        val unfilteredList: ArrayList<RecipeItem> = ArrayList()
+
+        for (item in RecipeItemList) {
+            if (item.Kkal in kkalRange && item.time in timeRange) {
+                filteredList.add(item)
+//            } else {
+//                unfilteredList.add(item)
+            }
+        }
+
+        filteredList.sortWith(compareBy({ it.time }, { it.Kkal }))
+//        unfilteredList.sortWith(compareBy({ it.time }, { it.Kkal }))
+
+//        filteredList.addAll(unfilteredList)
+        adapter.filteredList(filteredList)
+    }
+
+
+
     companion object {
         fun newInstance() = FragmentHome()
     }
-    fun filters(Krange: IntRange, Trange: IntRange) {
-        val filteredlist: ArrayList<RecipeItem> = ArrayList()
-        for (item in RecipeItemList) {
-            if(item.Kkal in Krange && item.time in Trange) {
-                filteredlist.add(item)
-            }
-        }
-        adapter.filteredList(filteredlist)
-    }
-
     @SuppressLint("DefaultLocale")
     private fun filter(text: String) {
         val filteredlist: ArrayList<RecipeItem> = ArrayList()
@@ -80,8 +95,8 @@ class FragmentHome : Fragment() {
         for (i in 1..50) {
             val name = "Recipe name"
             val text = "opisanie recepta, it is recipe number $i"
-            val time = i * 5
-            val Kkal = i * 100
+            val time = i
+            val Kkal = i * 10
             val recipeItem = RecipeItem(
                 name = name,
                 text = text,

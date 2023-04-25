@@ -16,12 +16,9 @@ import com.example.FoodIepal.databinding.ActivityFilterBinding
 
 class Filter : AppCompatActivity() {
     lateinit var binding: ActivityFilterBinding
-    private val dataModel: DataModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFilterBinding.inflate(layoutInflater)
-        binding.minKk.text =  dataModel.
         setContentView(binding.root)
     }
 
@@ -33,9 +30,9 @@ class Filter : AppCompatActivity() {
         intent = Intent(this@Filter, MainMenu::class.java)
         val Infinity: Double = 1.0/0.0
         intent.putExtra("minKk", binding.minKk.text.toString().toIntOrNull() ?: 0)
-        intent.putExtra("timeMin", binding.minKk.text.toString().toIntOrNull() ?: 0)
+        intent.putExtra("timeMin", binding.timeMin.text.toString().toIntOrNull() ?: 0)
         intent.putExtra("maxKk", binding.maxKk.text.toString().toIntOrNull() ?: Infinity.toInt())
-        intent.putExtra("timeMax", binding.maxKk.text.toString().toIntOrNull() ?: Infinity.toInt())
+        intent.putExtra("timeMax", binding.timeMax.text.toString().toIntOrNull() ?: Infinity.toInt())
         setResult(Activity.RESULT_OK, intent)
         finish()
     }

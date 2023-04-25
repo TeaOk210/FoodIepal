@@ -11,4 +11,5 @@ open class DataModel: ViewModel() {
     val Time: MutableLiveData<IntRange> by lazy {
         MutableLiveData<IntRange>()
     }
+
 }
