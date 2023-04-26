@@ -62,8 +62,10 @@ class MainMenu : AppCompatActivity() {
                 val timeMin = data?.getIntExtra("timeMin", 0) ?: 0
                 val maxKk = data?.getIntExtra("maxKk", 0) ?: 0
                 val timeMax = data?.getIntExtra("timeMax", 0) ?: 0
-                dataModel.Kkal.value = IntRange(minKk, maxKk)
-                dataModel.Time.value = IntRange(timeMin, timeMax)
+                dataModel.minKk.value = minKk
+                dataModel.maxKk.value = maxKk
+                dataModel.minTt.value = timeMin
+                dataModel.maxTt.value = timeMax
             }
         }
     }

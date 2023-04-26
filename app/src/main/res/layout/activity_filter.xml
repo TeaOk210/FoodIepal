@@ -45,7 +45,8 @@
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:text=""/>
 
     <TextView
         android:id="@+id/textView6"
@@ -69,7 +70,8 @@
         android:layout_toEndOf="@+id/textView6"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:text=""/>
 
     <TextView
         android:id="@+id/textView7"
@@ -135,7 +137,8 @@
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:text=""/>
 
     <TextView
         android:id="@+id/textView9"
@@ -159,6 +162,7 @@
         android:layout_toEndOf="@+id/textView9"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:text=""/>
 
 </RelativeLayout>

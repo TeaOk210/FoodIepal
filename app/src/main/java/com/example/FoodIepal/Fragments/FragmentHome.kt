@@ -33,9 +33,13 @@ class FragmentHome : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeMenuBinding.inflate(inflater)
-        dataModel.Kkal.observe(activity as LifecycleOwner) { Krange ->
-            dataModel.Time.observe(activity as LifecycleOwner) {Trange ->
-                kalTimeFilter(Krange, Trange)
+        dataModel.minKk.observe(activity as LifecycleOwner) {minKk ->
+            dataModel.maxKk.observe(activity as LifecycleOwner) {maxkK ->
+                dataModel.minTt.observe(activity as LifecycleOwner) {minTt ->
+                    dataModel.maxTt.observe(activity as LifecycleOwner) {maxTt ->
+                        kalTimeFilter(IntRange(minKk, maxkK), IntRange(minTt, maxTt))
+                    }
+                }
             }
         }
             binding.SearchEditText.addTextChangedListener(object: TextWatcher {
