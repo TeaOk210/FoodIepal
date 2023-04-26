@@ -27,11 +27,26 @@ class Filter : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == MainMenu.REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                val minKk = data?.getIntExtra("minKk", 0) ?: 0
+                val timeMin = data?.getIntExtra("minTt", 0) ?: 0
+                val maxKk = data?.getIntExtra("maxKk", 0) ?: 0
+                val timeMax = data?.getIntExtra("maxTt", 0) ?: 0
+                binding.minKk.setText(minKk)
+                binding.maxKk.setText(maxKk)
+                binding.timeMin.setText(timeMin)
+                binding.timeMax.setText(timeMax)
+            }
+        }
+    }
 
     fun onClickExitListener(view: View) {
         finish()
     }
-
     fun onClickContinueListener(view: View) {
         intent = Intent(this@Filter, MainMenu::class.java)
         val Infinity: Double = 1.0/0.0
@@ -44,19 +59,9 @@ class Filter : AppCompatActivity() {
         intent.putExtra("maxKk", maxKk)
         intent.putExtra("timeMax", maxTt)
         setResult(Activity.RESULT_OK, intent)
-        changeText(minKk, maxKk, minTt, maxTt)
         finish()
     }
-
-    private fun changeText(minKk: Int, maxKk: Int, minTt: Int, maxTt:Int) {
-        binding.minKk.setText(minKk.toString())
-        binding.maxKk.setText(maxKk.toString())
-        binding.timeMin.setText(minTt.toString())
-        binding.timeMax.setText(maxTt.toString())
-    }
-
     companion object {
         const val REQUEST_CODE = 228
     }
-
 }

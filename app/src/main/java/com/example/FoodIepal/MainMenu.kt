@@ -52,6 +52,25 @@ class MainMenu : AppCompatActivity() {
        }
     }
 
+    private  fun loadFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.MenuFrag,fragment)
+        transaction.commit()
+    }
+
+    fun onClickFilterListener(view: View) {
+        val intent = Intent(this@MainMenu, Filter::class.java)
+        intent.putExtra("minKk", dataModel.minKk.value.toString().toInt())
+        intent.putExtra("maxKk", dataModel.maxKk.value.toString().toInt())
+        intent.putExtra("minTt", dataModel.minTt.value.toString().toInt())
+        intent.putExtra("maxTt", dataModel.maxTt.value.toString().toInt())
+        setResult(Activity.RESULT_OK, intent)
+        startActivityForResult(intent, REQUEST_CODE)
+    }
+
+    fun OnClickFullScreen(view: View){
+        loadFragment(FragmentRecipeFullScreen.newInstance())
+    }
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -70,19 +89,7 @@ class MainMenu : AppCompatActivity() {
         }
     }
 
-    private  fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.MenuFrag,fragment)
-        transaction.commit()
+    companion object{
+        val REQUEST_CODE = 777
     }
-
-    fun onClickFilterListener(view: View) {
-        val intent = Intent(this, Filter::class.java)
-        startActivityForResult(intent, REQUEST_CODE)
-    }
-
-    fun OnClickFullScreen(view: View){
-        loadFragment(FragmentRecipeFullScreen.newInstance())
-    }
-
 }
