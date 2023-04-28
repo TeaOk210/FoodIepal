@@ -47,7 +47,7 @@ class fragment_registr : Fragment() {
         }
 
         // Проверка на наличие пользователя с таким логином в БД
-        val cursor = dbManager.fetch()
+        val cursor = dbManager.fetchReg()
         if (cursor.moveToFirst()) {
             do {
                 val dbLogin = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Login))
@@ -67,6 +67,6 @@ class fragment_registr : Fragment() {
     fun Registration() {
         val login = binding.LogTxt.text.toString()
         val password = binding.passTXT.text.toString()
-        dbManager.insert(login, password)
+        dbManager.insertReg(login, password)
     }
 }

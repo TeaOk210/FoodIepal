@@ -9,6 +9,7 @@ import com.example.FoodIepal.databinding.RecipeItemLayoutBinding
 
 class RecipeAdapter(private val context: Context, private var recipeItemList:ArrayList<RecipeItem>)
     : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+    private var originalItemList = recipeItemList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding = RecipeItemLayoutBinding.inflate(LayoutInflater.from(context),parent,false)
@@ -19,7 +20,7 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
         holder.bind(RecipeItem)
     }
 
-    fun filteredList(filterList: ArrayList<RecipeItem>) {
+    fun filter(filterList: ArrayList<RecipeItem>) {
         recipeItemList = filterList
         notifyDataSetChanged()
     }

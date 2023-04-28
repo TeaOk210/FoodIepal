@@ -9,11 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.FoodIepal.MainMenu
-import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBaseHalper
 import com.example.FoodIepal.databinding.FragmentLoginBinding
-import com.example.FoodIepal.databinding.FragmentRegistrBinding
 
 class fragment_login : Fragment() {
     lateinit var binding: FragmentLoginBinding
@@ -39,7 +37,7 @@ class fragment_login : Fragment() {
         val login = binding.LogTxt.text.toString()
         val password = binding.passTXT.text.toString()
 
-        val cursor = dbManager.fetch()
+        val cursor = dbManager.fetchReg()
         if (cursor.moveToFirst()) {
             do {
                 val storedLogin = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Login))

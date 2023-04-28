@@ -20,7 +20,7 @@ class DBManager(private val context: Context) {
             dbHelper.close()
         }
 
-        fun insert(Login : String, Password : String) {
+        fun insertReg(Login: String, Password: String) {
             val contentValue = ContentValues()
             contentValue.put(DataBaseHalper.Login, Login)
             contentValue.put(DataBaseHalper.Password, Password)
@@ -29,7 +29,7 @@ class DBManager(private val context: Context) {
             Toast.makeText(context, "Вы успешно зарегистрировались", Toast.LENGTH_SHORT).show()
         }
 
-        fun fetch() : Cursor {
+        fun fetchReg() : Cursor {
             val colums : Array<String> = arrayOf(
                 DataBaseHalper._ID,
                 DataBaseHalper.Login,
@@ -42,14 +42,14 @@ class DBManager(private val context: Context) {
         return Cursor
         }
 
-        fun update(_id : Long, Login : String, Password: String) {
+        fun updateReg(_id : Long, Login : String, Password: String) {
             val contentValue = ContentValues()
             contentValue.put(DataBaseHalper.Login, Login)
             contentValue.put(DataBaseHalper.Password, Password)
             val i : Int = database.update(DataBaseHalper.Table_Name, contentValue, DataBaseHalper._ID + " = " + _id, null)
         }
 
-        fun delete(_id: Long) {
+        fun deleteReg(_id: Long) {
             database.delete(DataBaseHalper.Table_Name, DataBaseHalper._ID + "=" + _id, null)
         }
 }
