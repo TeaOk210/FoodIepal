@@ -29,6 +29,7 @@ class DBManager(private val context: Context) {
             Toast.makeText(context, "Вы успешно зарегистрировались", Toast.LENGTH_SHORT).show()
         }
 
+
         fun fetchReg() : Cursor {
             val colums : Array<String> = arrayOf(
                 DataBaseHalper._ID,
@@ -40,6 +41,23 @@ class DBManager(private val context: Context) {
                 Cursor.moveToFirst()
             }
         return Cursor
+        }
+
+        fun fetchRecipe(): Cursor {
+            val colums : Array<String> = arrayOf(
+                DataBaseHalper.ID,
+                DataBaseHalper.Recipe_NAme,
+                DataBaseHalper.Description,
+                DataBaseHalper.Recipe_Items,
+                DataBaseHalper.Calories,
+                DataBaseHalper.Cook_time,
+                DataBaseHalper.Image_parh
+            )
+            val Cursor = database.query(DataBaseHalper.Table_Name_Food, colums, null, null, null, null, null)
+            if (Cursor != null) {
+                Cursor.moveToFirst()
+            }
+            return Cursor
         }
 
         fun updateReg(_id : Long, Login : String, Password: String) {

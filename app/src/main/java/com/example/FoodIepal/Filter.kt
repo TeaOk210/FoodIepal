@@ -20,11 +20,10 @@ class Filter : AppCompatActivity() {
     }
     fun onClickContinueListener(view: View) {
         intent = Intent(this@Filter, MainMenu::class.java)
-        val Infinity: Double = 1.0/0.0
-        val minKk = binding.minKk.text.toString().toIntOrNull() ?: 0
-        val maxKk = binding.maxKk.text.toString().toIntOrNull() ?: 0
-        val minTt = binding.timeMin.text.toString().toIntOrNull() ?: Infinity.toString().toInt()
-        val maxTt = binding.timeMax.text.toString().toIntOrNull() ?: Infinity.toString().toInt()
+        val minKk = if (binding.minKk.text.isNotEmpty()) binding.minKk.text.toString().toInt() else 0
+        val maxKk = if (binding.maxKk.text.isNotEmpty()) binding.maxKk.text.toString().toInt() else Int.MAX_VALUE
+        val minTt = if (binding.timeMin.text.isNotEmpty()) binding.timeMin.text.toString().toInt() else 0
+        val maxTt = if (binding.timeMax.text.isNotEmpty()) binding.timeMax.text.toString().toInt() else Int.MAX_VALUE
         intent.putExtra("minKk", minKk)
         intent.putExtra("timeMin", minTt)
         intent.putExtra("maxKk", maxKk)
@@ -32,6 +31,7 @@ class Filter : AppCompatActivity() {
         setResult(Activity.RESULT_OK, intent)
         finish()
     }
+
     companion object {
         const val REQUEST_CODE = 228
     }

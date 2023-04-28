@@ -11,7 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.DataModel
-import com.example.FoodIepal.R
+import com.example.FoodIepal.Utils.DBManager
+import com.example.FoodIepal.Utils.DataBaseHalper
 import com.example.FoodIepal.Utils.RecipeAdapter
 import com.example.FoodIepal.Utils.RecipeItem
 import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
@@ -21,6 +22,7 @@ import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
 class FragmentHome : Fragment() {
     private val RecipeItemList = ArrayList<RecipeItem>()
     private var filteredList = ArrayList<RecipeItem>()
+    lateinit var dbManager: DBManager
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
     private val dataModel: DataModel by activityViewModels()
@@ -29,6 +31,7 @@ class FragmentHome : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        dbManager = DBManager(requireActivity())
         binding = FragmentHomeMenuBinding.inflate(inflater)
         dataModel.minKk.observe(activity as LifecycleOwner) {minKk ->
             dataModel.maxKk.observe(activity as LifecycleOwner) {maxkK ->
@@ -50,9 +53,11 @@ class FragmentHome : Fragment() {
                 filter(s.toString())
             }
         })
+        dbManager.open()
         SetUpAdapter() // add RV
         populateList()
         return binding.root
+
     }
 
     fun kalTimeFilter(kkalRange: IntRange, timeRange: IntRange) {
@@ -64,9 +69,6 @@ class FragmentHome : Fragment() {
         }
         adapter.filter(filteredList)
     }
-
-
-
     companion object {
         fun newInstance() = FragmentHome()
     }
@@ -83,24 +85,29 @@ class FragmentHome : Fragment() {
             Toast.makeText(requireActivity(), "Такого нет...", Toast.LENGTH_SHORT).show()
         }
     }
+    @SuppressLint("Range")
     private fun populateList() {
-        for (i in 1..50) {
-            val name = "Recipe name"
-            val text = "opisanie recepta, it is recipe number $i"
-            val time = i
-            val Kkal = i * 10
-            val recipeItem = RecipeItem(
-                name = name,
-                text = text,
-                time = time,
-                Kkal = Kkal,
-                RecipeImageResId = R.drawable.food
-            )
-            RecipeItemList.add(recipeItem)
-            filteredList.add(recipeItem)
+        val cursor = dbManager.fetchRecipe()
+        if (cursor.moveToFirst()) {
+            do {
+                val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))
+                val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
+                val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
+                val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
+                val img = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Image_parh))
+                val recipeItem = RecipeItem(
+                    name = name,
+                    text = text,
+                    time = time,
+                    Kkal = kkal,
+                    RecipeImageResId = img.toString()
+                )
+                RecipeItemList.add(recipeItem)
+                filteredList.add(recipeItem)
+            } while (cursor.moveToNext())
         }
+        cursor.close()
     }
-
     private fun SetUpAdapter() {
         adapter = RecipeAdapter(requireActivity(), RecipeItemList)
         binding.RecipeList.adapter = adapter
