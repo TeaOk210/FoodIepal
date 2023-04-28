@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.DataModel
+import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.RecipeAdapter
 import com.example.FoodIepal.Utils.RecipeItem
 import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
@@ -19,7 +20,7 @@ import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
 @Suppress("DEPRECATION")
 class FragmentHome : Fragment() {
     private val RecipeItemList = ArrayList<RecipeItem>()
-    val filteredList: ArrayList<RecipeItem> = ArrayList()
+    private var filteredList = ArrayList<RecipeItem>()
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
     private val dataModel: DataModel by activityViewModels()
@@ -55,11 +56,11 @@ class FragmentHome : Fragment() {
     }
 
     fun kalTimeFilter(kkalRange: IntRange, timeRange: IntRange) {
+        filteredList.clear()
         for (item in RecipeItemList) {
             if (item.Kkal in kkalRange && item.time in timeRange) {
                 filteredList.add(item)
             }
-
         }
         adapter.filter(filteredList)
     }
@@ -71,32 +72,33 @@ class FragmentHome : Fragment() {
     }
     @SuppressLint("DefaultLocale")
     private fun filter(text: String) {
-        for (item in RecipeItemList) {
+        val searchedList: ArrayList<RecipeItem> = ArrayList()
+        for (item in filteredList) {
             if (item.name.toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item)
+                searchedList.add(item)
             }
         }
-        adapter.filter(filteredList)
-        if (filteredList.isEmpty()) {
+        adapter.filter(searchedList)
+        if (RecipeItemList.isEmpty()) {
             Toast.makeText(requireActivity(), "Такого нет...", Toast.LENGTH_SHORT).show()
         }
     }
     private fun populateList() {
-
-//        for (i in 1..50) {
-//            val name = "Recipe name"
-//            val text = "opisanie recepta, it is recipe number $i"
-//            val time = i
-//            val Kkal = i * 10
-//            val recipeItem = RecipeItem(
-//                name = name,
-//                text = text,
-//                time = time,
-//                Kkal = Kkal,
-//                RecipeImageResId = R.drawable.food
-//            )
-//            RecipeItemList.add(recipeItem)
-//        }
+        for (i in 1..50) {
+            val name = "Recipe name"
+            val text = "opisanie recepta, it is recipe number $i"
+            val time = i
+            val Kkal = i * 10
+            val recipeItem = RecipeItem(
+                name = name,
+                text = text,
+                time = time,
+                Kkal = Kkal,
+                RecipeImageResId = R.drawable.food
+            )
+            RecipeItemList.add(recipeItem)
+            filteredList.add(recipeItem)
+        }
     }
 
     private fun SetUpAdapter() {
