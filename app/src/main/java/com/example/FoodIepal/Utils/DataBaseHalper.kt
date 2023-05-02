@@ -53,7 +53,7 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
          val Image_parh = "image_path"
 
          val DB_NAME = "FoodIepal.db"
-         val DB_VERSION = 9
+         val DB_VERSION = 13
 
         val CREATE_TABLE = ("CREATE TABLE "
                 + Table_Name + "(" + _ID

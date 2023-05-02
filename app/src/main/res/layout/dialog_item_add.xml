@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/NameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:text="Инградиент:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/DoseInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NameInput"
+        android:layout_alignStart="@+id/NameInput"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Порция:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/DoseInput"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/DoseInput"
+        android:ems="10"
+        android:hint="Порция"
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textColorHint="#FF716C6C"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/NameInput"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/NameInput"
+        android:ems="10"
+        android:hint="Инградинт"
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textColorHint="#716C6C"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextPersonName"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:text="Button" />
+</RelativeLayout>

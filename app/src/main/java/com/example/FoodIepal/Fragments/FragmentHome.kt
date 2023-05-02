@@ -11,10 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.DataModel
-import com.example.FoodIepal.Utils.DBManager
-import com.example.FoodIepal.Utils.DataBaseHalper
-import com.example.FoodIepal.Utils.RecipeAdapter
-import com.example.FoodIepal.Utils.RecipeItem
+import com.example.FoodIepal.R
+import com.example.FoodIepal.Utils.*
 import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
 
 
@@ -22,6 +20,7 @@ import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
 class FragmentHome : Fragment() {
     private val RecipeItemList = ArrayList<RecipeItem>()
     private var filteredList = ArrayList<RecipeItem>()
+    private lateinit var FatSecretGet: FatSecretGet
     lateinit var dbManager: DBManager
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
@@ -100,7 +99,7 @@ class FragmentHome : Fragment() {
                     text = text,
                     time = time,
                     Kkal = kkal,
-                    RecipeImageResId = img.toString()
+                    RecipeImageResId = R.drawable.food
                 )
                 RecipeItemList.add(recipeItem)
                 filteredList.add(recipeItem)
@@ -114,4 +113,41 @@ class FragmentHome : Fragment() {
         binding.RecipeList.layoutManager = LinearLayoutManager(requireActivity())
     }
 
+//    private fun getFood(id: Long) {
+//        object : AsyncTask<String, String, String>() {
+//            override fun doInBackground(vararg arg0: String): String {
+//                val foodGet = FatSecretGet.getFood(id)
+//                try {
+//                    if (foodGet != null) {
+//                        val food_name = foodGet.getString("food_name")
+//                        val servings = foodGet.getJSONObject("servings")
+//                        val serving = servings.getJSONObject("serving")
+//                        val calories = serving.getString("calories")
+//                        val carbohydrate = serving.getString("carbohydrate")
+//                        val protein = serving.getString("protein")
+//                        val fat = serving.getString("fat")
+//                        val serving_description = serving.getString("serving_description")
+//                        Log.e("serving_description", serving_description)
+//                        /**
+//                         * Displays results in the LogCat
+//                         */
+//                        Log.e("food_name", food_name)
+//                        Log.e("calories", calories)
+//                        Log.e("carbohydrate", carbohydrate)
+//                        Log.e("protein", protein)
+//                        Log.e("fat", fat)
+//                    }
+//                } catch (exception: JSONException) {
+//                    return "Error"
+//                }
+//                return ""
+//            }
+//            override fun onPostExecute(result: String) {
+//                super.onPostExecute(result)
+//                if (result == "Error")
+//                    Toast.makeText(activity, "No Items Containing Your Search", Toast.LENGTH_SHORT).show()
+//                mCallbacks.fromFragment()
+//            }
+//        }.execute()
+//    }
 }

@@ -5,8 +5,29 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.FragmentBascet">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/BascetList"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/ItemAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:text="Button" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Bascet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ItemAdd"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp" />
+    </RelativeLayout>
 </FrameLayout>

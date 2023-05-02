@@ -44,7 +44,7 @@ class FragmentFavorite : Fragment() {
                     text = text,
                     time = time,
                     Kkal = kkal,
-                    RecipeImageResId = img.toString()
+                    RecipeImageResId = img
                 )
                 RecipeItemList.add(recipeItem)
             } while (cursor.moveToNext())

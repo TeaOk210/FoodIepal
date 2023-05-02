@@ -4,12 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.FoodIepal.databinding.RecipeItemLayoutBinding
 
 class RecipeAdapter(private val context: Context, private var recipeItemList:ArrayList<RecipeItem>)
     : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
-    private var originalItemList = recipeItemList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding = RecipeItemLayoutBinding.inflate(LayoutInflater.from(context),parent,false)
@@ -37,9 +35,8 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
             binding.RecipeText.text = RecipeItem.text
             binding.RecipeTime.text = RecipeItem.time.toString()
             binding.RecipeKkal.text = RecipeItem.Kkal.toString()
-            Glide.with(binding.RecipePhoto)
-                .load(RecipeItem.RecipeImageResId)
-                .into(binding.RecipePhoto)
+            binding.RecipePhoto.setImageResource(RecipeItem.RecipeImageResId)
+
         }
     }
 }
