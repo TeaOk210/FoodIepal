@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.FoodIepal.DataModel
 import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.*
 import com.example.FoodIepal.databinding.FragmentHomeMenuBinding

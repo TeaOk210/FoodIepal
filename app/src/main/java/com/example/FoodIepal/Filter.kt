@@ -33,6 +33,6 @@ class Filter : AppCompatActivity() {
     }
 
     companion object {
-        const val REQUEST_CODE = 228
+        const val FILTER_REQUEST_CODE = 228
     }
 }

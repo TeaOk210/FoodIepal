@@ -1,8 +1,7 @@
-package com.example.FoodIepal
+package com.example.FoodIepal.Utils
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.sql.Time
 
 open class DataModel: ViewModel() {
     val minKk: MutableLiveData<Int> by lazy {
@@ -16,5 +15,11 @@ open class DataModel: ViewModel() {
     }
     val maxTt: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>()
+    }
+    val Name: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val Dose: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
 }
