@@ -19,7 +19,7 @@ import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
 class FragmentHome : Fragment() {
     private val RecipeItemList = ArrayList<RecipeItem>()
     private var filteredList = ArrayList<RecipeItem>()
-    private lateinit var FatSecretGet: FatSecretGet
+    private lateinit var FatSecretGet: FatSecretSearch
     lateinit var dbManager: DBManager
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
@@ -54,11 +54,78 @@ class FragmentHome : Fragment() {
         dbManager.open()
         SetUpAdapter() // add RV
         populateList()
+//        println("===================================")
+//        printAllRecipes()
+//        println("===================================")
         return binding.root
 
     }
 
-    fun kalTimeFilter(kkalRange: IntRange, timeRange: IntRange) {
+//    private fun searchFood(item: String, page_num: Int) {
+//        @SuppressLint("StaticFieldLeak")
+//        object : AsyncTask<String, String, JSONObject>() {
+//            override fun onPreExecute() {
+//                mProgressMore.visibility = View.VISIBLE
+//                mProgressSearch.visibility = View.VISIBLE
+//            }
+//
+//            override fun doInBackground(vararg arg0: String): JSONObject {
+//                val food = mFatSecretSearch.searchFood(item, page_num)
+//                var FOODS_ARRAY: JSONArray?
+//                try {
+//                    if (food != null) {
+//                        FOODS_ARRAY = food.getJSONArray("food")
+//                        if (FOODS_ARRAY != null) {
+//                            for (i in 0 until FOODS_ARRAY.length()) {
+//                                val food_items = FOODS_ARRAY.optJSONObject(i)
+//                                val food_name = food_items.getString("food_name")
+//                                val food_description = food_items.getString("food_description")
+//                                val row = food_description.split("-").toTypedArray()
+//                                val id = food_items.getString("food_type")
+//                                if (id == "Brand") {
+//                                    brand = food_items.getString("brand_name")
+//                                }
+//                                if (id == "Generic") {
+//                                    brand = "Generic"
+//                                }
+//                                val food_id = food_items.getString("food_id")
+//                                mItem.add(
+//                                    Item(
+//                                        food_name,
+//                                        row[1].substring(1),
+//                                        "" + brand,
+//                                        food_id
+//                                    )
+//                                )
+//                            }
+//                        }
+//                    }
+//                } catch (exception: JSONException) {
+//                    return JSONObject("Error")
+//                }
+//                return JSONObject("")
+//            }
+//
+//            @Deprecated("Deprecated in Java")
+//            override fun onPostExecute(result: JSONObject) {
+//                super.onPostExecute(result)
+//                if (result.has("Error"))
+//                    Toast.makeText(
+//                        getActivity(),
+//                        "No Items Containing Your Search",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                mSearchAdapter.notifyDataSetChanged()
+//                updateList()
+//                mProgressMore.visibility = View.INVISIBLE
+//                mProgressSearch.visibility = View.INVISIBLE
+//                SEARCH_RETAIN = true
+//            }
+//        }.execute()
+//    }
+
+
+        fun kalTimeFilter(kkalRange: IntRange, timeRange: IntRange) {
         filteredList.clear()
         for (item in RecipeItemList) {
             if (item.Kkal in kkalRange && item.time in timeRange) {
@@ -92,7 +159,6 @@ class FragmentHome : Fragment() {
                 val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
                 val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
-                val img = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Image_parh))
                 val recipeItem = RecipeItem(
                     name = name,
                     text = text,
@@ -111,42 +177,4 @@ class FragmentHome : Fragment() {
         binding.RecipeList.adapter = adapter
         binding.RecipeList.layoutManager = LinearLayoutManager(requireActivity())
     }
-
-//    private fun getFood(id: Long) {
-//        object : AsyncTask<String, String, String>() {
-//            override fun doInBackground(vararg arg0: String): String {
-//                val foodGet = FatSecretGet.getFood(id)
-//                try {
-//                    if (foodGet != null) {
-//                        val food_name = foodGet.getString("food_name")
-//                        val servings = foodGet.getJSONObject("servings")
-//                        val serving = servings.getJSONObject("serving")
-//                        val calories = serving.getString("calories")
-//                        val carbohydrate = serving.getString("carbohydrate")
-//                        val protein = serving.getString("protein")
-//                        val fat = serving.getString("fat")
-//                        val serving_description = serving.getString("serving_description")
-//                        Log.e("serving_description", serving_description)
-//                        /**
-//                         * Displays results in the LogCat
-//                         */
-//                        Log.e("food_name", food_name)
-//                        Log.e("calories", calories)
-//                        Log.e("carbohydrate", carbohydrate)
-//                        Log.e("protein", protein)
-//                        Log.e("fat", fat)
-//                    }
-//                } catch (exception: JSONException) {
-//                    return "Error"
-//                }
-//                return ""
-//            }
-//            override fun onPostExecute(result: String) {
-//                super.onPostExecute(result)
-//                if (result == "Error")
-//                    Toast.makeText(activity, "No Items Containing Your Search", Toast.LENGTH_SHORT).show()
-//                mCallbacks.fromFragment()
-//            }
-//        }.execute()
-//    }
 }

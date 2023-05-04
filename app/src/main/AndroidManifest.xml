@@ -11,6 +11,7 @@
         android:roundIcon="@drawable/giga"
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLITE"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".ItemAdd"
