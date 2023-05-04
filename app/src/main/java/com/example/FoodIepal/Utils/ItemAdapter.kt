@@ -27,7 +27,7 @@ class ItemAdapter(private val context: Context, private var ItemList:ArrayList<I
         RecyclerView.ViewHolder(binding.root) {
         fun bind(ItemItem: ItemItem) {
             binding.TextName.text = ItemItem.name
-            binding.TextName.text = ItemItem.dose
+            binding.TextDose.text = ItemItem.dose
         }
     }
 }

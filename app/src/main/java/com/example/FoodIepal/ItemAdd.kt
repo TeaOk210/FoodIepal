@@ -26,8 +26,4 @@ class ItemAdd : AppCompatActivity() {
         setResult(Activity.RESULT_OK, intent)
         finish()
     }
-
-    companion object{
-        const val ITEM_ADD_REQUEST_CODE = 123
-    }
 }
