@@ -11,11 +11,13 @@ import androidx.fragment.app.Fragment
 import com.example.FoodIepal.MainMenu
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBaseHalper
+import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.FragmentLoginBinding
 
 class fragment_login : Fragment() {
     lateinit var binding: FragmentLoginBinding
     lateinit var dbManager: DBManager
+    lateinit var sessionManager: SessionManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

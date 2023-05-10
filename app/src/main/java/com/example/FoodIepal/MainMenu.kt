@@ -18,7 +18,6 @@ class MainMenu : AppCompatActivity() {
     lateinit var lastFragment: Fragment
     lateinit var bundle: Bundle
     private val dataModel: DataModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
