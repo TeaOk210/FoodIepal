@@ -54,76 +54,8 @@ class FragmentHome : Fragment() {
         dbManager.open()
         SetUpAdapter() // add RV
         populateList()
-//        println("===================================")
-//        printAllRecipes()
-//        println("===================================")
         return binding.root
-
     }
-
-//    private fun searchFood(item: String, page_num: Int) {
-//        @SuppressLint("StaticFieldLeak")
-//        object : AsyncTask<String, String, JSONObject>() {
-//            override fun onPreExecute() {
-//                mProgressMore.visibility = View.VISIBLE
-//                mProgressSearch.visibility = View.VISIBLE
-//            }
-//
-//            override fun doInBackground(vararg arg0: String): JSONObject {
-//                val food = mFatSecretSearch.searchFood(item, page_num)
-//                var FOODS_ARRAY: JSONArray?
-//                try {
-//                    if (food != null) {
-//                        FOODS_ARRAY = food.getJSONArray("food")
-//                        if (FOODS_ARRAY != null) {
-//                            for (i in 0 until FOODS_ARRAY.length()) {
-//                                val food_items = FOODS_ARRAY.optJSONObject(i)
-//                                val food_name = food_items.getString("food_name")
-//                                val food_description = food_items.getString("food_description")
-//                                val row = food_description.split("-").toTypedArray()
-//                                val id = food_items.getString("food_type")
-//                                if (id == "Brand") {
-//                                    brand = food_items.getString("brand_name")
-//                                }
-//                                if (id == "Generic") {
-//                                    brand = "Generic"
-//                                }
-//                                val food_id = food_items.getString("food_id")
-//                                mItem.add(
-//                                    Item(
-//                                        food_name,
-//                                        row[1].substring(1),
-//                                        "" + brand,
-//                                        food_id
-//                                    )
-//                                )
-//                            }
-//                        }
-//                    }
-//                } catch (exception: JSONException) {
-//                    return JSONObject("Error")
-//                }
-//                return JSONObject("")
-//            }
-//
-//            @Deprecated("Deprecated in Java")
-//            override fun onPostExecute(result: JSONObject) {
-//                super.onPostExecute(result)
-//                if (result.has("Error"))
-//                    Toast.makeText(
-//                        getActivity(),
-//                        "No Items Containing Your Search",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                mSearchAdapter.notifyDataSetChanged()
-//                updateList()
-//                mProgressMore.visibility = View.INVISIBLE
-//                mProgressSearch.visibility = View.INVISIBLE
-//                SEARCH_RETAIN = true
-//            }
-//        }.execute()
-//    }
-
 
         fun kalTimeFilter(kkalRange: IntRange, timeRange: IntRange) {
         filteredList.clear()
