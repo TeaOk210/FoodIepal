@@ -1,6 +1,7 @@
 package com.example.FoodIepal.Fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,16 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.FoodIepal.FullScreen
 import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.*
 import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
 
 
 @Suppress("DEPRECATION")
-class FragmentHome : Fragment() {
+class FragmentHome : Fragment(){
     private val RecipeItemList = ArrayList<RecipeItem>()
     private var filteredList = ArrayList<RecipeItem>()
-    private lateinit var FatSecretGet: FatSecretSearch
     lateinit var dbManager: DBManager
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
@@ -85,19 +86,28 @@ class FragmentHome : Fragment() {
     @SuppressLint("Range")
     private fun populateList() {
         val cursor = dbManager.fetchRecipe()
+        val images = arrayOf(
+            R.drawable.figna,
+            R.drawable.waf,
+            R.drawable.blin,
+            R.drawable.max
+        )
+        var imageIndex = 0
         if (cursor.moveToFirst()) {
             do {
                 val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))
                 val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
                 val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
+                var image = 0
                 val recipeItem = RecipeItem(
                     name = name,
                     text = text,
                     time = time,
                     Kkal = kkal,
-                    RecipeImageResId = R.drawable.food
+                    RecipeImageResId = images[imageIndex]
                 )
+                imageIndex = (imageIndex + 1) % images.size
                 RecipeItemList.add(recipeItem)
                 filteredList.add(recipeItem)
             } while (cursor.moveToNext())
@@ -105,7 +115,20 @@ class FragmentHome : Fragment() {
         cursor.close()
     }
     private fun SetUpAdapter() {
-        adapter = RecipeAdapter(requireActivity(), RecipeItemList)
+        adapter = RecipeAdapter(requireActivity(), RecipeItemList, object : RecipeAdapter.OnItemClickListener{
+            override fun onItemClick(data: RecipeItem) {
+                val intent = Intent(requireContext(), FullScreen::class.java)
+
+
+                intent.putExtra("Kkal", data.Kkal)
+                intent.putExtra("time", data.time)
+                intent.putExtra("name", data.name)
+                intent.putExtra("text", data.text)
+                intent.putExtra("image", data.RecipeImageResId)
+
+                startActivity(intent)
+            }
+        })
         binding.RecipeList.adapter = adapter
         binding.RecipeList.layoutManager = LinearLayoutManager(requireActivity())
     }

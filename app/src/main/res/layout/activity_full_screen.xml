@@ -18,7 +18,7 @@
             tools:ignore="UselessLeaf">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/ImageView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="10dp"
@@ -58,7 +58,7 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/KkalView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -67,7 +67,7 @@
                     android:textColor="#FFFFFF" />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/TimeView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

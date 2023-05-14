@@ -6,14 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.FoodIepal.databinding.RecipeItemLayoutBinding
 
-class RecipeAdapter(private val context: Context, private var recipeItemList:ArrayList<RecipeItem>)
+class RecipeAdapter(private val context: Context, private var recipeItemList:ArrayList<RecipeItem>, private val listener: OnItemClickListener)
     : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
-    private var listener: onItemClickListener? = null
-
-    fun setOnItemClickListener(listener: onItemClickListener) {
-        this.listener = listener
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding = RecipeItemLayoutBinding.inflate(LayoutInflater.from(context),parent,false)
@@ -21,7 +16,10 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
     }
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val RecipeItem = recipeItemList[position]
-        holder.bind(RecipeItem, listener)
+        holder.bind(RecipeItem)
+        holder.itemView.setOnClickListener{
+            listener.onItemClick(RecipeItem)
+        }
     }
 
     fun filter(filterList: ArrayList<RecipeItem>) {
@@ -36,20 +34,16 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
     class RecipeViewHolder(private val binding: RecipeItemLayoutBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(RecipeItem: RecipeItem, listener: onItemClickListener?) {
+        fun bind(RecipeItem: RecipeItem) {
             binding.RecipeName.text = RecipeItem.name
             binding.RecipeText.text = RecipeItem.text
             binding.RecipeTime.text = RecipeItem.time.toString()
             binding.RecipeKkal.text = RecipeItem.Kkal.toString()
             binding.RecipePhoto.setImageResource(RecipeItem.RecipeImageResId)
 
-            binding.root.setOnClickListener {
-                listener?.onItemClick(RecipeItem)
-            }
         }
     }
-
-    interface onItemClickListener{
+    interface OnItemClickListener {
         fun onItemClick(data: RecipeItem)
     }
 }

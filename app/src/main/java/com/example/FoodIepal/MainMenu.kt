@@ -9,12 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.FoodIepal.Fragments.*
 import com.example.FoodIepal.Utils.DataModel
-import com.example.FoodIepal.Utils.RecipeAdapter
-import com.example.FoodIepal.Utils.RecipeItem
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainMenu : AppCompatActivity(), RecipeAdapter.onItemClickListener {
+class MainMenu : AppCompatActivity() {
     lateinit var binding : ActivityMainMenuBinding
     lateinit var BottomNav : BottomNavigationView
     lateinit var lastFragment: Fragment
@@ -67,6 +65,7 @@ class MainMenu : AppCompatActivity(), RecipeAdapter.onItemClickListener {
         startActivityForResult(intent, 2)
     }
 
+
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -91,15 +90,5 @@ class MainMenu : AppCompatActivity(), RecipeAdapter.onItemClickListener {
                 dataModel.Dose.value = Dose
             }
         }
-    }
-
-    override fun onItemClick(data: RecipeItem) {
-        val intent = Intent(this, FullScreen::class.java)
-        intent.putExtra("name", data.name)
-        intent.putExtra("text", data.text)
-        intent.putExtra("time", data.time)
-        intent.putExtra("Kkal", data.Kkal)
-        intent.putExtra("RecipeImageResId", data.RecipeImageResId)
-        startActivity(intent)
     }
 }
