@@ -4,13 +4,13 @@
     <item
         android:id="@+id/home"
         android:title="@string/Home"
-        android:icon="@drawable/ic_baseline_home_24" />
+        android:icon="@drawable/home24" />
     <item
         android:id="@+id/bascet"
         android:title="@string/Basket"
-        android:icon="@drawable/ic_baseline_shopping_basket_24"/>
+        android:icon="@drawable/basket24"/>
     <item
         android:id="@+id/favorites"
         android:title="@string/favourites"
-        android:icon="@drawable/ic_baseline_bookmark_24"/>
+        android:icon="@drawable/book24"/>
 </menu>

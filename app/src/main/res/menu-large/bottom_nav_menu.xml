@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:title="@string/Home"
+        android:icon="@drawable/home48"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/bascet"
+        android:title="@string/Basket"
+        android:icon="@drawable/basket48"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/favorites"
+        android:title="@string/favourites"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/book48"/>
+
+</menu>
