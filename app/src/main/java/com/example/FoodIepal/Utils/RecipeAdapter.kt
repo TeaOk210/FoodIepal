@@ -39,7 +39,7 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
             binding.RecipeText.text = RecipeItem.text
             binding.RecipeTime.text = RecipeItem.time.toString()
             binding.RecipeKkal.text = RecipeItem.Kkal.toString()
-            binding.RecipePhoto.setImageResource(RecipeItem.RecipeImageResId)
+            binding.RecipePhoto.setImageResource(RecipeItem.RecipeImage)
 
         }
     }

@@ -99,13 +99,12 @@ class FragmentHome : Fragment(){
                 val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
                 val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
-                var image = 0
                 val recipeItem = RecipeItem(
                     name = name,
                     text = text,
                     time = time,
                     Kkal = kkal,
-                    RecipeImageResId = images[imageIndex]
+                    RecipeImage = images[imageIndex]
                 )
                 imageIndex = (imageIndex + 1) % images.size
                 RecipeItemList.add(recipeItem)
@@ -119,12 +118,12 @@ class FragmentHome : Fragment(){
             override fun onItemClick(data: RecipeItem) {
                 val intent = Intent(requireContext(), FullScreen::class.java)
 
-
                 intent.putExtra("Kkal", data.Kkal)
                 intent.putExtra("time", data.time)
                 intent.putExtra("name", data.name)
                 intent.putExtra("text", data.text)
-                intent.putExtra("image", data.RecipeImageResId)
+                intent.putExtra("image", data.RecipeImage)
+
 
                 startActivity(intent)
             }

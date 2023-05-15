@@ -9,6 +9,8 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
     companion object {
          val Table_Name = "Person"
          val Table_Name_Food = "Recipes"
+         val Table_Name_Favorite = "Favorite"
+         val Table_Name_Basket = "Basket"
 
          val _ID = "_id"
          val Login = "Login"
@@ -51,21 +53,26 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
          val Calories = "calories"
          val Cook_time = "cook_time"
          val Image_parh = "image_path"
+         val Recipe_Dose = "recipe_dose"
+
 
          val DB_NAME = "FoodIepal.db"
-         val DB_VERSION = 13
+         val DB_VERSION = 19
 
-        val CREATE_TABLE = ("CREATE TABLE "
-                + Table_Name + "(" + _ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Login + " TEXT, " + Password + " TEXT);")
-        val CREATE_TABLE_FOOD = ("CREATE TABLE "
-                + Table_Name_Food + "(" + ID
-              + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Recipe_NAme + " TEXT, " + Description + " TEXT, " + Recipe_Items + " TEXT, " + Calories + " TEXT, " + Cook_time + " TEXT, " + Image_parh + " TEXT);")
+        val CREATE_TABLE = "CREATE TABLE $Table_Name ($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $Login TEXT, $Password TEXT);"
+        val CREATE_TABLE_FOOD = "CREATE TABLE $Table_Name_Food ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Recipe_NAme TEXT, $Description TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER);"
+        val CREATE_TABLE_FAVORITE = "CREATE TABLE $Table_Name_Favorite ($ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " $Recipe_NAme TEXT, $Description TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER, $Login TEXT, FOREIGN KEY ($Login) REFERENCES $Table_Name ($Login));"
+        val CREATE_TABLE_BASKET = "CREATE TABLE $Table_Name_Basket ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Recipe_NAme TEXT, $Recipe_Dose TEXT);"
+
+
     }
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(CREATE_TABLE)
         db.execSQL(CREATE_TABLE_FOOD)
+        db.execSQL(CREATE_TABLE_FAVORITE)
+        db.execSQL(CREATE_TABLE_BASKET)
 
         db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time) VALUES('${Res1[0]}', '${Res1[1]}', '${Res1[2]}', ${Res1[3]}, ${Res1[4]})")
         db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time) VALUES('${Res2[0]}', '${Res2[1]}', '${Res2[2]}', ${Res2[3]}, ${Res2[4]})")
@@ -76,6 +83,8 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $Table_Name")
         db.execSQL("DROP TABLE IF EXISTS $Table_Name_Food")
+        db.execSQL("DROP TABLE IF EXISTS $Table_Name_Favorite")
+        db.execSQL("DROP TABLE IF EXISTS $Table_Name_Basket")
         onCreate(db)
     }
 }

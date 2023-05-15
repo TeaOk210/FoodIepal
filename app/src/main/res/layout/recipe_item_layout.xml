@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/waf" />
 
     <TextView
         android:id="@+id/RecipeName"
