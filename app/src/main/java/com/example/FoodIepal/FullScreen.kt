@@ -1,6 +1,7 @@
 package com.example.FoodIepal
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -17,7 +18,7 @@ class FullScreen : AppCompatActivity() {
     lateinit var text: String
     var time by Delegates.notNull<Int>()
     var Kkal by Delegates.notNull<Int>()
-    var image by Delegates.notNull<Int>()
+    var image by Delegates.notNull<ByteArray>()
     lateinit var dbManager: DBManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,20 +35,21 @@ class FullScreen : AppCompatActivity() {
         text = intent.getStringExtra("text").toString()
         time = intent.getIntExtra("time", 0)
         Kkal = intent.getIntExtra("Kkal", 0)
-        image = intent.getIntExtra("RecipeImageResId", 0)
+        image = (intent.getByteArrayExtra("image") ?: byteArrayOf()) as ByteArray
 
         binding.KkalView.text = Kkal.toString()
         binding.TimeView.text = time.toString()
         binding.DeskView.text = text
-//        binding.ImageView.setImageResource(image)
+        val bitmap = BitmapFactory.decodeByteArray(image, 0, image.size)
+        binding.ImageView.setImageBitmap(bitmap)
 
         supportActionBar?.apply {
             title = name
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
-
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.custom_toolbar, menu)

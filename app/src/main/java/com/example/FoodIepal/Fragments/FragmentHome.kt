@@ -15,6 +15,7 @@ import com.example.FoodIepal.FullScreen
 import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.*
 import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
+import java.io.ByteArrayOutputStream
 
 
 @Suppress("DEPRECATION")
@@ -91,7 +92,8 @@ class FragmentHome : Fragment(){
             R.drawable.waf,
             R.drawable.blin,
             R.drawable.max
-        )
+        ).map { resourceId -> getBytesFromResource(resourceId) }
+
         var imageIndex = 0
         if (cursor.moveToFirst()) {
             do {
@@ -99,6 +101,7 @@ class FragmentHome : Fragment(){
                 val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
                 val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
+
                 val recipeItem = RecipeItem(
                     name = name,
                     text = text,
@@ -130,5 +133,16 @@ class FragmentHome : Fragment(){
         })
         binding.RecipeList.adapter = adapter
         binding.RecipeList.layoutManager = LinearLayoutManager(requireActivity())
+    }
+
+    private fun getBytesFromResource(resourceId: Int): ByteArray {
+        val inputStream = requireContext().resources.openRawResource(resourceId)
+        val outputStream = ByteArrayOutputStream()
+        val buffer = ByteArray(4096)
+        var bytesRead: Int
+        while (inputStream.read(buffer).also { bytesRead = it } >= 0) {
+            outputStream.write(buffer, 0, bytesRead)
+        }
+        return outputStream.toByteArray()
     }
 }

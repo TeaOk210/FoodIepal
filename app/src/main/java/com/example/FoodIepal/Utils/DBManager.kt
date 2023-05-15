@@ -29,7 +29,7 @@ class DBManager(private val context: Context) {
             Toast.makeText(context, "Вы успешно зарегистрировались", Toast.LENGTH_SHORT).show()
         }
 
-        fun insertFavorite(RecipeName: String, Description: String, Recipe_Items: String, Calories: Int, Cook_time: Int, Image_path: Int){
+        fun insertFavorite(RecipeName: String, Description: String, Recipe_Items: String, Calories: Int, Cook_time: Int, Image_path: ByteArray){
             val contentValues = ContentValues()
             contentValues.put(DataBaseHalper.Recipe_NAme, RecipeName)
             contentValues.put(DataBaseHalper.Description, Description)

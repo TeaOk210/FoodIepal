@@ -1,6 +1,7 @@
 package com.example.FoodIepal.Utils
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,6 @@ import com.example.FoodIepal.databinding.RecipeItemLayoutBinding
 
 class RecipeAdapter(private val context: Context, private var recipeItemList:ArrayList<RecipeItem>, private val listener: OnItemClickListener)
     : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding = RecipeItemLayoutBinding.inflate(LayoutInflater.from(context),parent,false)
@@ -31,6 +31,7 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
         return recipeItemList.size
     }
 
+
     class RecipeViewHolder(private val binding: RecipeItemLayoutBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
@@ -39,8 +40,9 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
             binding.RecipeText.text = RecipeItem.text
             binding.RecipeTime.text = RecipeItem.time.toString()
             binding.RecipeKkal.text = RecipeItem.Kkal.toString()
-            binding.RecipePhoto.setImageResource(RecipeItem.RecipeImage)
 
+            val bitmap = BitmapFactory.decodeByteArray(RecipeItem.RecipeImage, 0, RecipeItem.RecipeImage.size)
+            binding.RecipePhoto.setImageBitmap(bitmap)
         }
     }
     interface OnItemClickListener {

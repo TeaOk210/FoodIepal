@@ -9,11 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.FullScreen
-import com.example.FoodIepal.R
-import com.example.FoodIepal.Utils.DBManager
-import com.example.FoodIepal.Utils.DataBaseHalper
-import com.example.FoodIepal.Utils.RecipeAdapter
-import com.example.FoodIepal.Utils.RecipeItem
+import com.example.FoodIepal.Utils.*
 import com.example.FoodIepal.databinding.FragmentFavoriteBinding
 
 class FragmentFavorite : Fragment() {
@@ -36,33 +32,26 @@ class FragmentFavorite : Fragment() {
     @SuppressLint("Range")
     private fun populateList() {
         val cursor = dbManager.fetchFavorite()
-        val images = arrayOf(
-            R.drawable.figna,
-            R.drawable.waf,
-            R.drawable.blin,
-            R.drawable.max
-        )
-        var imageIndex = 0
         if (cursor.moveToFirst()) {
             do {
                 val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))
                 val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
                 val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
-                val image = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Image_parh))
+                val bytesImage = cursor.getBlob(cursor.getColumnIndex(DataBaseHalper.Image_parh))
                 val recipeItem = RecipeItem(
                     name = name,
                     text = text,
                     time = time,
                     Kkal = kkal,
-                    RecipeImage = image
+                    RecipeImage = bytesImage
                 )
-                imageIndex = (imageIndex + 1) % images.size
                 RecipeItemList.add(recipeItem)
             } while (cursor.moveToNext())
         }
         cursor.close()
     }
+
 
     fun setUpAdapter() {
         adapter = RecipeAdapter(requireActivity(), RecipeItemList, object : RecipeAdapter.OnItemClickListener{
