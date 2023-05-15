@@ -35,7 +35,7 @@ class FullScreen : AppCompatActivity() {
         text = intent.getStringExtra("text").toString()
         time = intent.getIntExtra("time", 0)
         Kkal = intent.getIntExtra("Kkal", 0)
-        image = (intent.getByteArrayExtra("image") ?: byteArrayOf()) as ByteArray
+        image = (intent.getByteArrayExtra("image") ?: byteArrayOf())
 
         binding.KkalView.text = Kkal.toString()
         binding.TimeView.text = time.toString()

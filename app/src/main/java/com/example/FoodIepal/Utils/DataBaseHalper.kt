@@ -53,17 +53,20 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
          val Calories = "calories"
          val Cook_time = "cook_time"
          val Image_parh = "image_path"
-         val Recipe_Dose = "recipe_dose"
+
+
+         val Item_name = "item_name"
+         val Item_Dose = "item_dose"
 
 
          val DB_NAME = "FoodIepal.db"
-         val DB_VERSION = 19
+         val DB_VERSION = 20
 
         val CREATE_TABLE = "CREATE TABLE $Table_Name ($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $Login TEXT, $Password TEXT);"
         val CREATE_TABLE_FOOD = "CREATE TABLE $Table_Name_Food ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Recipe_NAme TEXT, $Description TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER);"
         val CREATE_TABLE_FAVORITE = "CREATE TABLE $Table_Name_Favorite ($ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " $Recipe_NAme TEXT, $Description TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER, $Login TEXT, FOREIGN KEY ($Login) REFERENCES $Table_Name ($Login));"
-        val CREATE_TABLE_BASKET = "CREATE TABLE $Table_Name_Basket ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Recipe_NAme TEXT, $Recipe_Dose TEXT);"
+        val CREATE_TABLE_BASKET = "CREATE TABLE $Table_Name_Basket ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Item_name TEXT, $Item_Dose TEXT);"
     }
 
     override fun onCreate(db: SQLiteDatabase) {

@@ -62,7 +62,7 @@ class MainMenu : AppCompatActivity() {
 
     fun onClickItemAdd(view: View){
         val intent = Intent(this@MainMenu, ItemAdd::class.java)
-        startActivityForResult(intent, 2)
+        startActivity(intent)
     }
 
 
@@ -79,15 +79,6 @@ class MainMenu : AppCompatActivity() {
                 dataModel.maxKk.value = maxKk
                 dataModel.minTt.value = timeMin
                 dataModel.maxTt.value = timeMax
-            }
-        }
-
-        if (requestCode == 2) {
-            if (resultCode == Activity.RESULT_OK) {
-                val Name = data?.getStringExtra("Name")
-                val Dose = data?.getStringExtra("Dose")
-                dataModel.Name.value = Name
-                dataModel.Dose.value = Dose
             }
         }
     }

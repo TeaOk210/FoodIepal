@@ -40,6 +40,13 @@ class DBManager(private val context: Context) {
             database.insert(DataBaseHalper.Table_Name_Favorite, null, contentValues)
         }
 
+        fun insertBasket(name: String, Dose: String){
+            val contentValues = ContentValues()
+            contentValues.put(DataBaseHalper.Item_name, name)
+            contentValues.put(DataBaseHalper.Item_Dose, Dose)
+            database.insert(DataBaseHalper.Table_Name_Basket, null, contentValues)
+        }
+
 
         fun fetchReg() : Cursor {
             val colums : Array<String> = arrayOf(
@@ -83,6 +90,18 @@ class DBManager(private val context: Context) {
             )
             val Cursor = database.query(DataBaseHalper.Table_Name_Favorite, colums, null, null, null, null, null)
             if (Cursor != null) {
+                Cursor.moveToFirst()
+            }
+            return Cursor
+        }
+
+        fun fetchBasket(): Cursor{
+            val colums : Array<String> = arrayOf(
+                DataBaseHalper.Item_name,
+                DataBaseHalper.Item_Dose
+            )
+            val Cursor = database.query(DataBaseHalper.Table_Name_Basket, colums, null, null, null, null, null)
+            if (Cursor != null){
                 Cursor.moveToFirst()
             }
             return Cursor

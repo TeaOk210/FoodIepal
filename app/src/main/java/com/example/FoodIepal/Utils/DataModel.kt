@@ -16,10 +16,4 @@ open class DataModel: ViewModel() {
     val maxTt: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>()
     }
-    val Name: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val Dose: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
 }
