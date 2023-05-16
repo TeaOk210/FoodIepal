@@ -116,6 +116,7 @@ class FragmentHome : Fragment(){
         }
         cursor.close()
     }
+
     private fun SetUpAdapter() {
         adapter = RecipeAdapter(requireActivity(), RecipeItemList, object : RecipeAdapter.OnItemClickListener{
             override fun onItemClick(data: RecipeItem) {

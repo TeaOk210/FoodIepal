@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.Utils.*
@@ -29,7 +30,7 @@ class FragmentBascet : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged", "Range")
+    @SuppressLint("Range")
     fun populateList(){
         val cursor = dbManager.fetchBasket()
         if (cursor.moveToFirst()){
@@ -38,17 +39,24 @@ class FragmentBascet : Fragment() {
                 val dose = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Item_Dose))
 
                 val basketItem = ItemItem(
-                    name = name,
-                    dose = dose
+                    ItemName = name,
+                    ItemDose = dose
                 )
                 ItemList.add(basketItem)
-            } while (cursor.moveToFirst())
+            } while (cursor.moveToNext())
         }
         cursor.close()
     }
 
     fun setUpAdapter() {
-        adapter = ItemAdapter(requireActivity(), ItemList)
+        adapter = ItemAdapter(requireActivity(), ItemList, object : ItemAdapter.onDeleteListener {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onDelete(data: ItemItem) {
+                Toast.makeText(requireContext(), "УДАЛЕНО!", Toast.LENGTH_SHORT).show()
+                dbManager.deleteBasket(data.ItemName)
+                populateList()
+            }
+        })
         binding.Bascet.adapter = adapter
         binding.Bascet.layoutManager = LinearLayoutManager(requireActivity())
     }

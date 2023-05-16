@@ -107,6 +107,12 @@ class DBManager(private val context: Context) {
             return Cursor
         }
 
+        fun deleteBasket(name: String) {
+            val selection = "${DataBaseHalper.Item_name}=?"
+            val selectionArgs = arrayOf(name)
+            database.delete(DataBaseHalper.Table_Name_Basket, selection, selectionArgs)
+        }
+
 
     fun deleteRecipe(name: String) {
         val selection = "${DataBaseHalper.Recipe_NAme}=?"

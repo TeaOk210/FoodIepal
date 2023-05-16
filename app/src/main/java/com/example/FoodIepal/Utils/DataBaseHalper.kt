@@ -75,10 +75,10 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
         db.execSQL(CREATE_TABLE_FAVORITE)
         db.execSQL(CREATE_TABLE_BASKET)
 
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time, $Image_parh) VALUES('${Res2[0]}', '${Res2[1]}', '${Res2[2]}', ${Res2[3]}, ${Res2[4]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time, $Image_parh) VALUES('${Res3[0]}', '${Res3[1]}', '${Res3[2]}', ${Res3[3]}, ${Res3[4]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time, $Image_parh) VALUES('${Res4[0]}', '${Res4[1]}', '${Res4[2]}', ${Res4[3]}, ${Res4[4]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time, $Image_parh) VALUES('${Res1[0]}', '${Res1[1]}', '${Res1[2]}', ${Res1[3]}, ${Res1[4]})")
+        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time) VALUES('${Res2[0]}', '${Res2[1]}', '${Res2[2]}', ${Res2[3]}, ${Res2[4]})")
+        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time) VALUES('${Res3[0]}', '${Res3[1]}', '${Res3[2]}', ${Res3[3]}, ${Res3[4]})")
+        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time) VALUES('${Res4[0]}', '${Res4[1]}', '${Res4[2]}', ${Res4[3]}, ${Res4[4]})")
+        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Calories, $Cook_time) VALUES('${Res1[0]}', '${Res1[1]}', '${Res1[2]}', ${Res1[3]}, ${Res1[4]})")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {

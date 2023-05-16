@@ -2,6 +2,7 @@ package com.example.FoodIepal
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.databinding.ActivityItemAddBinding
@@ -22,7 +23,14 @@ class ItemAdd : AppCompatActivity() {
     }
 
     fun onAddListener(view: View) {
-        dbManager.insertBasket(binding.NameInput.text.toString(), binding.DoseInput.text.toString())
-        finish()
+        val name = binding.NameInput.text.toString()
+        val dose = binding.DoseInput.text.toString()
+
+        if (name.isNotEmpty() && dose.isNotEmpty()) {
+            dbManager.insertBasket(name, dose)
+            finish()
+        } else{
+            Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -1,3 +1,3 @@
 package com.example.FoodIepal.Utils
 
-data class ItemItem(val name: String, val dose: String)
+data class ItemItem(val ItemName: String, val ItemDose: String)

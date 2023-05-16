@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.FoodIepal.databinding.ItemItemLayoutBinding
 
-class ItemAdapter(private val context: Context, private var ItemList:ArrayList<ItemItem>)
+class ItemAdapter(private val context: Context, private var ItemList:ArrayList<ItemItem>, private val listener: ItemAdapter.onDeleteListener)
     : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding = ItemItemLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
-        return ItemViewHolder(binding)
+        return ItemViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
@@ -23,11 +23,19 @@ class ItemAdapter(private val context: Context, private var ItemList:ArrayList<I
         return ItemList.size
     }
 
-    class ItemViewHolder(private val binding: ItemItemLayoutBinding) :
+    class ItemViewHolder(private val binding: ItemItemLayoutBinding, private val listener: onDeleteListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(ItemItem: ItemItem) {
-            binding.TextName.text = ItemItem.name
-            binding.TextDose.text = ItemItem.dose
+            binding.TextName.text = ItemItem.ItemName
+            binding.TextDose.text = ItemItem.ItemDose
+
+            binding.deleteButton.setOnClickListener {
+                listener.onDelete(ItemItem)
+            }
         }
+    }
+
+    interface onDeleteListener{
+        fun onDelete(data: ItemItem)
     }
 }
