@@ -26,6 +26,7 @@ class FragmentFavorite : Fragment() {
         dbManager.open()
         populateList()
         setUpAdapter()
+        binding.toolbar2.title = "Избранное"
         return binding.root
     }
 

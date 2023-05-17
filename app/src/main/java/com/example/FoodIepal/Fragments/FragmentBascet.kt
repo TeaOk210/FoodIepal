@@ -2,12 +2,11 @@ package com.example.FoodIepal.Fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.*
 import com.example.FoodIepal.databinding.FragmentBascetBinding
 
@@ -27,7 +26,13 @@ class FragmentBascet : Fragment() {
         dbManager.open()
         populateList()
         setUpAdapter()
+        getToolbar()
         return binding.root
+    }
+
+    private fun getToolbar(){
+        binding.toolbar3.title = "Корзина"
+        binding.toolbar3.inflateMenu(R.menu.cutom_toolbar_basket)
     }
 
     @SuppressLint("Range")

@@ -3,6 +3,7 @@ package com.example.FoodIepal
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainMenu : AppCompatActivity() {
     lateinit var binding : ActivityMainMenuBinding
     lateinit var BottomNav : BottomNavigationView
-    lateinit var lastFragment: Fragment
     lateinit var bundle: Bundle
     private val dataModel: DataModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,23 +23,19 @@ class MainMenu : AppCompatActivity() {
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         loadFragment(FragmentHome.newInstance())
-        lastFragment = FragmentHome.newInstance()
         BottomNav = binding.BottomMenu
         BottomNav.setOnItemSelectedListener{
            when(it.itemId) {
                R.id.home -> {
                    loadFragment(FragmentHome.newInstance())
-                   lastFragment = FragmentHome.newInstance()
                    true
                }
                R.id.bascet -> {
                    loadFragment(FragmentBascet.newInstance())
-                   lastFragment = FragmentBascet.newInstance()
                    true
                }
                R.id.favorites -> {
                    loadFragment(FragmentFavorite.newInstance())
-                   lastFragment = FragmentFavorite.newInstance()
                    true
                }
                else -> {
@@ -60,11 +56,10 @@ class MainMenu : AppCompatActivity() {
         startActivityForResult(intent, 1)
     }
 
-    fun onClickItemAdd(view: View){
+    fun onClickItemAdd(item: MenuItem) {
         val intent = Intent(this@MainMenu, ItemAdd::class.java)
         startActivity(intent)
     }
-
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

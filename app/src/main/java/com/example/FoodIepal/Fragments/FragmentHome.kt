@@ -53,6 +53,7 @@ class FragmentHome : Fragment(){
                 filter(s.toString())
             }
         })
+        binding.toolbarMenu.title = "Главная"
         dbManager.open()
         SetUpAdapter() // add RV
         populateList()

@@ -26,6 +26,7 @@ class FullScreen : AppCompatActivity() {
         dbManager = DBManager(this)
         binding = ActivityFullScreenBinding.inflate(layoutInflater)
         dbManager.open()
+        setSupportActionBar(binding.toolbar)
         getData()
         setContentView(binding.root)
     }

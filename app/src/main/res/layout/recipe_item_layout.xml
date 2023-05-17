@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animationCache="true"
-    android:onClick="OnClickFullScreen">
+    android:onClick="OnClickFullScreen"
+    android:background="@drawable/recipe_item_background"
+    android:layout_marginTop="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/RecipePhoto"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/food"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
@@ -21,9 +26,12 @@
 
     <TextView
         android:id="@+id/RecipeName"
-        android:layout_width="246dp"
+        android:layout_width="225dp"
         android:layout_height="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/RecipePhoto"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,9 +40,12 @@
 
     <TextView
         android:id="@+id/RecipeText"
-        android:layout_width="238dp"
+        android:layout_width="225dp"
         android:layout_height="44dp"
-        android:layout_marginTop="8dp"
+        android:layout_below="@+id/RecipeName"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/RecipePhoto"
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/RecipePhoto"
         app:layout_constraintTop_toBottomOf="@+id/RecipeName" />
@@ -43,7 +54,10 @@
         android:id="@+id/RecipeTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/RecipeName"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,11 +68,14 @@
         android:id="@+id/RecipeKkal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_below="@+id/RecipeTime"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="16dp"
+        android:layout_toEndOf="@+id/RecipeText"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toEndOf="@+id/RecipeText" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

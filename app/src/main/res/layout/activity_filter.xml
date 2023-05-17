@@ -16,7 +16,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:text="@string/Kkal"
-        android:textColor="#FF8E00"
+        android:textColor="@color/text_orange"
         android:textSize="24sp" />
 
     <TextView
@@ -83,7 +83,7 @@
         android:layout_marginBottom="10dp"
         android:onClick="onClickContinueListener"
         android:text="@string/Cont"
-        android:textColor="#A66900"
+        android:textColor="@color/black_orange"
         android:textSize="28sp" />
 
     <TextView
@@ -96,7 +96,7 @@
         android:layout_marginBottom="10dp"
         android:onClick="onClickExitListener"
         android:text="@string/NoCont"
-        android:textColor="#A66900"
+        android:textColor="@color/black_orange"
         android:textSize="28sp" />
 
     <TextView
@@ -108,7 +108,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:text="@string/Time"
-        android:textColor="#FF8E00"
+        android:textColor="@color/text_orange"
         android:textSize="24sp" />
 
     <TextView
@@ -120,7 +120,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:text="@string/Befote"
-        android:textColor="#A66900"
+        android:textColor="@color/black_orange"
         android:textSize="24sp" />
 
     <EditText
@@ -149,7 +149,7 @@
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/timeMin"
         android:text="@string/After"
-        android:textColor="#A66900"
+        android:textColor="@color/black_orange"
         android:textSize="24sp" />
 
     <EditText

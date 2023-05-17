@@ -16,7 +16,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:text="Название:"
-        android:textColor="#FF8E00"
+        android:textColor="@color/text_orange"
         android:textSize="24sp" />
 
     <EditText
@@ -44,7 +44,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="15dp"
         android:text="Дозировка:"
-        android:textColor="#FF8E00"
+        android:textColor="@color/text_orange"
         android:textSize="24sp" />
 
     <EditText
@@ -72,7 +72,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/NoCont"
-        android:textColor="#A66900"
+        android:textColor="@color/black_orange"
         android:textSize="28sp"
         android:onClick="onClickExit"/>
 
@@ -85,7 +85,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:text="Добавить"
-        android:textColor="#A66900"
+        android:textColor="@color/black_orange"
         android:textSize="28sp"
         android:onClick="onAddListener"/>
 
