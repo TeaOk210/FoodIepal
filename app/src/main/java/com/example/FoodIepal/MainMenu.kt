@@ -70,10 +70,13 @@ class MainMenu : AppCompatActivity() {
                 val timeMin = data?.getIntExtra("timeMin", 0) ?: 0
                 val maxKk = data?.getIntExtra("maxKk", 0) ?: 0
                 val timeMax = data?.getIntExtra("timeMax", 0) ?: 0
+                val items = data?.getStringExtra("items")?: "666"
+
                 dataModel.minKk.value = minKk
                 dataModel.maxKk.value = maxKk
                 dataModel.minTt.value = timeMin
                 dataModel.maxTt.value = timeMax
+                dataModel.items.value = arrayOf(items)
             }
         }
     }

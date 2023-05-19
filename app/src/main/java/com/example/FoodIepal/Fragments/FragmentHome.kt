@@ -37,7 +37,9 @@ class FragmentHome : Fragment(){
             dataModel.maxKk.observe(activity as LifecycleOwner) {maxkK ->
                 dataModel.minTt.observe(activity as LifecycleOwner) {minTt ->
                     dataModel.maxTt.observe(activity as LifecycleOwner) {maxTt ->
-                        kalTimeFilter(IntRange(minKk, maxkK), IntRange(minTt, maxTt))
+                        dataModel.items.observe(activity as LifecycleOwner) {items ->
+                            Filter(IntRange(minKk, maxkK), IntRange(minTt, maxTt), items)
+                        }
                     }
                 }
             }
@@ -50,22 +52,24 @@ class FragmentHome : Fragment(){
             }
 
             override fun afterTextChanged(s: Editable?) {
-                filter(s.toString())
+                Search(s.toString())
             }
         })
         binding.toolbarMenu.title = "Главная"
         dbManager.open()
-        SetUpAdapter() // add RV
+        SetUpAdapter()
         populateList()
         return binding.root
     }
 
-        fun kalTimeFilter(kkalRange: IntRange, timeRange: IntRange) {
+        fun Filter(kkalRange: IntRange, timeRange: IntRange, items: Array<String>) {
         filteredList.clear()
 
         for (item in RecipeItemList) {
-            if (item.Kkal in kkalRange && item.time in timeRange) {
-                filteredList.add(item)
+            for (recipeItem in items) {
+                if (item.Kkal in kkalRange && item.time in timeRange && recipeItem in item.recipeItems) {
+                    filteredList.add(item)
+                }
             }
         }
         adapter.filter(filteredList)
@@ -74,7 +78,7 @@ class FragmentHome : Fragment(){
         fun newInstance() = FragmentHome()
     }
     @SuppressLint("DefaultLocale")
-    private fun filter(text: String) {
+    private fun Search(text: String) {
         val searchedList: ArrayList<RecipeItem> = ArrayList()
 
         for (item in filteredList) {
@@ -158,6 +162,7 @@ class FragmentHome : Fragment(){
         while (inputStream.read(buffer).also { bytesRead = it } >= 0) {
             outputStream.write(buffer, 0, bytesRead)
         }
+
         return outputStream.toByteArray()
     }
 }

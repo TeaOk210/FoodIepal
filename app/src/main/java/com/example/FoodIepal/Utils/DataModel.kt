@@ -16,4 +16,7 @@ open class DataModel: ViewModel() {
     val maxTt: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>()
     }
+    val items: MutableLiveData<Array<String>> by lazy {
+        MutableLiveData<Array<String>>()
+    }
 }

@@ -16,8 +16,8 @@
     <string name="favourites">Избранное</string>
     <string name="Skip">Пропустить -></string>
     <string name="Search">Поиск...</string>
-    <string name="Kkal">Kkal:</string>
-    <string name="Time">Time:</string>
+    <string name="Kkal">Каллорий:</string>
+    <string name="Time">Время приготовления:</string>
     <string name="Befote">От:</string>
     <string name="After">До:</string>
     <string name="Cont">Продолжить</string>
