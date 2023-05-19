@@ -33,7 +33,7 @@ class DBManager(private val context: Context) {
             val contentValues = ContentValues()
             contentValues.put(DataBaseHalper.Recipe_NAme, RecipeName)
             contentValues.put(DataBaseHalper.Description, Description)
-            contentValues.put(DataBaseHalper.Recipe_Items, RecipeName)
+            contentValues.put(DataBaseHalper.Recipe_Items, Recipe_Items)
             contentValues.put(DataBaseHalper.Calories, Calories)
             contentValues.put(DataBaseHalper.Cook_time, Cook_time)
             contentValues.put(DataBaseHalper.Image_parh, Image_path)

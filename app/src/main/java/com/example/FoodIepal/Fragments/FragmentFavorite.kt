@@ -33,20 +33,25 @@ class FragmentFavorite : Fragment() {
     @SuppressLint("Range")
     private fun populateList() {
         val cursor = dbManager.fetchFavorite()
+
         if (cursor.moveToFirst()) {
             do {
                 val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))
                 val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
+                val items = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_Items))
                 val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
                 val bytesImage = cursor.getBlob(cursor.getColumnIndex(DataBaseHalper.Image_parh))
+
                 val recipeItem = RecipeItem(
                     name = name,
                     text = text,
                     time = time,
                     Kkal = kkal,
-                    RecipeImage = bytesImage
+                    RecipeImage = bytesImage,
+                    recipeItems = items
                 )
+
                 RecipeItemList.add(recipeItem)
             } while (cursor.moveToNext())
         }
@@ -65,6 +70,7 @@ class FragmentFavorite : Fragment() {
                 intent.putExtra("name", data.name)
                 intent.putExtra("text", data.text)
                 intent.putExtra("image", data.RecipeImage)
+                intent.putExtra("items", data.recipeItems)
 
                 startActivity(intent)
             }

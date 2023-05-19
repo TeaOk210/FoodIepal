@@ -62,6 +62,7 @@ class FragmentHome : Fragment(){
 
         fun kalTimeFilter(kkalRange: IntRange, timeRange: IntRange) {
         filteredList.clear()
+
         for (item in RecipeItemList) {
             if (item.Kkal in kkalRange && item.time in timeRange) {
                 filteredList.add(item)
@@ -75,12 +76,15 @@ class FragmentHome : Fragment(){
     @SuppressLint("DefaultLocale")
     private fun filter(text: String) {
         val searchedList: ArrayList<RecipeItem> = ArrayList()
+
         for (item in filteredList) {
             if (item.name.toLowerCase().contains(text.toLowerCase())) {
                 searchedList.add(item)
             }
         }
+
         adapter.filter(searchedList)
+
         if (RecipeItemList.isEmpty()) {
             Toast.makeText(requireActivity(), "Такого нет...", Toast.LENGTH_SHORT).show()
         }
@@ -88,6 +92,7 @@ class FragmentHome : Fragment(){
     @SuppressLint("Range")
     private fun populateList() {
         val cursor = dbManager.fetchRecipe()
+
         val images = arrayOf(
             R.drawable.figna,
             R.drawable.waf,
@@ -100,6 +105,7 @@ class FragmentHome : Fragment(){
             do {
                 val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))
                 val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
+                val items = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_Items))
                 val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
 
@@ -108,11 +114,15 @@ class FragmentHome : Fragment(){
                     text = text,
                     time = time,
                     Kkal = kkal,
-                    RecipeImage = images[imageIndex]
+                    RecipeImage = images[imageIndex],
+                    recipeItems = items
                 )
+
                 imageIndex = (imageIndex + 1) % images.size
+
                 RecipeItemList.add(recipeItem)
                 filteredList.add(recipeItem)
+
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -120,6 +130,7 @@ class FragmentHome : Fragment(){
 
     private fun SetUpAdapter() {
         adapter = RecipeAdapter(requireActivity(), RecipeItemList, object : RecipeAdapter.OnItemClickListener{
+            @SuppressLint("Range")
             override fun onItemClick(data: RecipeItem) {
                 val intent = Intent(requireContext(), FullScreen::class.java)
 
@@ -128,11 +139,12 @@ class FragmentHome : Fragment(){
                 intent.putExtra("name", data.name)
                 intent.putExtra("text", data.text)
                 intent.putExtra("image", data.RecipeImage)
-
+                intent.putExtra("items", data.recipeItems)
 
                 startActivity(intent)
             }
         })
+
         binding.RecipeList.adapter = adapter
         binding.RecipeList.layoutManager = LinearLayoutManager(requireActivity())
     }
@@ -142,6 +154,7 @@ class FragmentHome : Fragment(){
         val outputStream = ByteArrayOutputStream()
         val buffer = ByteArray(4096)
         var bytesRead: Int
+
         while (inputStream.read(buffer).also { bytesRead = it } >= 0) {
             outputStream.write(buffer, 0, bytesRead)
         }

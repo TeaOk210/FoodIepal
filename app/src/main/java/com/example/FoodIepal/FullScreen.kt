@@ -16,6 +16,7 @@ class FullScreen : AppCompatActivity() {
     private lateinit var binding: ActivityFullScreenBinding
     lateinit var name: String
     lateinit var text: String
+    lateinit var items: String
     var time by Delegates.notNull<Int>()
     var Kkal by Delegates.notNull<Int>()
     var image by Delegates.notNull<ByteArray>()
@@ -34,13 +35,19 @@ class FullScreen : AppCompatActivity() {
     private fun getData(){
         name = intent.getStringExtra("name").toString()
         text = intent.getStringExtra("text").toString()
+        items = intent.getStringExtra("items").toString()
         time = intent.getIntExtra("time", 0)
         Kkal = intent.getIntExtra("Kkal", 0)
         image = (intent.getByteArrayExtra("image") ?: byteArrayOf())
 
+
         binding.KkalView.text = Kkal.toString()
         binding.TimeView.text = time.toString()
+
         binding.DeskView.text = text
+
+        binding.ItemsView.text = items
+
         val bitmap = BitmapFactory.decodeByteArray(image, 0, image.size)
         binding.ImageView.setImageBitmap(bitmap)
 
@@ -72,7 +79,7 @@ class FullScreen : AppCompatActivity() {
                 Toast.makeText(this, "Удалено из избранного", Toast.LENGTH_SHORT).show()
             } else {
                 item.setIcon(R.drawable.baseline_star_24)
-                dbManager.insertFavorite(name, text, text, Kkal, time, image)
+                dbManager.insertFavorite(name, text, items, Kkal, time, image)
                 Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
             }
         }
