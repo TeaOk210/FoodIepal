@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -61,6 +62,16 @@ class MainMenu : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun clearFilter(item: MenuItem) {
+        dataModel.minKk.value = 0
+        dataModel.maxKk.value = Int.MAX_VALUE
+        dataModel.minTt.value = 0
+        dataModel.maxTt.value = Int.MAX_VALUE
+        dataModel.items.value = ArrayList()
+        Toast.makeText(this, "Фильтр очищен!", Toast.LENGTH_SHORT).show()
+    }
+
+
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -68,15 +79,15 @@ class MainMenu : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 val minKk = data?.getIntExtra("minKk", 0) ?: 0
                 val timeMin = data?.getIntExtra("timeMin", 0) ?: 0
-                val maxKk = data?.getIntExtra("maxKk", 0) ?: 0
-                val timeMax = data?.getIntExtra("timeMax", 0) ?: 0
-                val items = data?.getStringExtra("items")?: "666"
+                val maxKk = data?.getIntExtra("maxKk", 0) ?: Int.MAX_VALUE
+                val timeMax = data?.getIntExtra("timeMax", 0) ?: Int.MAX_VALUE
+                val items = data?.getStringArrayListExtra("items")
 
                 dataModel.minKk.value = minKk
                 dataModel.maxKk.value = maxKk
                 dataModel.minTt.value = timeMin
                 dataModel.maxTt.value = timeMax
-                dataModel.items.value = arrayOf(items)
+                dataModel.items.value = items
             }
         }
     }

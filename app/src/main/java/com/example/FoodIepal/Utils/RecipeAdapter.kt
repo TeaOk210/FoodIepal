@@ -42,7 +42,6 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
             binding.RecipeTime.text = RecipeItem.time.toString()
             binding.RecipeKkal.text = RecipeItem.Kkal.toString()
 
-            val items: String = RecipeItem.recipeItems
 
             val bitmap = BitmapFactory.decodeByteArray(RecipeItem.RecipeImage, 0, RecipeItem.RecipeImage.size)
             binding.RecipePhoto.setImageBitmap(bitmap)

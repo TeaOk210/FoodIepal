@@ -24,9 +24,11 @@ class FragmentBascet : Fragment() {
         dbManager = DBManager(requireContext())
         binding = FragmentBascetBinding.inflate(inflater)
         dbManager.open()
+
         populateList()
         setUpAdapter()
         getToolbar()
+
         return binding.root
     }
 

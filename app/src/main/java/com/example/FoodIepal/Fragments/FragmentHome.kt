@@ -32,7 +32,15 @@ class FragmentHome : Fragment(){
         savedInstanceState: Bundle?
     ): View {
         dbManager = DBManager(requireActivity())
+
         binding = FragmentHomeMenuBinding.inflate(inflater)
+
+        dbManager.open()
+
+        SetUpAdapter()
+        populateList()
+
+
         dataModel.minKk.observe(activity as LifecycleOwner) {minKk ->
             dataModel.maxKk.observe(activity as LifecycleOwner) {maxkK ->
                 dataModel.minTt.observe(activity as LifecycleOwner) {minTt ->
@@ -44,6 +52,7 @@ class FragmentHome : Fragment(){
                 }
             }
         }
+
             binding.SearchEditText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -55,44 +64,63 @@ class FragmentHome : Fragment(){
                 Search(s.toString())
             }
         })
+
         binding.toolbarMenu.title = "Главная"
-        dbManager.open()
-        SetUpAdapter()
-        populateList()
+        binding.toolbarMenu.inflateMenu(R.menu.custom_toolvar_menu)
+
         return binding.root
     }
 
-        fun Filter(kkalRange: IntRange, timeRange: IntRange, items: Array<String>) {
-        filteredList.clear()
-
+    fun Filter(kkalRange: IntRange, timeRange: IntRange, items: ArrayList<String>) {
+        val filteredSet = mutableSetOf<RecipeItem>()
         for (item in RecipeItemList) {
-            for (recipeItem in items) {
-                if (item.Kkal in kkalRange && item.time in timeRange && recipeItem in item.recipeItems) {
-                    filteredList.add(item)
+            if (items.isEmpty()) {
+                if (item.Kkal in kkalRange && item.time in timeRange) {
+                    filteredSet.add(item)
+                }
+            } else {
+                var containsAllItems = true
+                for (recipeItem in items) {
+                    if (recipeItem !in item.recipeItems) {
+                        containsAllItems = false
+                        break
+                    }
+                }
+                if (containsAllItems && item.Kkal in kkalRange && item.time in timeRange) {
+                    filteredSet.add(item)
                 }
             }
         }
+
+        val filteredList = ArrayList(filteredSet)
         adapter.filter(filteredList)
     }
+
+
     companion object {
         fun newInstance() = FragmentHome()
     }
     @SuppressLint("DefaultLocale")
     private fun Search(text: String) {
-        val searchedList: ArrayList<RecipeItem> = ArrayList()
+        val searchedSet: MutableSet<RecipeItem> = mutableSetOf()
 
         for (item in filteredList) {
             if (item.name.toLowerCase().contains(text.toLowerCase())) {
-                searchedList.add(item)
+                searchedSet.add(item)
             }
+//            if (item.recipeItems.toLowerCase().contains(text.toLowerCase())) {
+//                searchedSet.add(item)
+//            }
         }
 
+        val searchedList: ArrayList<RecipeItem> = ArrayList(searchedSet)
         adapter.filter(searchedList)
 
-        if (RecipeItemList.isEmpty()) {
+        if (searchedList.isEmpty()) {
             Toast.makeText(requireActivity(), "Такого нет...", Toast.LENGTH_SHORT).show()
         }
     }
+
     @SuppressLint("Range")
     private fun populateList() {
         val cursor = dbManager.fetchRecipe()
