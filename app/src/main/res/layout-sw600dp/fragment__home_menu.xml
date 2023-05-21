@@ -24,8 +24,8 @@
 
         <EditText
             android:id="@+id/SearchEditText"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_width="650dp"
+            android:layout_height="70dp"
             android:layout_below="@+id/toolbarMenu"
             android:layout_alignParentStart="true"
             android:layout_marginStart="5dp"
@@ -48,15 +48,15 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="55dp"
-            android:layout_height="50dp"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
             android:layout_below="@+id/toolbarMenu"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/SearchEditText"
             android:background="@drawable/filter_style"
             android:onClick="onClickFilterListener"
-            android:src="@drawable/filter24"
+            android:src="@drawable/filter48"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.111"
             app:layout_constraintStart_toEndOf="@+id/SearchEditText"

@@ -5,7 +5,8 @@
         android:id="@+id/home"
         android:title="@string/Home"
         android:icon="@drawable/home48"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"
+        />
     <item
         android:id="@+id/bascet"
         android:title="@string/Basket"
