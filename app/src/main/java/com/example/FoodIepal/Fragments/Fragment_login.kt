@@ -23,8 +23,12 @@ class fragment_login : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater)
+
         dbManager = DBManager(requireActivity())
         dbManager.open()
+
+        sessionManager = SessionManager(requireContext())
+
         return binding.root
     }
 
@@ -46,8 +50,12 @@ class fragment_login : Fragment() {
                 val storedPassword = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Password))
 
                 if (login == storedLogin && password == storedPassword) {
+                    sessionManager.setLogin(true)
+                    sessionManager.setUserName(login)
+
                     val mainIntent = Intent(activity, MainMenu::class.java)
                     startActivity(mainIntent)
+
                     activity?.finish()
                     return
                 }

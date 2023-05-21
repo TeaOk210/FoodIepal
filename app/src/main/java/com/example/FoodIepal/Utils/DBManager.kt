@@ -29,7 +29,7 @@ class DBManager(private val context: Context) {
             Toast.makeText(context, "Вы успешно зарегистрировались", Toast.LENGTH_SHORT).show()
         }
 
-        fun insertFavorite(RecipeName: String, Description: String, Recipe_Items: String, Calories: Int, Cook_time: Int, Image_path: ByteArray){
+        fun insertFavorite(RecipeName: String, Description: String, Recipe_Items: String, Calories: Int, Cook_time: Int, Image_path: ByteArray, login: String){
             val contentValues = ContentValues()
             contentValues.put(DataBaseHalper.Recipe_NAme, RecipeName)
             contentValues.put(DataBaseHalper.Description, Description)
@@ -37,13 +37,15 @@ class DBManager(private val context: Context) {
             contentValues.put(DataBaseHalper.Calories, Calories)
             contentValues.put(DataBaseHalper.Cook_time, Cook_time)
             contentValues.put(DataBaseHalper.Image_parh, Image_path)
+            contentValues.put(DataBaseHalper.Login, login)
             database.insert(DataBaseHalper.Table_Name_Favorite, null, contentValues)
         }
 
-        fun insertBasket(name: String, Dose: String){
+        fun insertBasket(name: String, Dose: String, Login: String){
             val contentValues = ContentValues()
             contentValues.put(DataBaseHalper.Item_name, name)
             contentValues.put(DataBaseHalper.Item_Dose, Dose)
+            contentValues.put(DataBaseHalper.Login, Login)
             database.insert(DataBaseHalper.Table_Name_Basket, null, contentValues)
         }
 
@@ -78,8 +80,8 @@ class DBManager(private val context: Context) {
             return Cursor
         }
 
-        fun fetchFavorite(): Cursor{
-            val colums : Array<String> = arrayOf(
+        fun fetchFavorite(login: String): Cursor {
+            val columns: Array<String> = arrayOf(
                 DataBaseHalper.ID,
                 DataBaseHalper.Recipe_NAme,
                 DataBaseHalper.Description,
@@ -88,23 +90,45 @@ class DBManager(private val context: Context) {
                 DataBaseHalper.Cook_time,
                 DataBaseHalper.Image_parh
             )
-            val Cursor = database.query(DataBaseHalper.Table_Name_Favorite, colums, null, null, null, null, null)
-            if (Cursor != null) {
-                Cursor.moveToFirst()
-            }
-            return Cursor
+
+            val selection = "${DataBaseHalper.Login} = ?"
+            val selectionArgs = arrayOf(login)
+
+            val cursor = database.query(
+                DataBaseHalper.Table_Name_Favorite,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+            )
+
+            cursor.moveToFirst()
+            return cursor
         }
 
-        fun fetchBasket(): Cursor{
+
+        fun fetchBasket(login: String): Cursor{
             val colums : Array<String> = arrayOf(
                 DataBaseHalper.Item_name,
                 DataBaseHalper.Item_Dose
             )
-            val Cursor = database.query(DataBaseHalper.Table_Name_Basket, colums, null, null, null, null, null)
-            if (Cursor != null){
-                Cursor.moveToFirst()
-            }
-            return Cursor
+            val selection = "${DataBaseHalper.Login} = ?"
+            val selectionArgs = arrayOf(login)
+
+            val cursor = database.query(
+                DataBaseHalper.Table_Name_Basket,
+                colums,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+            )
+
+            cursor.moveToFirst()
+            return cursor
         }
 
         fun deleteBasket(name: String) {

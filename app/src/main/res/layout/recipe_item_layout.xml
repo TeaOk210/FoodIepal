@@ -48,7 +48,8 @@
         android:layout_toEndOf="@+id/RecipePhoto"
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/RecipePhoto"
-        app:layout_constraintTop_toBottomOf="@+id/RecipeName" />
+        app:layout_constraintTop_toBottomOf="@+id/RecipeName"
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/RecipeTime"

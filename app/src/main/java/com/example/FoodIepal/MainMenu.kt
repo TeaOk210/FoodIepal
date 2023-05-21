@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.FoodIepal.Fragments.*
 import com.example.FoodIepal.Utils.DataModel
+import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -19,11 +20,18 @@ class MainMenu : AppCompatActivity() {
     lateinit var BottomNav : BottomNavigationView
     lateinit var bundle: Bundle
     private val dataModel: DataModel by viewModels()
+    private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
         loadFragment(FragmentHome.newInstance())
+
+        sessionManager = SessionManager(this)
+
         BottomNav = binding.BottomMenu
         BottomNav.setOnItemSelectedListener{
            when(it.itemId) {
@@ -69,6 +77,13 @@ class MainMenu : AppCompatActivity() {
         dataModel.maxTt.value = Int.MAX_VALUE
         dataModel.items.value = ArrayList()
         Toast.makeText(this, "Фильтр очищен!", Toast.LENGTH_SHORT).show()
+    }
+
+    fun exitInUser(item: MenuItem){
+        sessionManager.setLogin(false)
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
 

@@ -15,6 +15,7 @@ class FragmentBascet : Fragment() {
     private lateinit var adapter: ItemAdapter
     lateinit var binding: FragmentBascetBinding
     lateinit var dbManager: DBManager
+    private lateinit var sessionManager: SessionManager
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -22,8 +23,11 @@ class FragmentBascet : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         dbManager = DBManager(requireContext())
-        binding = FragmentBascetBinding.inflate(inflater)
         dbManager.open()
+
+        binding = FragmentBascetBinding.inflate(inflater)
+
+        sessionManager = SessionManager(requireContext())
 
         populateList()
         setUpAdapter()
@@ -39,7 +43,7 @@ class FragmentBascet : Fragment() {
 
     @SuppressLint("Range")
     fun populateList(){
-        val cursor = dbManager.fetchBasket()
+        val cursor = dbManager.fetchBasket(sessionManager.getUserName())
         if (cursor.moveToFirst()){
             do {
                 val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Item_name))

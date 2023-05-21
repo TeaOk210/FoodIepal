@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.FullScreen
+import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.*
 import com.example.FoodIepal.databinding.FragmentFavoriteBinding
 
 class FragmentFavorite : Fragment() {
     var RecipeItemList = ArrayList<RecipeItem>()
+    private lateinit var sessionManager: SessionManager
     lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentFavoriteBinding
     lateinit var dbManager: DBManager
@@ -22,17 +24,24 @@ class FragmentFavorite : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         dbManager = DBManager(requireActivity())
-        binding = FragmentFavoriteBinding.inflate(inflater)
         dbManager.open()
+
+        sessionManager = SessionManager(requireContext())
+
+        binding = FragmentFavoriteBinding.inflate(inflater)
+
         populateList()
         setUpAdapter()
+
         binding.toolbar2.title = "Избранное"
+        binding.toolbar2.inflateMenu(R.menu.custom_toolbsr_favorite)
+
         return binding.root
     }
 
     @SuppressLint("Range")
     private fun populateList() {
-        val cursor = dbManager.fetchFavorite()
+        val cursor = dbManager.fetchFavorite(sessionManager.getUserName())
 
         if (cursor.moveToFirst()) {
             do {

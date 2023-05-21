@@ -9,18 +9,24 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBaseHalper
+import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.FragmentRegistrBinding
 
 class fragment_registr : Fragment() {
     lateinit var binding: FragmentRegistrBinding
     lateinit var dbManager: DBManager
+    lateinit var sessionManager: SessionManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegistrBinding.inflate(inflater)
+
         dbManager = DBManager(requireActivity())
         dbManager.open()
+
+        sessionManager = SessionManager(requireContext())
+
         return binding.root
     }
 
@@ -67,6 +73,14 @@ class fragment_registr : Fragment() {
     fun Registration() {
         val login = binding.LogTxt.text.toString()
         val password = binding.passTXT.text.toString()
+
+        sessionManager.setLogin(true)
+        sessionManager.setUserName(login)
+
         dbManager.insertReg(login, password)
     }
 }
+
+
+
+

@@ -9,24 +9,33 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBaseHalper
+import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.ActivityFullScreenBinding
 import kotlin.properties.Delegates
 
 class FullScreen : AppCompatActivity() {
     private lateinit var binding: ActivityFullScreenBinding
+    private lateinit var sessionManager: SessionManager
     lateinit var name: String
     lateinit var text: String
     lateinit var items: String
     var time by Delegates.notNull<Int>()
     var Kkal by Delegates.notNull<Int>()
     var image by Delegates.notNull<ByteArray>()
+    lateinit var login: String
     lateinit var dbManager: DBManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sessionManager = SessionManager(this)
+
         dbManager = DBManager(this)
+
         binding = ActivityFullScreenBinding.inflate(layoutInflater)
+
         dbManager.open()
+
         setSupportActionBar(binding.toolbar)
         getData()
         setContentView(binding.root)
@@ -39,6 +48,12 @@ class FullScreen : AppCompatActivity() {
         time = intent.getIntExtra("time", 0)
         Kkal = intent.getIntExtra("Kkal", 0)
         image = (intent.getByteArrayExtra("image") ?: byteArrayOf())
+        if (sessionManager.getLogin()){
+            login = sessionManager.getUserName()
+        } else{
+            login = "guest"
+        }
+
 
 
         binding.KkalView.text = Kkal.toString()
@@ -79,7 +94,7 @@ class FullScreen : AppCompatActivity() {
                 Toast.makeText(this, "Удалено из избранного", Toast.LENGTH_SHORT).show()
             } else {
                 item.setIcon(R.drawable.baseline_star_24)
-                dbManager.insertFavorite(name, text, items, Kkal, time, image)
+                dbManager.insertFavorite(name, text, items, Kkal, time, image, login)
                 Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
             }
         }
@@ -88,7 +103,8 @@ class FullScreen : AppCompatActivity() {
 
     @SuppressLint("Range")
     private fun checkFavorite(): Boolean {
-        val cursor = dbManager.fetchFavorite()
+        val cursor = dbManager.fetchFavorite(login)
+
         if (cursor.moveToFirst()) {
             do {
                 val recipeName = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))

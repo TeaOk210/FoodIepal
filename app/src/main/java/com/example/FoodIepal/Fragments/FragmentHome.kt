@@ -108,9 +108,6 @@ class FragmentHome : Fragment(){
             if (item.name.toLowerCase().contains(text.toLowerCase())) {
                 searchedSet.add(item)
             }
-//            if (item.recipeItems.toLowerCase().contains(text.toLowerCase())) {
-//                searchedSet.add(item)
-//            }
         }
 
         val searchedList: ArrayList<RecipeItem> = ArrayList(searchedSet)
