@@ -40,19 +40,16 @@ class fragment_registr : Fragment() {
         val password = binding.passTXT.text.toString()
         val passwordConf = binding.passConf.text.toString()
 
-        // Проверка на пустые поля
         if (login.isEmpty() || password.isEmpty() || passwordConf.isEmpty()) {
             Toast.makeText(activity, "Заполните все поля", Toast.LENGTH_SHORT).show()
             return false
         }
 
-        // Проверка на совпадение паролей
         if (password != passwordConf) {
             Toast.makeText(activity, "Пароли не совпадают!", Toast.LENGTH_SHORT).show()
             return false
         }
 
-        // Проверка на наличие пользователя с таким логином в БД
         val cursor = dbManager.fetchReg()
         if (cursor.moveToFirst()) {
             do {

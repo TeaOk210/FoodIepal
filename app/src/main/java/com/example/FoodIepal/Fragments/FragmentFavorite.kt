@@ -34,10 +34,12 @@ class FragmentFavorite : Fragment() {
         setUpAdapter()
 
         binding.toolbar2.title = "Избранное"
+        binding.toolbar2.subtitle = sessionManager.getUserName()
         binding.toolbar2.inflateMenu(R.menu.custom_toolbsr_favorite)
 
         return binding.root
     }
+
 
     @SuppressLint("Range")
     private fun populateList() {

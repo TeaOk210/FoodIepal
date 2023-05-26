@@ -60,6 +60,7 @@ class MainMenu : AppCompatActivity() {
         transaction.commit()
     }
 
+
     fun onClickFilterListener(view: View) {
         val intent = Intent(this@MainMenu, Filter::class.java)
         startActivityForResult(intent, 1)

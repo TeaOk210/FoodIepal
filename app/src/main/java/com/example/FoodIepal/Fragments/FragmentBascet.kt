@@ -38,6 +38,7 @@ class FragmentBascet : Fragment() {
 
     private fun getToolbar(){
         binding.toolbar3.title = "Корзина"
+        binding.toolbar3.subtitle = sessionManager.getUserName()
         binding.toolbar3.inflateMenu(R.menu.cutom_toolbar_basket)
     }
 

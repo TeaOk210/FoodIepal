@@ -9,7 +9,6 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.FullScreen
 import com.example.FoodIepal.R
@@ -26,12 +25,15 @@ class FragmentHome : Fragment(){
     private lateinit var adapter: RecipeAdapter
     lateinit var binding: FragmentHomeMenuBinding
     private val dataModel: DataModel by activityViewModels()
+    private lateinit var sessionManager: SessionManager
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         dbManager = DBManager(requireActivity())
+
+        sessionManager = SessionManager(requireContext())
 
         binding = FragmentHomeMenuBinding.inflate(inflater)
 
@@ -40,18 +42,18 @@ class FragmentHome : Fragment(){
         SetUpAdapter()
         populateList()
 
-
-        dataModel.minKk.observe(activity as LifecycleOwner) {minKk ->
-            dataModel.maxKk.observe(activity as LifecycleOwner) {maxkK ->
-                dataModel.minTt.observe(activity as LifecycleOwner) {minTt ->
-                    dataModel.maxTt.observe(activity as LifecycleOwner) {maxTt ->
-                        dataModel.items.observe(activity as LifecycleOwner) {items ->
+        dataModel.minKk.observe(viewLifecycleOwner) { minKk ->
+            dataModel.maxKk.observe(viewLifecycleOwner) { maxkK ->
+                dataModel.minTt.observe(viewLifecycleOwner) { minTt ->
+                    dataModel.maxTt.observe(viewLifecycleOwner) { maxTt ->
+                        dataModel.items.observe(viewLifecycleOwner) { items ->
                             Filter(IntRange(minKk, maxkK), IntRange(minTt, maxTt), items)
                         }
                     }
                 }
             }
         }
+
 
             binding.SearchEditText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -66,6 +68,7 @@ class FragmentHome : Fragment(){
         })
 
         binding.toolbarMenu.title = "Главная"
+        binding.toolbarMenu.subtitle = sessionManager.getUserName()
         binding.toolbarMenu.inflateMenu(R.menu.custom_toolvar_menu)
 
         return binding.root
