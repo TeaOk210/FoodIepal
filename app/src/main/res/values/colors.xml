@@ -10,4 +10,5 @@
     <color name="selected_color">#A66900</color>
     <color name="black_orange">#A66900</color>
     <color name="text_orange">#FF8E00</color>
+    <color name="material_dynamic_neutral10">#191C1E</color>
 </resources>

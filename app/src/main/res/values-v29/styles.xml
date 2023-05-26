@@ -1,8 +1,9 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
 
     <style name="Widget.Theme.FoodIepal.MyView" parent="">
         <item name="android:background">@color/teal_700</item>
         <item name="exampleColor">@color/purple_700</item>
-        <item name="android:forceDarkAllowed" tools:ignore="NewApi">true</item>
+        <item name="android:forceDarkAllowed">true</item>
     </style>
 </resources>
