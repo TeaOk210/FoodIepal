@@ -29,7 +29,7 @@ class DBManager(private val context: Context) {
             Toast.makeText(context, "Вы успешно зарегистрировались", Toast.LENGTH_SHORT).show()
         }
 
-        fun insertFavorite(RecipeName: String, Description: String, Recipe_Items: String, Calories: Int, Cook_time: Int, Image_path: ByteArray, login: String){
+        fun insertFavorite(RecipeName: String, Description: String, Recipe_Items: String, Calories: Int, Cook_time: Int, Image_path: ByteArray, login: String, preparation: String){
             val contentValues = ContentValues()
             contentValues.put(DataBaseHalper.Recipe_NAme, RecipeName)
             contentValues.put(DataBaseHalper.Description, Description)
@@ -38,6 +38,7 @@ class DBManager(private val context: Context) {
             contentValues.put(DataBaseHalper.Cook_time, Cook_time)
             contentValues.put(DataBaseHalper.Image_parh, Image_path)
             contentValues.put(DataBaseHalper.Login, login)
+            contentValues.put(DataBaseHalper.Preparation, preparation)
             database.insert(DataBaseHalper.Table_Name_Favorite, null, contentValues)
         }
 
@@ -71,7 +72,8 @@ class DBManager(private val context: Context) {
                 DataBaseHalper.Recipe_Items,
                 DataBaseHalper.Calories,
                 DataBaseHalper.Cook_time,
-                DataBaseHalper.Image_parh
+                DataBaseHalper.Image_parh,
+                DataBaseHalper.Preparation
             )
             val Cursor = database.query(DataBaseHalper.Table_Name_Food, colums, null, null, null, null, null)
             if (Cursor != null) {
@@ -88,7 +90,8 @@ class DBManager(private val context: Context) {
                 DataBaseHalper.Recipe_Items,
                 DataBaseHalper.Calories,
                 DataBaseHalper.Cook_time,
-                DataBaseHalper.Image_parh
+                DataBaseHalper.Image_parh,
+                DataBaseHalper.Preparation
             )
 
             val selection = "${DataBaseHalper.Login} = ?"

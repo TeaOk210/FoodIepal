@@ -123,10 +123,26 @@ class FragmentHome : Fragment(){
         val cursor = dbManager.fetchRecipe()
 
         val images = arrayOf(
-            R.drawable.figna,
-            R.drawable.waf,
-            R.drawable.blin,
-            R.drawable.max
+            R.drawable.keks,
+            R.drawable.okroshca,
+            R.drawable.laph_krivet,
+            R.drawable.kart_grib,
+            R.drawable.hok_keks,
+            R.drawable.sir_lepeshka,
+            R.drawable.grechka_ovoshi,
+            R.drawable.ydon_kanada,
+            R.drawable.grek_salt,
+            R.drawable.ris_blin,
+            R.drawable.ban_ovs_alad,
+            R.drawable.kotl_kur,
+            R.drawable.lavash_tvorog,
+            R.drawable.sirniki,
+            R.drawable.kur_salt,
+            R.drawable.chis_ris,
+            R.drawable.salt_kriv,
+            R.drawable.bulg_plov_kur,
+            R.drawable.pech_tvorohn,
+            R.drawable.ovosh_ragu
         ).map { resourceId -> getBytesFromResource(resourceId) }
 
         var imageIndex = 0
@@ -134,6 +150,7 @@ class FragmentHome : Fragment(){
             do {
                 val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))
                 val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
+                val preparation = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Preparation))
                 val items = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_Items))
                 val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
@@ -144,7 +161,8 @@ class FragmentHome : Fragment(){
                     time = time,
                     Kkal = kkal,
                     RecipeImage = images[imageIndex],
-                    recipeItems = items
+                    recipeItems = items,
+                    Preparation = preparation
                 )
 
                 imageIndex = (imageIndex + 1) % images.size
@@ -169,6 +187,7 @@ class FragmentHome : Fragment(){
                 intent.putExtra("text", data.text)
                 intent.putExtra("image", data.RecipeImage)
                 intent.putExtra("items", data.recipeItems)
+                intent.putExtra("preparation", data.Preparation)
 
                 startActivity(intent)
             }

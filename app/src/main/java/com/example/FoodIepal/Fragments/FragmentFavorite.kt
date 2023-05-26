@@ -48,6 +48,7 @@ class FragmentFavorite : Fragment() {
                 val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))
                 val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
                 val items = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_Items))
+                val preparation = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Preparation))
                 val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
                 val bytesImage = cursor.getBlob(cursor.getColumnIndex(DataBaseHalper.Image_parh))
@@ -58,7 +59,8 @@ class FragmentFavorite : Fragment() {
                     time = time,
                     Kkal = kkal,
                     RecipeImage = bytesImage,
-                    recipeItems = items
+                    recipeItems = items,
+                    Preparation = preparation
                 )
 
                 RecipeItemList.add(recipeItem)
@@ -80,6 +82,7 @@ class FragmentFavorite : Fragment() {
                 intent.putExtra("text", data.text)
                 intent.putExtra("image", data.RecipeImage)
                 intent.putExtra("items", data.recipeItems)
+                intent.putExtra("preparation", data.Preparation)
 
                 startActivity(intent)
             }

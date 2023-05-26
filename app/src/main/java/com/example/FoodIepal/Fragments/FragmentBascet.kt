@@ -63,7 +63,7 @@ class FragmentBascet : Fragment() {
         adapter = ItemAdapter(requireActivity(), ItemList, object : ItemAdapter.onDeleteListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDelete(data: ItemItem) {
-                Toast.makeText(requireContext(), "УДАЛЕНО!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Удалено!", Toast.LENGTH_SHORT).show()
                 dbManager.deleteBasket(data.ItemName)
                 populateList()
             }

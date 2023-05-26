@@ -16,14 +16,18 @@ import kotlin.properties.Delegates
 class FullScreen : AppCompatActivity() {
     private lateinit var binding: ActivityFullScreenBinding
     private lateinit var sessionManager: SessionManager
+    lateinit var dbManager: DBManager
+
     lateinit var name: String
     lateinit var text: String
     lateinit var items: String
+    lateinit var preparation: String
+    lateinit var login: String
+
     var time by Delegates.notNull<Int>()
     var Kkal by Delegates.notNull<Int>()
     var image by Delegates.notNull<ByteArray>()
-    lateinit var login: String
-    lateinit var dbManager: DBManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,21 +49,20 @@ class FullScreen : AppCompatActivity() {
         name = intent.getStringExtra("name").toString()
         text = intent.getStringExtra("text").toString()
         items = intent.getStringExtra("items").toString()
+        preparation = intent.getStringExtra("preparation").toString()
+
         time = intent.getIntExtra("time", 0)
         Kkal = intent.getIntExtra("Kkal", 0)
-        image = (intent.getByteArrayExtra("image") ?: byteArrayOf())
-        if (sessionManager.getLogin()){
-            login = sessionManager.getUserName()
-        } else{
-            login = "guest"
-        }
 
+        image = (intent.getByteArrayExtra("image") ?: byteArrayOf())
+
+        login = sessionManager.getUserName()
 
 
         binding.KkalView.text = Kkal.toString()
         binding.TimeView.text = time.toString()
 
-        binding.DeskView.text = text
+        binding.DeskView.text = preparation
 
         binding.ItemsView.text = items
 
@@ -94,7 +97,7 @@ class FullScreen : AppCompatActivity() {
                 Toast.makeText(this, "Удалено из избранного", Toast.LENGTH_SHORT).show()
             } else {
                 item.setIcon(R.drawable.baseline_star_24)
-                dbManager.insertFavorite(name, text, items, Kkal, time, image, login)
+                dbManager.insertFavorite(name, text, items, Kkal, time, image, login, preparation)
                 Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
             }
         }
