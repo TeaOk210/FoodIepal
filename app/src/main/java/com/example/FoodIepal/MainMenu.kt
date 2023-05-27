@@ -24,13 +24,16 @@ class MainMenu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        sessionManager = SessionManager(this)
+        if (!sessionManager.getLogin()){
+            startActivityForResult(Intent(this, MainActivity::class.java), 2)
+        }
+
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
         loadFragment(FragmentHome.newInstance())
-
-        sessionManager = SessionManager(this)
 
         BottomNav = binding.BottomMenu
         BottomNav.setOnItemSelectedListener{
@@ -68,7 +71,7 @@ class MainMenu : AppCompatActivity() {
 
     fun onClickItemAdd(item: MenuItem) {
         val intent = Intent(this@MainMenu, ItemAdd::class.java)
-        startActivity(intent)
+        startActivityForResult(intent, 3)
     }
 
     fun clearFilter(item: MenuItem) {
@@ -78,13 +81,6 @@ class MainMenu : AppCompatActivity() {
         dataModel.maxTt.value = Int.MAX_VALUE
         dataModel.items.value = ArrayList()
         Toast.makeText(this, "Фильтр очищен!", Toast.LENGTH_SHORT).show()
-    }
-
-    fun exitInUser(item: MenuItem){
-        sessionManager.setLogin(false)
-
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
     }
 
 

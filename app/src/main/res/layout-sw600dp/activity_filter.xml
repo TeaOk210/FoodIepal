@@ -46,7 +46,8 @@
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="36sp"
-        android:text=""/>
+        android:text=""
+        android:shadowColor="@color/white"/>
 
     <TextView
         android:id="@+id/textView6"

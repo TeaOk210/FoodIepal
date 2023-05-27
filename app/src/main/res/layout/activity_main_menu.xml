@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="5dp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/BottomMenu"
@@ -30,7 +31,8 @@
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_nav_menu"
         app:itemTextColor="@color/bottom_nav_menu_colors"
-        app:itemIconTint="@color/bottom_nav_menu_colors">
+        app:itemIconTint="@color/bottom_nav_menu_colors"
+        android:background="@color/neutral10">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

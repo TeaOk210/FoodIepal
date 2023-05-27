@@ -1,5 +1,6 @@
 package com.example.FoodIepal
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -26,6 +27,7 @@ class ItemAdd : AppCompatActivity() {
     }
 
     fun onClickExit(view: View){
+        setResult(Activity.RESULT_CANCELED)
         finish()
     }
 
@@ -36,6 +38,7 @@ class ItemAdd : AppCompatActivity() {
 
         if (name.isNotEmpty() && dose.isNotEmpty()) {
             dbManager.insertBasket(name, dose, login)
+            setResult(Activity.RESULT_OK)
             finish()
         } else{
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()

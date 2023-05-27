@@ -1,5 +1,6 @@
 package com.example.FoodIepal
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -17,30 +18,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         sessionManager = SessionManager(this)
-        if (sessionManager.getLogin()){
-            val Main = Intent(this, MainMenu::class.java)
-            startActivity(Main)
-        }
-
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
-
-
-
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.Registr, fragment_registr.newInstance())
             .commit()
-
-
         binding.Up.setOnClickListener() {
             registrationFragment = supportFragmentManager.findFragmentById(R.id.Registr) as fragment_registr
             if (registrationFragment.checkRegistrationFields()) {
                 registrationFragment.Registration()
-                val Main = Intent(this, MainMenu::class.java)
-                startActivity(Main)
+                setResult(Activity.RESULT_OK)
+                finish()
             }
         }
     }
@@ -54,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         sessionManager.setLogin(false)
         sessionManager.setUserName("guest")
 
-        val Main = Intent(this, MainMenu::class.java)
-        startActivity(Main)
+        setResult(Activity.RESULT_CANCELED)
+        finish()
     }
 }

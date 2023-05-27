@@ -6,5 +6,5 @@
         android:radius="10dp"/>
 
     <solid
-        android:color="@color/material_dynamic_neutral10"/>
+        android:color="@color/neutral10"/>
 </shape>

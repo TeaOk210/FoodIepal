@@ -18,9 +18,11 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:background="@color/material_dynamic_neutral10"
+            android:background="@color/neutral10"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:theme="?attr/actionBarTheme"
+            app:subtitleTextColor="@color/white"
+            app:titleTextColor="@color/white"/>
 
         <EditText
             android:id="@+id/SearchEditText"

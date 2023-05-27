@@ -36,8 +36,9 @@ class SignIn : AppCompatActivity() {
     }
 
     fun OnClickSign(view: View) {
-        val Register = Intent(this, MainActivity::class.java)
-        startActivity(Register)
+        val register = Intent(this, MainActivity::class.java)
+        startActivity(register)
     }
+
 }
  

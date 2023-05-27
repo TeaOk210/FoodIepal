@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.FullScreen
-import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.*
 import com.example.FoodIepal.databinding.FragmentFavoriteBinding
 
@@ -35,7 +34,6 @@ class FragmentFavorite : Fragment() {
 
         binding.toolbar2.title = "Избранное"
         binding.toolbar2.subtitle = sessionManager.getUserName()
-        binding.toolbar2.inflateMenu(R.menu.custom_toolbsr_favorite)
 
         return binding.root
     }

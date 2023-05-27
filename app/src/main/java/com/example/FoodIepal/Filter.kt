@@ -16,6 +16,7 @@ class Filter : AppCompatActivity() {
     }
 
     fun onClickExitListener(view: View) {
+        setResult(Activity.RESULT_CANCELED)
         finish()
     }
 
@@ -45,7 +46,7 @@ class Filter : AppCompatActivity() {
         intent.putExtra("timeMax", maxTt)
         intent.putExtra("items", itemsList)
 
-        setResult(Activity.RESULT_OK, intent)
+        setResult(Activity.RESULT_OK)
         finish()
     }
 }
