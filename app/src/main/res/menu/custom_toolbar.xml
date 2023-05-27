@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Favorite"
+    <item android:title=""
         android:id="@+id/addToFavorite"
         android:icon="@drawable/baseline_star_border_24"
         app:showAsAction="ifRoom"/>

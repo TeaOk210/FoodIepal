@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/PassConfirm"
                 android:textColor="#D6CBCB"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/passConf"
@@ -37,9 +38,11 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/PassTXT"
+                android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                tools:ignore="VisualLintTextFieldSize,DuplicateSpeakableTextCheck" />
 
         </LinearLayout>
 
@@ -60,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Pass"
                 android:textColor="#D6CBCB"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/passTXT"
@@ -71,7 +75,9 @@
                 android:hint="@string/PassTXT"
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                tools:ignore="VisualLintTextFieldSize"
+                android:importantForAutofill="no" />
 
         </LinearLayout>
 
@@ -94,7 +100,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Login"
                 android:textColor="#D6CBCB"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/LogTxt"
@@ -106,7 +113,9 @@
                 android:inputType="textPersonName"
                 android:textColor="#FFFFFF"
                 android:textSize="36sp"
-                tools:visibility="visible" />
+                tools:visibility="visible"
+                tools:ignore="VisualLintTextFieldSize"
+                android:importantForAutofill="no" />
 
         </LinearLayout>
 

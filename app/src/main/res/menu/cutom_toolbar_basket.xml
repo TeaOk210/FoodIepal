@@ -5,7 +5,7 @@
     <item
         android:id="@+id/itemAdd"
         android:icon="@drawable/item_add"
-        android:title="add"
+        android:title=""
         app:showAsAction="ifRoom"
         android:onClick="onClickItemAdd"/>
 

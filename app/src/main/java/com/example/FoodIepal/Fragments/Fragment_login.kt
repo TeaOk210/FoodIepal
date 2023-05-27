@@ -16,8 +16,8 @@ import com.example.FoodIepal.databinding.FragmentLoginBinding
 
 class fragment_login : Fragment() {
     lateinit var binding: FragmentLoginBinding
-    lateinit var dbManager: DBManager
-    lateinit var sessionManager: SessionManager
+    private lateinit var dbManager: DBManager
+    private lateinit var sessionManager: SessionManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

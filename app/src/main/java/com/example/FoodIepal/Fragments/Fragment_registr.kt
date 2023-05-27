@@ -14,8 +14,8 @@ import com.example.FoodIepal.databinding.FragmentRegistrBinding
 
 class fragment_registr : Fragment() {
     lateinit var binding: FragmentRegistrBinding
-    lateinit var dbManager: DBManager
-    lateinit var sessionManager: SessionManager
+    private lateinit var dbManager: DBManager
+    private lateinit var sessionManager: SessionManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

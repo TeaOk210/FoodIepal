@@ -21,9 +21,9 @@ import java.io.ByteArrayOutputStream
 class FragmentHome : Fragment(){
     private val RecipeItemList = ArrayList<RecipeItem>()
     private var filteredList = ArrayList<RecipeItem>()
-    lateinit var dbManager: DBManager
+    private lateinit var dbManager: DBManager
     private lateinit var adapter: RecipeAdapter
-    lateinit var binding: FragmentHomeMenuBinding
+    private lateinit var binding: FragmentHomeMenuBinding
     private val dataModel: DataModel by activityViewModels()
     private lateinit var sessionManager: SessionManager
     @SuppressLint("NotifyDataSetChanged")
@@ -74,7 +74,7 @@ class FragmentHome : Fragment(){
         return binding.root
     }
 
-    fun Filter(kkalRange: IntRange, timeRange: IntRange, items: ArrayList<String>) {
+    private fun Filter(kkalRange: IntRange, timeRange: IntRange, items: ArrayList<String>) {
         val filteredSet = mutableSetOf<RecipeItem>()
         for (item in RecipeItemList) {
             if (items.isEmpty()) {

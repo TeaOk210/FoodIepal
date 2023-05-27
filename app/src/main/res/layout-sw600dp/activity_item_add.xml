@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="Название:"
+        android:text="@string/Name"
         android:textColor="@color/text_orange"
         android:textSize="56sp" />
 
@@ -33,7 +33,9 @@
         android:textColorHighlight="@color/white"
         android:textColorHint="@color/white"
         android:textColorLink="@color/white"
-        android:textSize="48sp" />
+        android:textSize="48sp"
+        tools:ignore="LabelFor,SpeakableTextPresentCheck,VisualLintTextFieldSize"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/textView12"
@@ -43,7 +45,7 @@
         android:layout_alignStart="@+id/NameInput"
         android:layout_marginStart="0dp"
         android:layout_marginTop="15dp"
-        android:text="Дозировка:"
+        android:text="@string/Dosing"
         android:textColor="@color/text_orange"
         android:textSize="56sp" />
 
@@ -61,7 +63,9 @@
         android:textColorHighlight="@color/white"
         android:textColorHint="@color/white"
         android:textColorLink="@color/white"
-        android:textSize="48sp"/>
+        android:textSize="48sp"
+        tools:ignore="LabelFor,SpeakableTextPresentCheck,VisualLintTextFieldSize"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/TextExit"
@@ -84,9 +88,10 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Добавить"
+        android:text="@string/Add"
         android:textColor="@color/black_orange"
         android:textSize="56sp"
-        android:onClick="onAddListener"/>
+        android:onClick="onAddListener"
+        tools:ignore="RelativeOverlap" />
 
 </RelativeLayout>

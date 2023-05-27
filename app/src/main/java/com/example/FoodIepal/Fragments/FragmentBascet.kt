@@ -14,7 +14,7 @@ class FragmentBascet : Fragment() {
     private val ItemList = ArrayList<ItemItem>()
     private lateinit var adapter: ItemAdapter
     lateinit var binding: FragmentBascetBinding
-    lateinit var dbManager: DBManager
+    private lateinit var dbManager: DBManager
     private lateinit var sessionManager: SessionManager
 
     @SuppressLint("NotifyDataSetChanged")
@@ -43,7 +43,7 @@ class FragmentBascet : Fragment() {
     }
 
     @SuppressLint("Range")
-    fun populateList(){
+    private fun populateList(){
         val cursor = dbManager.fetchBasket(sessionManager.getUserName())
         if (cursor.moveToFirst()){
             do {
@@ -60,7 +60,7 @@ class FragmentBascet : Fragment() {
         cursor.close()
     }
 
-    fun setUpAdapter() {
+    private fun setUpAdapter() {
         adapter = ItemAdapter(requireActivity(), ItemList, object : ItemAdapter.onDeleteListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDelete(data: ItemItem) {

@@ -16,7 +16,7 @@ import kotlin.properties.Delegates
 class FullScreen : AppCompatActivity() {
     private lateinit var binding: ActivityFullScreenBinding
     private lateinit var sessionManager: SessionManager
-    lateinit var dbManager: DBManager
+    private lateinit var dbManager: DBManager
 
     lateinit var name: String
     lateinit var text: String

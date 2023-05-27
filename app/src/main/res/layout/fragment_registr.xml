@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/PassConfirm"
                 android:textColor="#D6CBCB"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/passConf"
@@ -39,7 +40,9 @@
                 android:hint="@string/PassTXT"
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="DuplicateSpeakableTextCheck"
+                android:importantForAutofill="no" />
 
         </LinearLayout>
 
@@ -61,7 +64,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Pass"
                 android:textColor="#D6CBCB"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/passTXT"
@@ -72,7 +76,8 @@
                 android:hint="@string/PassTXT"
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:importantForAutofill="no" />
 
         </LinearLayout>
 
@@ -95,7 +100,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Login"
                 android:textColor="#D6CBCB"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/LogTxt"
@@ -107,7 +113,8 @@
                 android:inputType="textPersonName"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                tools:visibility="visible" />
+                tools:visibility="visible"
+                android:importantForAutofill="no" />
 
         </LinearLayout>
 

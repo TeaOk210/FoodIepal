@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -47,7 +46,9 @@
         android:textColorLink="#FFFFFF"
         android:textSize="36sp"
         android:text=""
-        android:shadowColor="@color/white"/>
+        android:shadowColor="@color/white"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textView6"
@@ -72,7 +73,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="36sp"
-        android:text=""/>
+        android:text=""
+        tools:ignore="LabelFor"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/textView7"
@@ -85,7 +88,8 @@
         android:onClick="onClickContinueListener"
         android:text="@string/Cont"
         android:textColor="@color/black_orange"
-        android:textSize="56sp"/>
+        android:textSize="56sp"
+        tools:ignore="RelativeOverlap" />
 
     <TextView
         android:id="@+id/textView8"
@@ -139,7 +143,9 @@
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="36sp"
-        android:text=""/>
+        android:text=""
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textView9"
@@ -164,7 +170,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="36sp"
-        android:text=""/>
+        android:text=""
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textView15"
@@ -174,7 +182,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="45dp"
-        android:text="Ингредиенты:"
+        android:text="@string/items_itemAdd"
         android:textColor="@color/text_orange"
         android:textSize="56sp" />
 
@@ -193,7 +201,9 @@
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="36sp"
-        android:text="" />
+        android:text=""
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/item2"
@@ -210,7 +220,9 @@
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="36sp"
-        android:text="" />
+        android:text=""
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/item3"
@@ -227,6 +239,8 @@
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
-        android:textSize="36sp" />
+        android:textSize="36sp"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
 </RelativeLayout>

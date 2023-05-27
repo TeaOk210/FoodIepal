@@ -10,7 +10,7 @@ import com.example.FoodIepal.databinding.ActivitySignInBinding
 
 class SignIn : AppCompatActivity() {
     lateinit var binding : ActivitySignInBinding
-    lateinit var dbManager: DBManager
+    private lateinit var dbManager: DBManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

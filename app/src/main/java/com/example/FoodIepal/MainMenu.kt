@@ -17,8 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainMenu : AppCompatActivity() {
     lateinit var binding : ActivityMainMenuBinding
-    lateinit var BottomNav : BottomNavigationView
-    lateinit var bundle: Bundle
+    private lateinit var BottomNav : BottomNavigationView
     private val dataModel: DataModel by viewModels()
     private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {

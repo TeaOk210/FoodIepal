@@ -11,7 +11,7 @@ import com.example.FoodIepal.databinding.ActivityItemAddBinding
 
 class ItemAdd : AppCompatActivity() {
     lateinit var binding: ActivityItemAddBinding
-    lateinit var dbManager: DBManager
+    private lateinit var dbManager: DBManager
     private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

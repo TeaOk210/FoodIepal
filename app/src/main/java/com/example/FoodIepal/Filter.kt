@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.FoodIepal.databinding.ActivityFilterBinding
 
 class Filter : AppCompatActivity() {
-    lateinit var binding: ActivityFilterBinding
+    private lateinit var binding: ActivityFilterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

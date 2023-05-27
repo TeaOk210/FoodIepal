@@ -13,11 +13,11 @@ import com.example.FoodIepal.Utils.*
 import com.example.FoodIepal.databinding.FragmentFavoriteBinding
 
 class FragmentFavorite : Fragment() {
-    var RecipeItemList = ArrayList<RecipeItem>()
+    private var RecipeItemList = ArrayList<RecipeItem>()
     private lateinit var sessionManager: SessionManager
-    lateinit var adapter: RecipeAdapter
-    lateinit var binding: FragmentFavoriteBinding
-    lateinit var dbManager: DBManager
+    private lateinit var adapter: RecipeAdapter
+    private lateinit var binding: FragmentFavoriteBinding
+    private lateinit var dbManager: DBManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,7 +70,7 @@ class FragmentFavorite : Fragment() {
     }
 
 
-    fun setUpAdapter() {
+    private fun setUpAdapter() {
         adapter = RecipeAdapter(requireActivity(), RecipeItemList, object : RecipeAdapter.OnItemClickListener{
             override fun onItemClick(data: RecipeItem){
                 val intent = Intent(requireContext(), FullScreen::class.java)

@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Pass"
                 android:textColor="#D6CBCB"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/passTXT"
@@ -39,7 +40,9 @@
                 android:hint="@string/PassTXT"
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                android:importantForAutofill="no"
+                tools:ignore="VisualLintTextFieldSize" />
 
         </LinearLayout>
 
@@ -61,7 +64,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Login"
                 android:textColor="#D6CBCB"
-                android:textSize="36sp" />
+                android:textSize="36sp"
+                tools:ignore="TextContrastCheck" />
 
             <EditText
                 android:id="@+id/LogTxt"
@@ -73,7 +77,9 @@
                 android:inputType="textPersonName"
                 android:textColor="#FFFFFF"
                 android:textSize="36sp"
-                tools:visibility="visible" />
+                tools:visibility="visible"
+                android:importantForAutofill="no"
+                tools:ignore="VisualLintTextFieldSize" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

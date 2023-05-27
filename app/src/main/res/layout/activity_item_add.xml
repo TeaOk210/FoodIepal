@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="Название:"
+        android:text="@string/Name"
         android:textColor="@color/text_orange"
         android:textSize="24sp" />
 
@@ -33,7 +33,9 @@
         android:textColorHighlight="@color/white"
         android:textColorHint="@color/white"
         android:textColorLink="@color/white"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        tools:ignore="LabelFor,SpeakableTextPresentCheck"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/textView12"
@@ -43,7 +45,7 @@
         android:layout_alignStart="@+id/NameInput"
         android:layout_marginStart="0dp"
         android:layout_marginTop="15dp"
-        android:text="Дозировка:"
+        android:text="@string/Dosing"
         android:textColor="@color/text_orange"
         android:textSize="24sp" />
 
@@ -61,7 +63,9 @@
         android:textColorHighlight="@color/white"
         android:textColorHint="@color/white"
         android:textColorLink="@color/white"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        tools:ignore="LabelFor,SpeakableTextPresentCheck"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/TextExit"
@@ -71,10 +75,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
+        android:minHeight="48dp"
+        android:onClick="onClickExit"
         android:text="@string/NoCont"
         android:textColor="@color/black_orange"
-        android:textSize="28sp"
-        android:onClick="onClickExit"/>
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/textView14"
@@ -84,9 +89,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Добавить"
+        android:minHeight="48dp"
+        android:onClick="onAddListener"
+        android:text="@string/Add"
         android:textColor="@color/black_orange"
         android:textSize="28sp"
-        android:onClick="onAddListener"/>
+        tools:ignore="RelativeOverlap" />
 
 </RelativeLayout>
