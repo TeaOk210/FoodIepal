@@ -2,6 +2,7 @@
    <img src="https://img.shields.io/badge/version-1.0-brightgreen" alt="version">
    <img src="https://img.shields.io/badge/platform-android-blue" alt="platforms">
    <img src="https://img.shields.io/badge/devices-phone%20%7C%20tablet-lightgrey" alt="devices">
+   <img src="https://img.shields.io/badge/wakatime-92h-red" alt="waaktime">
 </p>
 
 ## О проекте
