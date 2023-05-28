@@ -13,7 +13,6 @@ class ItemAdapter(private val context: Context, private var ItemList:ArrayList<I
         val binding = ItemItemLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
         return ItemViewHolder(binding, listener)
     }
-
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val ItemItem = ItemList[position]
         holder.bind(ItemItem)

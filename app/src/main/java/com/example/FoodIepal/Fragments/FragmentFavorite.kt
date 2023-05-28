@@ -75,7 +75,6 @@ class FragmentFavorite : Fragment() {
             override fun onItemClick(data: RecipeItem){
                 val intent = Intent(requireContext(), FullScreen::class.java)
 
-
                 intent.putExtra("Kkal", data.Kkal)
                 intent.putExtra("time", data.time)
                 intent.putExtra("name", data.name)

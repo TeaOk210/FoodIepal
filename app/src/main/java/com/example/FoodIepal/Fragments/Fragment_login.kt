@@ -32,7 +32,6 @@ class fragment_login : Fragment() {
         return binding.root
     }
 
-
     companion object {
 
         fun newInstance() = fragment_login()

@@ -54,7 +54,6 @@ class FragmentHome : Fragment(){
             }
         }
 
-
             binding.SearchEditText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -98,7 +97,6 @@ class FragmentHome : Fragment(){
         val filteredList = ArrayList(filteredSet)
         adapter.filter(filteredList)
     }
-
 
     companion object {
         fun newInstance() = FragmentHome()
@@ -195,7 +193,6 @@ class FragmentHome : Fragment(){
                 startActivity(intent)
             }
         })
-
         binding.RecipeList.adapter = adapter
         binding.RecipeList.layoutManager = LinearLayoutManager(requireActivity())
     }
@@ -209,7 +206,6 @@ class FragmentHome : Fragment(){
         while (inputStream.read(buffer).also { bytesRead = it } >= 0) {
             outputStream.write(buffer, 0, bytesRead)
         }
-
         return outputStream.toByteArray()
     }
 }

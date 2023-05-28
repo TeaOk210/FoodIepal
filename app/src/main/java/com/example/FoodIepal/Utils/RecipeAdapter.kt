@@ -15,6 +15,7 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
         val binding = RecipeItemLayoutBinding.inflate(LayoutInflater.from(context),parent,false)
         return RecipeViewHolder(binding)
     }
+
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val RecipeItem = recipeItemList[position]
         holder.bind(RecipeItem)
@@ -33,7 +34,6 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
     override fun getItemCount(): Int {
         return recipeItemList.size
     }
-
 
     class RecipeViewHolder(private val binding: RecipeItemLayoutBinding)
         : RecyclerView.ViewHolder(binding.root) {

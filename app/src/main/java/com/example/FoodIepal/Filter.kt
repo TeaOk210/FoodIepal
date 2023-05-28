@@ -39,7 +39,6 @@ class Filter : AppCompatActivity() {
             }
         }
 
-
         intent.putExtra("minKk", minKk)
         intent.putExtra("timeMin", minTt)
         intent.putExtra("maxKk", maxKk)

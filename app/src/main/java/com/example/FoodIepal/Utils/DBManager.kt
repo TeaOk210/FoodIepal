@@ -50,7 +50,6 @@ class DBManager(private val context: Context) {
             database.insert(DataBaseHalper.Table_Name_Basket, null, contentValues)
         }
 
-
         fun fetchReg() : Cursor {
             val colums : Array<String> = arrayOf(
                 DataBaseHalper._ID,
@@ -111,7 +110,6 @@ class DBManager(private val context: Context) {
             return cursor
         }
 
-
         fun fetchBasket(login: String): Cursor{
             val colums : Array<String> = arrayOf(
                 DataBaseHalper.Item_name,
@@ -139,7 +137,6 @@ class DBManager(private val context: Context) {
             val selectionArgs = arrayOf(name)
             database.delete(DataBaseHalper.Table_Name_Basket, selection, selectionArgs)
         }
-
 
     fun deleteRecipe(name: String) {
         val selection = "${DataBaseHalper.Recipe_NAme}=?"
