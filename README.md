@@ -1,10 +1,22 @@
-# FoodIepal
-Welcome to my repository! Here you will find an example of implementing an application for registering and authorizing users on Kotlin using SQLite.
+<p align="start">
+   <img src="https://img.shields.io/badge/version-1.0-brightgreen" alt="version">
+   <img src="https://img.shields.io/badge/platform-android-blue" alt="platforms">
+   <img src="https://img.shields.io/badge/devices-phone%20%7C%20tablet-lightgrey" alt="devices">
+   <img src="https://img.shields.io/badge/wakatime-92h-red" alt="waaktime">
+</p>
 
-To run the application, you need to have Android Studio and Kotlin installed on it.
+## О проекте
 
-The application implements a simple field check during registration, which makes sure that the user has entered the correct data and the passwords match. There is also a check for the presence of an existing user in the database.
+**FoodIepal** - Мобильное приложение по поиску рецептов по различным фильтрам. Оно позволяет тратить меньше времени на поиск рецепта, подходящего вам.
 
-The application has two screens: registration and authorization. After registering the user, he can log in to the application by entering his username and password.
+## Установка
 
-All the code is available in the repository. If you have any questions or suggestions, feel free to contact me. Thanks for your attention!
+### На android
+
+ - Перейдите по ссылке на [Яндекс диск](https://disk.yandex.ru/d/MqOK5XvX8tZBVw)
+ - Скачайте **apk** файл
+ - Установите его и нажмите **открыть**
+
+## Разработчики
+
+[TeaOk210](https://github.com/TeaOk210)
