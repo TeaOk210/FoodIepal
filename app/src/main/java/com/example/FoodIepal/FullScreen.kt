@@ -72,10 +72,9 @@ class FullScreen : AppCompatActivity() {
         supportActionBar?.apply {
             title = name
             setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
+            setHomeAsUpIndicator(R.drawable.back_button)
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.custom_toolbar, menu)
@@ -90,18 +89,25 @@ class FullScreen : AppCompatActivity() {
 
     @SuppressLint("ShowToast")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.addToFavorite){
-            if (checkFavorite()){
-                item.setIcon(R.drawable.baseline_star_border_24)
-                dbManager.deleteRecipe(name)
-                Toast.makeText(this, "Удалено из избранного", Toast.LENGTH_SHORT).show()
-            } else {
-                item.setIcon(R.drawable.baseline_star_24)
-                dbManager.insertFavorite(name, text, items, Kkal, time, image, login, preparation)
-                Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
             }
+            R.id.addToFavorite -> {
+                if (checkFavorite()) {
+                    item.setIcon(R.drawable.baseline_star_border_24)
+                    dbManager.deleteRecipe(name)
+                    Toast.makeText(this, "Удалено из избранного", Toast.LENGTH_SHORT).show()
+                } else {
+                    item.setIcon(R.drawable.baseline_star_24)
+                    dbManager.insertFavorite(name, text, items, Kkal, time, image, login, preparation)
+                    Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
+                }
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     @SuppressLint("Range")

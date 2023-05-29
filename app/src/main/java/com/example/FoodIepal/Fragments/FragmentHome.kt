@@ -190,7 +190,7 @@ class FragmentHome : Fragment(){
                 intent.putExtra("items", data.recipeItems)
                 intent.putExtra("preparation", data.Preparation)
 
-                startActivity(intent)
+                startActivityForResult(intent, 1)
             }
         })
         binding.RecipeList.adapter = adapter

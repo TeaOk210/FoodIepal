@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home"
+        android:id="@+id/Homebtn"
         android:title="@string/Home"
         android:icon="@drawable/home48"
         app:showAsAction="ifRoom"

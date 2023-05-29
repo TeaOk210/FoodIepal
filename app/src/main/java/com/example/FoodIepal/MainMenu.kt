@@ -13,13 +13,13 @@ import com.example.FoodIepal.Fragments.*
 import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
+@Suppress("DEPRECATION")
 class MainMenu : AppCompatActivity() {
     lateinit var binding : ActivityMainMenuBinding
-    private lateinit var BottomNav : BottomNavigationView
     private val dataModel: DataModel by viewModels()
     private lateinit var sessionManager: SessionManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,26 +34,25 @@ class MainMenu : AppCompatActivity() {
 
         loadFragment(FragmentHome.newInstance())
 
-        BottomNav = binding.BottomMenu
-        BottomNav.setOnItemSelectedListener{
-           when(it.itemId) {
-               R.id.home -> {
-                   loadFragment(FragmentHome.newInstance())
-                   true
-               }
-               R.id.bascet -> {
-                   loadFragment(FragmentBascet.newInstance())
-                   true
-               }
-               R.id.favorites -> {
-                   loadFragment(FragmentFavorite.newInstance())
-                   true
-               }
-               else -> {
-                   false
-               }
-           }
-       }
+        binding.BottomMenu.setOnItemSelectedListener{
+            when(it.itemId) {
+                R.id.Homebtn -> {
+                    loadFragment(FragmentHome.newInstance())
+                    true
+                }
+                R.id.bascet -> {
+                    loadFragment(FragmentBascet.newInstance())
+                    true
+                }
+                R.id.favorites -> {
+                    loadFragment(FragmentFavorite.newInstance())
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
     }
 
     private  fun loadFragment(fragment: Fragment){
@@ -61,7 +60,6 @@ class MainMenu : AppCompatActivity() {
         transaction.replace(R.id.MenuFrag,fragment)
         transaction.commit()
     }
-
 
     fun onClickFilterListener(view: View) {
         val intent = Intent(this@MainMenu, Filter::class.java)

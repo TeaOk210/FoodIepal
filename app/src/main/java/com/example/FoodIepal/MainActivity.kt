@@ -21,10 +21,12 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.Registr, fragment_registr.newInstance())
             .commit()
+
         binding.Up.setOnClickListener() {
             registrationFragment = supportFragmentManager.findFragmentById(R.id.Registr) as fragment_registr
             if (registrationFragment.checkRegistrationFields()) {
