@@ -29,12 +29,13 @@ class FragmentBascet : Fragment() {
 
         sessionManager = SessionManager(requireContext())
 
-        populateList()
         setUpAdapter()
+        populateList()
         getToolbar()
 
         return binding.root
     }
+
 
     private fun getToolbar(){
         binding.toolbar3.title = "Корзина"
@@ -44,6 +45,7 @@ class FragmentBascet : Fragment() {
 
     @SuppressLint("Range")
     private fun populateList(){
+        ItemList.clear()
         val cursor = dbManager.fetchBasket(sessionManager.getUserName())
         if (cursor.moveToFirst()){
             do {
@@ -76,4 +78,5 @@ class FragmentBascet : Fragment() {
     companion object {
         fun newInstance() = FragmentBascet()
     }
+
 }

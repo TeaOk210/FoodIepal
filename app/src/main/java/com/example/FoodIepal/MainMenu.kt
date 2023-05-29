@@ -8,9 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.FoodIepal.Fragments.*
 import com.example.FoodIepal.Utils.DataModel
+import com.example.FoodIepal.Utils.MyPagerAdapter
 import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 
@@ -32,33 +33,44 @@ class MainMenu : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        loadFragment(FragmentHome.newInstance())
+        val viewPager: ViewPager2 = binding.PagerView
+        viewPager.adapter = MyPagerAdapter(this)
 
-        binding.BottomMenu.setOnItemSelectedListener{
-            when(it.itemId) {
+        viewPager.currentItem = 0
+
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                val menuItem = when (position) {
+                    0 -> R.id.Homebtn
+                    1 -> R.id.bascet
+                    2 -> R.id.favorites
+                    else -> -1
+                }
+                if (menuItem != -1) {
+                    binding.BottomMenu.menu.findItem(menuItem)?.isChecked = true
+                }
+            }
+        })
+
+        binding.BottomMenu.setOnItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.Homebtn -> {
-                    loadFragment(FragmentHome.newInstance())
+                    viewPager.currentItem = 0
                     true
                 }
                 R.id.bascet -> {
-                    loadFragment(FragmentBascet.newInstance())
+                    viewPager.currentItem = 1
                     true
                 }
                 R.id.favorites -> {
-                    loadFragment(FragmentFavorite.newInstance())
+                    viewPager.currentItem = 2
                     true
                 }
-                else -> {
-                    false
-                }
+                else -> false
             }
         }
-    }
 
-    private  fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.MenuFrag,fragment)
-        transaction.commit()
     }
 
     fun onClickFilterListener(view: View) {

@@ -98,9 +98,6 @@ class FragmentHome : Fragment(){
         adapter.filter(filteredList)
     }
 
-    companion object {
-        fun newInstance() = FragmentHome()
-    }
     @SuppressLint("DefaultLocale")
     private fun Search(text: String) {
         val searchedSet: MutableSet<RecipeItem> = mutableSetOf()
@@ -207,5 +204,9 @@ class FragmentHome : Fragment(){
             outputStream.write(buffer, 0, bytesRead)
         }
         return outputStream.toByteArray()
+    }
+
+    companion object {
+        fun newInstance() = FragmentHome()
     }
 }

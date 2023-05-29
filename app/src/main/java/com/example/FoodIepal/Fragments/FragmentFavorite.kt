@@ -29,8 +29,8 @@ class FragmentFavorite : Fragment() {
 
         binding = FragmentFavoriteBinding.inflate(inflater)
 
-        populateList()
         setUpAdapter()
+        populateList()
 
         binding.toolbar2.title = "Избранное"
         binding.toolbar2.subtitle = sessionManager.getUserName()
@@ -38,9 +38,15 @@ class FragmentFavorite : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        populateList()
+    }
+
 
     @SuppressLint("Range")
     private fun populateList() {
+        RecipeItemList.clear()
         val cursor = dbManager.fetchFavorite(sessionManager.getUserName())
 
         if (cursor.moveToFirst()) {
@@ -68,7 +74,6 @@ class FragmentFavorite : Fragment() {
         }
         cursor.close()
     }
-
 
     private fun setUpAdapter() {
         adapter = RecipeAdapter(requireActivity(), RecipeItemList, object : RecipeAdapter.OnItemClickListener{

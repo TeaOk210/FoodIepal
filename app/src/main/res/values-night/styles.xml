@@ -6,4 +6,9 @@
         <item name="android:forceDarkAllowed" tools:ignore="NewApi">true</item>
 
     </style>
+
+    <style name="Widget.Theme.SQLITE.MyView" parent="">
+        <item name="android:background">@color/gray_600</item>
+        <item name="exampleColor">@color/light_blue_600</item>
+    </style>
 </resources>
