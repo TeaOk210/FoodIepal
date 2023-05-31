@@ -58,7 +58,6 @@ class FullScreen : AppCompatActivity() {
 
         login = sessionManager.getUserName()
 
-
         binding.KkalView.text = Kkal.toString()
         binding.TimeView.text = time.toString()
 
@@ -104,6 +103,7 @@ class FullScreen : AppCompatActivity() {
                     dbManager.insertFavorite(name, text, items, Kkal, time, image, login, preparation)
                     Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
                 }
+
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

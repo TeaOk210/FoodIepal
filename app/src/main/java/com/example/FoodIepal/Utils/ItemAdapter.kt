@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.FoodIepal.databinding.ItemItemLayoutBinding
 
-class ItemAdapter(private val context: Context, private var ItemList:ArrayList<ItemItem>, private val listener: ItemAdapter.onDeleteListener)
+class ItemAdapter(private val context: Context, private var ItemList:ArrayList<ItemItem>, private val listener: onDeleteListener)
     : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {

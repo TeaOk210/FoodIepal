@@ -20,6 +20,8 @@ class MainMenu : AppCompatActivity() {
     lateinit var binding : ActivityMainMenuBinding
     private val dataModel: DataModel by viewModels()
     private lateinit var sessionManager: SessionManager
+    private lateinit var viewPager: ViewPager2
+    private lateinit var adapter: MyPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +35,11 @@ class MainMenu : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        val viewPager: ViewPager2 = binding.PagerView
+        viewPager = binding.PagerView
         viewPager.adapter = MyPagerAdapter(this)
+        adapter = MyPagerAdapter(this)
 
         viewPager.currentItem = 0
-
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -91,7 +93,6 @@ class MainMenu : AppCompatActivity() {
         dataModel.items.value = ArrayList()
         Toast.makeText(this, "Фильтр очищен!", Toast.LENGTH_SHORT).show()
     }
-
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

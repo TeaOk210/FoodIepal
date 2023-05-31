@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.FoodIepal.databinding.RecipeItemLayoutBinding
 
+@SuppressLint("NotifyDataSetChanged")
 class RecipeAdapter(private val context: Context, private var recipeItemList:ArrayList<RecipeItem>, private val listener: OnItemClickListener)
     : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
@@ -25,7 +26,6 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun filter(filterList: ArrayList<RecipeItem>) {
         recipeItemList = filterList
         notifyDataSetChanged()

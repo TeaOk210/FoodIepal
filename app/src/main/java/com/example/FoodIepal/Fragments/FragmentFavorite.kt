@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.FullScreen
 import com.example.FoodIepal.Utils.*
@@ -18,6 +19,7 @@ class FragmentFavorite : Fragment() {
     private lateinit var adapter: RecipeAdapter
     private lateinit var binding: FragmentFavoriteBinding
     private lateinit var dbManager: DBManager
+    private val dataModel: DataModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,14 +40,9 @@ class FragmentFavorite : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        populateList()
-    }
 
-
-    @SuppressLint("Range")
-    private fun populateList() {
+    @SuppressLint("Range", "NotifyDataSetChanged")
+    fun populateList() {
         RecipeItemList.clear()
         val cursor = dbManager.fetchFavorite(sessionManager.getUserName())
 
@@ -72,6 +69,7 @@ class FragmentFavorite : Fragment() {
                 RecipeItemList.add(recipeItem)
             } while (cursor.moveToNext())
         }
+        adapter.notifyDataSetChanged()
         cursor.close()
     }
 
@@ -88,11 +86,19 @@ class FragmentFavorite : Fragment() {
                 intent.putExtra("items", data.recipeItems)
                 intent.putExtra("preparation", data.Preparation)
 
-                startActivity(intent)
+                startActivityForResult(intent, 1)
             }
         })
         binding.FavoriteList.adapter = adapter
         binding.FavoriteList.layoutManager = LinearLayoutManager(requireActivity())
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            populateList()
+        }
     }
 
     companion object {

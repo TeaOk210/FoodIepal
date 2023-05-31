@@ -36,15 +36,14 @@ class FragmentBascet : Fragment() {
         return binding.root
     }
 
-
     private fun getToolbar(){
         binding.toolbar3.title = "Корзина"
         binding.toolbar3.subtitle = sessionManager.getUserName()
         binding.toolbar3.inflateMenu(R.menu.cutom_toolbar_basket)
     }
 
-    @SuppressLint("Range")
-    private fun populateList(){
+    @SuppressLint("Range", "NotifyDataSetChanged")
+    fun populateList(){
         ItemList.clear()
         val cursor = dbManager.fetchBasket(sessionManager.getUserName())
         if (cursor.moveToFirst()){
@@ -59,10 +58,11 @@ class FragmentBascet : Fragment() {
                 ItemList.add(basketItem)
             } while (cursor.moveToNext())
         }
+        adapter.notifyDataSetChanged()
         cursor.close()
     }
 
-    private fun setUpAdapter() {
+    fun setUpAdapter() {
         adapter = ItemAdapter(requireActivity(), ItemList, object : ItemAdapter.onDeleteListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDelete(data: ItemItem) {

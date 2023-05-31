@@ -18,4 +18,8 @@ class MyPagerAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment
             else -> FragmentHome.newInstance()
         }
     }
+
+    fun getFragment(position: Int): Fragment {
+        return createFragment(position)
+    }
 }

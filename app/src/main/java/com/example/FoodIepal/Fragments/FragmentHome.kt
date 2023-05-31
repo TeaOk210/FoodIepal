@@ -116,7 +116,7 @@ class FragmentHome : Fragment(){
         }
     }
 
-    @SuppressLint("Range")
+    @SuppressLint("Range", "NotifyDataSetChanged")
     private fun populateList() {
         val cursor = dbManager.fetchRecipe()
 
@@ -170,6 +170,7 @@ class FragmentHome : Fragment(){
 
             } while (cursor.moveToNext())
         }
+        adapter.notifyDataSetChanged()
         cursor.close()
     }
 
