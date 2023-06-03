@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FoodIepal.Fragments.FragmentBascet
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.MyPagerAdapter
 import com.example.FoodIepal.Utils.SessionManager
@@ -38,12 +37,9 @@ class ItemAdd : AppCompatActivity() {
         val name = binding.NameInput.text.toString()
         val dose = binding.DoseInput.text.toString()
         val login = sessionManager.getUserName()
-        val fragmentBascet = adapter.getFragment(1) as? FragmentBascet
 
         if (name.isNotEmpty() && dose.isNotEmpty()) {
             dbManager.insertBasket(name, dose, login)
-            fragmentBascet?.setUpAdapter()
-            fragmentBascet?.populateList()
             finish()
         } else{
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()

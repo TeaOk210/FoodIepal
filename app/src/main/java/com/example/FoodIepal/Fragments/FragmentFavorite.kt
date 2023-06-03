@@ -10,7 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.FullScreen
-import com.example.FoodIepal.Utils.*
+import com.example.FoodIepal.Utils.DBManager
+import com.example.FoodIepal.Utils.DataBaseHalper
+import com.example.FoodIepal.Utils.DataModel
+import com.example.FoodIepal.Utils.RecipeAdapter
+import com.example.FoodIepal.Utils.RecipeItem
+import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.FragmentFavoriteBinding
 
 class FragmentFavorite : Fragment() {
@@ -32,14 +37,18 @@ class FragmentFavorite : Fragment() {
         binding = FragmentFavoriteBinding.inflate(inflater)
 
         setUpAdapter()
-        populateList()
 
-        binding.toolbar2.title = "Избранное"
-        binding.toolbar2.subtitle = sessionManager.getUserName()
-
+        binding.toolbar2.apply {
+            title = "Избранное"
+            subtitle = sessionManager.getUserName()
+        }
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        populateList()
+    }
 
     @SuppressLint("Range", "NotifyDataSetChanged")
     fun populateList() {
@@ -91,14 +100,6 @@ class FragmentFavorite : Fragment() {
         })
         binding.FavoriteList.adapter = adapter
         binding.FavoriteList.layoutManager = LinearLayoutManager(requireActivity())
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            populateList()
-        }
     }
 
     companion object {

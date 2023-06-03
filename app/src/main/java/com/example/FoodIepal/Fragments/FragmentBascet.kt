@@ -30,16 +30,22 @@ class FragmentBascet : Fragment() {
         sessionManager = SessionManager(requireContext())
 
         setUpAdapter()
-        populateList()
         getToolbar()
 
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        populateList()
+    }
+
     private fun getToolbar(){
-        binding.toolbar3.title = "Корзина"
-        binding.toolbar3.subtitle = sessionManager.getUserName()
-        binding.toolbar3.inflateMenu(R.menu.cutom_toolbar_basket)
+        binding.toolbar3.apply {
+            title = "Корзина"
+            subtitle = sessionManager.getUserName()
+            inflateMenu(R.menu.cutom_toolbar_basket)
+        }
     }
 
     @SuppressLint("Range", "NotifyDataSetChanged")

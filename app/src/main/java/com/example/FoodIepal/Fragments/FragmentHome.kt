@@ -66,10 +66,11 @@ class FragmentHome : Fragment(){
             }
         })
 
-        binding.toolbarMenu.title = "Главная"
-        binding.toolbarMenu.subtitle = sessionManager.getUserName()
-        binding.toolbarMenu.inflateMenu(R.menu.custom_toolvar_menu)
-
+        binding.toolbarMenu.apply {
+            title = "Главная"
+            subtitle = sessionManager.getUserName()
+            inflateMenu(R.menu.custom_toolvar_menu)
+        }
         return binding.root
     }
 
