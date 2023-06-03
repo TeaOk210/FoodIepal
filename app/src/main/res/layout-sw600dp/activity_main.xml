@@ -64,7 +64,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:minHeight="48dp"
-        android:onClick="OnClickReg"
+        android:onClick="onClickReg"
         android:text="@string/RegQuest"
         android:textColor="@color/black_orange"
         android:textSize="36sp"

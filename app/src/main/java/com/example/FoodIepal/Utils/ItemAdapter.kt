@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.FoodIepal.databinding.ItemItemLayoutBinding
 
-class ItemAdapter(private val context: Context, private var ItemList:ArrayList<ItemItem>, private val listener: onDeleteListener)
+class ItemAdapter(private val context: Context, private var ItemList:ArrayList<ItemItem>, private val listener: OnDeleteListener)
     : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -22,7 +22,7 @@ class ItemAdapter(private val context: Context, private var ItemList:ArrayList<I
         return ItemList.size
     }
 
-    class ItemViewHolder(private val binding: ItemItemLayoutBinding, private val listener: onDeleteListener) :
+    class ItemViewHolder(private val binding: ItemItemLayoutBinding, private val listener: OnDeleteListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(ItemItem: ItemItem) {
             binding.TextName.text = ItemItem.ItemName
@@ -34,7 +34,7 @@ class ItemAdapter(private val context: Context, private var ItemList:ArrayList<I
         }
     }
 
-    interface onDeleteListener{
+    interface OnDeleteListener{
         fun onDelete(data: ItemItem)
     }
 }

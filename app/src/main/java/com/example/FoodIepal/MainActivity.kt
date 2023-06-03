@@ -5,13 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FoodIepal.Fragments.fragment_registr
+import com.example.FoodIepal.Fragments.FragmentRegistr
 import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
-    private lateinit var registrationFragment: fragment_registr
+    private lateinit var registrationFragment: FragmentRegistr
     private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,22 +24,22 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.Registr, fragment_registr.newInstance())
+            .replace(R.id.Registr, FragmentRegistr.newInstance())
             .commit()
 
         binding.Up.setOnClickListener() {
-            registrationFragment = supportFragmentManager.findFragmentById(R.id.Registr) as fragment_registr
+            registrationFragment = supportFragmentManager.findFragmentById(R.id.Registr) as FragmentRegistr
             if (registrationFragment.checkRegistrationFields()) {
-                registrationFragment.Registration()
+                registrationFragment.registr()
                 setResult(Activity.RESULT_OK)
                 finish()
             }
         }
     }
 
-    fun OnClickReg(view: View) {
-        val Login = Intent(this, SignIn::class.java)
-        startActivity(Login)
+    fun onClickReg(view: View) {
+        val intent = Intent(this, SignIn::class.java)
+        startActivity(intent)
     }
 
     fun skip(view: View) {

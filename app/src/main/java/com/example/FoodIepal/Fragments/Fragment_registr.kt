@@ -12,7 +12,7 @@ import com.example.FoodIepal.Utils.DataBaseHalper
 import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.FragmentRegistrBinding
 
-class fragment_registr : Fragment() {
+class FragmentRegistr : Fragment() {
     lateinit var binding: FragmentRegistrBinding
     private lateinit var dbManager: DBManager
     private lateinit var sessionManager: SessionManager
@@ -31,7 +31,7 @@ class fragment_registr : Fragment() {
     }
 
     companion object {
-        fun newInstance() = fragment_registr()
+        fun newInstance() = FragmentRegistr()
     }
 
     @SuppressLint("Range")
@@ -67,7 +67,7 @@ class fragment_registr : Fragment() {
 
 
 
-    fun Registration() {
+    fun registr() {
         val login = binding.LogTxt.text.toString()
         val password = binding.passTXT.text.toString()
 

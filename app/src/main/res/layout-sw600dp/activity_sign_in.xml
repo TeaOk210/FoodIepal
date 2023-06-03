@@ -14,7 +14,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:onClick="OnClickSign"
+        android:onClick="onClickSign"
         android:text="@string/LogQuest"
         android:textColor="@color/black_orange"
         android:textSize="36sp"

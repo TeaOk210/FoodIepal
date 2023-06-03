@@ -39,7 +39,7 @@ class FragmentHome : Fragment(){
 
         dbManager.open()
 
-        SetUpAdapter()
+        setAdapter()
         populateList()
 
         dataModel.minKk.observe(viewLifecycleOwner) { minKk ->
@@ -47,7 +47,7 @@ class FragmentHome : Fragment(){
                 dataModel.minTt.observe(viewLifecycleOwner) { minTt ->
                     dataModel.maxTt.observe(viewLifecycleOwner) { maxTt ->
                         dataModel.items.observe(viewLifecycleOwner) { items ->
-                            Filter(IntRange(minKk, maxkK), IntRange(minTt, maxTt), items)
+                            filter(IntRange(minKk, maxkK), IntRange(minTt, maxTt), items)
                         }
                     }
                 }
@@ -62,7 +62,7 @@ class FragmentHome : Fragment(){
             }
 
             override fun afterTextChanged(s: Editable?) {
-                Search(s.toString())
+                search(s.toString())
             }
         })
 
@@ -74,7 +74,7 @@ class FragmentHome : Fragment(){
         return binding.root
     }
 
-    private fun Filter(kkalRange: IntRange, timeRange: IntRange, items: ArrayList<String>) {
+    private fun filter(kkalRange: IntRange, timeRange: IntRange, items: ArrayList<String>) {
         val filteredSet = mutableSetOf<RecipeItem>()
         for (item in RecipeItemList) {
             if (items.isEmpty()) {
@@ -100,7 +100,7 @@ class FragmentHome : Fragment(){
     }
 
     @SuppressLint("DefaultLocale")
-    private fun Search(text: String) {
+    private fun search(text: String) {
         val searchedSet: MutableSet<RecipeItem> = mutableSetOf()
 
         for (item in filteredList) {
@@ -175,7 +175,7 @@ class FragmentHome : Fragment(){
         cursor.close()
     }
 
-    private fun SetUpAdapter() {
+    private fun setAdapter() {
         adapter = RecipeAdapter(requireActivity(), RecipeItemList, object : RecipeAdapter.OnItemClickListener{
             @SuppressLint("Range")
             override fun onItemClick(data: RecipeItem) {

@@ -18,15 +18,15 @@ class FullScreen : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     private lateinit var dbManager: DBManager
 
-    lateinit var name: String
-    lateinit var text: String
-    lateinit var items: String
-    lateinit var preparation: String
-    lateinit var login: String
+    private lateinit var name: String
+    private lateinit var text: String
+    private lateinit var items: String
+    private lateinit var preparation: String
+    private lateinit var login: String
 
-    var time by Delegates.notNull<Int>()
-    var Kkal by Delegates.notNull<Int>()
-    var image by Delegates.notNull<ByteArray>()
+    private var time by Delegates.notNull<Int>()
+    private var Kkal by Delegates.notNull<Int>()
+    private var image by Delegates.notNull<ByteArray>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

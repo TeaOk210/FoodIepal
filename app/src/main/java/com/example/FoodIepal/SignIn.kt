@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FoodIepal.Fragments.fragment_login
+import com.example.FoodIepal.Fragments.FragmentLogin
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.databinding.ActivitySignInBinding
 
@@ -25,19 +25,19 @@ class SignIn : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.LoginLog, fragment_login.newInstance())
+            .replace(R.id.LoginLog, FragmentLogin.newInstance())
             .commit()
 
 
         binding.Up.setOnClickListener() {
-            val loginFragment = supportFragmentManager.findFragmentById(R.id.LoginLog) as fragment_login
+            val loginFragment = supportFragmentManager.findFragmentById(R.id.LoginLog) as FragmentLogin
             loginFragment.checkLoginAndPassword()
         }
     }
 
-    fun OnClickSign(view: View) {
-        val register = Intent(this, MainActivity::class.java)
-        startActivity(register)
+    fun onClickSign(view: View) {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
 }

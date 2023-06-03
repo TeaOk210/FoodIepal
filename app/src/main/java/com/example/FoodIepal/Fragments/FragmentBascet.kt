@@ -68,8 +68,8 @@ class FragmentBascet : Fragment() {
         cursor.close()
     }
 
-    fun setUpAdapter() {
-        adapter = ItemAdapter(requireActivity(), ItemList, object : ItemAdapter.onDeleteListener {
+    private fun setUpAdapter() {
+        adapter = ItemAdapter(requireActivity(), ItemList, object : ItemAdapter.OnDeleteListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onDelete(data: ItemItem) {
                 Toast.makeText(requireContext(), "Удалено!", Toast.LENGTH_SHORT).show()

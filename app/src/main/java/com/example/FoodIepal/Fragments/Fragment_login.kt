@@ -14,7 +14,7 @@ import com.example.FoodIepal.Utils.DataBaseHalper
 import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.FragmentLoginBinding
 
-class fragment_login : Fragment() {
+class FragmentLogin : Fragment() {
     lateinit var binding: FragmentLoginBinding
     private lateinit var dbManager: DBManager
     private lateinit var sessionManager: SessionManager
@@ -34,7 +34,7 @@ class fragment_login : Fragment() {
 
     companion object {
 
-        fun newInstance() = fragment_login()
+        fun newInstance() = FragmentLogin()
     }
 
     @SuppressLint("Range")

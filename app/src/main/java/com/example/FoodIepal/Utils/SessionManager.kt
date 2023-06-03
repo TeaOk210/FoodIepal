@@ -30,13 +30,4 @@ class SessionManager(context: Context) {
     fun getUserName(): String {
         return sharedPreferences.getString("username", false.toString()).toString()
     }
-
-    fun setStatus(status: Boolean) {
-        editor.putBoolean("status", status)
-        editor.commit()
-    }
-
-    fun getStatus(): Boolean {
-        return sharedPreferences.getBoolean("status", true)
-    }
 }

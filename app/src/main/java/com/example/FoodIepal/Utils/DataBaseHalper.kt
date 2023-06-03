@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteOpenHelper
 class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, null, DB_VERSION) {
 
     companion object {
-         val Table_Name = "Person"
-         val Table_Name_Food = "Recipes"
-         val Table_Name_Favorite = "Favorite"
-         val Table_Name_Basket = "Basket"
+         const val Table_Name = "Person"
+         const val Table_Name_Food = "Recipes"
+         const val Table_Name_Favorite = "Favorite"
+         const val Table_Name_Basket = "Basket"
 
-         val _ID = "_id"
-         val Login = "Login"
-         val Password = "Password"
+         const val _ID = "_id"
+         const val Login = "Login"
+         const val Password = "Password"
 
         val Res1 = listOf("Белковые Кексы", "Мягкая и влажная выпечка", "20 г мука ржаная цельнозерновая\n" +
                 "20 г сывороточный протеин двойной шоколад\n" +
@@ -190,40 +190,30 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
                 "362 г кабачок", "Нарезать все ингредиенты.\n" +
                 "Тушить в толстостенной кастрюле или сковороде.\n" +
                 "Приправить по вкусу. Варить до мягкости, но не переваривать.", 74, 50)
-        val Res21 = listOf("")
-        val Res22 = listOf("")
-        val Res23 = listOf("")
-        val Res24 = listOf("")
-        val Res25 = listOf("")
-        val Res26 = listOf("")
-        val Res27 = listOf("")
-        val Res28 = listOf("")
-        val Res29 = listOf("")
-        val Res30 = listOf("")
 
 
-         val ID = "_id"
-         val Recipe_NAme = "recipe_name"
-         val Description = "description"
-         val Preparation= "preparation"
-         val Recipe_Items = "items"
-         val Calories = "calories"
-         val Cook_time = "cook_time"
-         val Image_parh = "image_path"
+         const val ID = "_id"
+         const val Recipe_NAme = "recipe_name"
+         const val Description = "description"
+         const val Preparation= "preparation"
+         const val Recipe_Items = "items"
+         const val Calories = "calories"
+         const val Cook_time = "cook_time"
+         const val Image_parh = "image_path"
 
 
-         val Item_name = "item_name"
-         val Item_Dose = "item_dose"
+         const val Item_name = "item_name"
+         const val Item_Dose = "item_dose"
 
 
-         val DB_NAME = "FoodIepal.db"
-         val DB_VERSION = 29
+         const val DB_NAME = "FoodIepal.db"
+         const val DB_VERSION = 29
 
-        val CREATE_TABLE = "CREATE TABLE $Table_Name ($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $Login TEXT, $Password TEXT);"
-        val CREATE_TABLE_FOOD = "CREATE TABLE $Table_Name_Food ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories INTEGET, $Cook_time INTEGER, $Image_parh INTEGER);"
-        val CREATE_TABLE_FAVORITE = "CREATE TABLE $Table_Name_Favorite ($ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER, $Login TEXT, FOREIGN KEY ($Login) REFERENCES $Table_Name ($Login));"
-        val CREATE_TABLE_BASKET = "CREATE TABLE $Table_Name_Basket ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Item_name TEXT, $Item_Dose TEXT, $Login TEXT, FOREIGN KEY($Login) REFERENCES $Table_Name ($Login));"
+        const val CREATE_TABLE = "CREATE TABLE $Table_Name ($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $Login TEXT, $Password TEXT);"
+        const val CREATE_TABLE_FOOD = "CREATE TABLE $Table_Name_Food ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories INTEGET, $Cook_time INTEGER, $Image_parh INTEGER);"
+        const val CREATE_TABLE_FAVORITE = "CREATE TABLE $Table_Name_Favorite ($ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                 " $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER, $Login TEXT, FOREIGN KEY ($Login) REFERENCES $Table_Name ($Login));"
+        const val CREATE_TABLE_BASKET = "CREATE TABLE $Table_Name_Basket ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Item_name TEXT, $Item_Dose TEXT, $Login TEXT, FOREIGN KEY($Login) REFERENCES $Table_Name ($Login));"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
