@@ -85,6 +85,11 @@ class MainMenu : AppCompatActivity() {
         startActivityForResult(intent, 3)
     }
 
+    fun onClickRecipeAdd(item: MenuItem) {
+        val intent = Intent(this@MainMenu, RecipeAdd::class.java)
+        startActivityForResult(intent, 4)
+    }
+
     fun clearFilter(item: MenuItem) {
         dataModel.minKk.value = 0
         dataModel.maxKk.value = Int.MAX_VALUE

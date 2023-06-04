@@ -13,22 +13,21 @@
         android:theme="@style/Theme.SQLITE"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".RecipeAdd"
+            android:exported="false" />
         <activity
             android:name=".FullScreen"
             android:exported="false"
-            android:parentActivityName=".MainMenu"/>
-
+            android:parentActivityName=".MainMenu" />
         <activity
             android:name=".ItemAdd"
             android:exported="false"
-            android:parentActivityName=".MainMenu"/>
-
+            android:parentActivityName=".MainMenu" />
         <activity
             android:name=".Filter"
             android:exported="false"
-            android:parentActivityName=".MainMenu"/>
-
+            android:parentActivityName=".MainMenu" />
         <activity
             android:name=".MainMenu"
             android:exported="true"
@@ -43,7 +42,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SignIn"
             android:exported="false"
@@ -52,17 +50,15 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:noHistory="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
     </application>
+
 </manifest>

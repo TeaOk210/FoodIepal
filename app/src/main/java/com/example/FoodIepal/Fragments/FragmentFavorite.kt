@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.FullScreen
+import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBaseHalper
 import com.example.FoodIepal.Utils.DataModel
@@ -41,6 +42,7 @@ class FragmentFavorite : Fragment() {
         binding.toolbar2.apply {
             title = "Избранное"
             subtitle = sessionManager.getUserName()
+            inflateMenu(R.menu.custom_toolbar_favorite)
         }
         return binding.root
     }
