@@ -86,8 +86,7 @@ class MainMenu : AppCompatActivity() {
     }
 
     fun onClickRecipeAdd(item: MenuItem) {
-        val intent = Intent(this@MainMenu, RecipeAdd::class.java)
-        startActivityForResult(intent, 4)
+        DialogRecipeAdd().show(supportFragmentManager, "Добавить рецепт")
     }
 
     fun clearFilter(item: MenuItem) {

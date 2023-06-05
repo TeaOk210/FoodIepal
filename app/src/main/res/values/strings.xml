@@ -29,5 +29,6 @@
     <string name="Name">Название:</string>
     <string name="Dosing">Дозировка:</string>
     <string name="Add">Добавить</string>
+    <string name="sendPhoto">Загрузите фотографию:</string>
 
 </resources>
