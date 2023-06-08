@@ -30,5 +30,8 @@
     <string name="Dosing">Дозировка:</string>
     <string name="Add">Добавить</string>
     <string name="sendPhoto">Загрузите фотографию:</string>
+    <string name="KkalValue">Общая каллорийность:</string>
+    <string name="timeValue">Общее время:</string>
+    <string name="ItemsValues">Ингредиенты и граммовки:</string>
 
 </resources>

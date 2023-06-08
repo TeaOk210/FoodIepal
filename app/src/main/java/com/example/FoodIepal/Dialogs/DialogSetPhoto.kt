@@ -1,6 +1,5 @@
-package com.example.FoodIepal.Fragments
+package com.example.FoodIepal.Dialogs
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -10,14 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.DialogFragment
 import com.example.FoodIepal.databinding.DialogSendimageLayoutBinding
-import com.example.FoodIepal.databinding.DialogSendkkalLayoutBinding
-import kotlin.properties.Delegates
 
-class DialogRecipeAdd : DialogFragment() {
+class DialogSetPhoto : DialogFragment() {
     private lateinit var binding: DialogSendimageLayoutBinding
-    private lateinit var binding2: DialogSendkkalLayoutBinding
     private lateinit var image: ImageView
-    private var kkal by Delegates.notNull<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,13 +25,12 @@ class DialogRecipeAdd : DialogFragment() {
 
         onClick()
 
-        binding
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(1100, 900)
+        dialog?.window?.setLayout(1100,900)
     }
 
     private fun onClick() {
@@ -48,26 +42,16 @@ class DialogRecipeAdd : DialogFragment() {
             dismiss()
         }
         binding.textView16.setOnClickListener {
-            chandeGialogs()
+            dismiss()
+            DialogSetDetails().show(parentFragmentManager, "")
         }
-    }
-
-    @SuppressLint("UseGetLayoutInflater")
-    private fun chandeGialogs() {
-        val inflater = LayoutInflater.from(requireContext())
-        val newBinding = DialogSendkkalLayoutBinding.inflate(inflater)
-
-        val parent = binding.root.parent as ViewGroup
-        parent.removeView(binding.root)
-        parent.addView(newBinding.root)
-        binding2 = DialogSendkkalLayoutBinding.inflate(inflater)
     }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            val selectedPhotoURL = data?.data
+        if (requestCode == 1 && data != null) {
+            val selectedPhotoURL = data.data
             image.setImageURI(selectedPhotoURL)
         }
     }
