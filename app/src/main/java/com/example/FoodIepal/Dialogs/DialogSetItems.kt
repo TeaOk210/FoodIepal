@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.FoodIepal.databinding.DialogSenditemsLayoutBinding
 
@@ -24,7 +25,7 @@ class DialogSetItems: DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(1100,900)
+        dialog?.window?.setLayout(1100, 1400)
     }
 
     private fun onClick() {
@@ -32,49 +33,12 @@ class DialogSetItems: DialogFragment() {
             dismiss()
         }
         binding.textView16.setOnClickListener {
-
+            if (binding.textItem.text.isNotEmpty()) {
+                dismiss()
+                DialogSetDesk().show(parentFragmentManager, "")
+            } else {
+                Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_SHORT).show()
+            }
         }
-        binding.itemAdd.setOnClickListener {
-//            val linearLayoutItems = binding.LinearLayoutItems
-//            val scrollView = binding.scroll
-//
-//            val newRelativeLayout = RelativeLayout(requireContext())
-//            val newEditText = EditText(requireContext())
-//            val newImageView = ImageView(requireContext())
-//
-//            newRelativeLayout.layoutParams = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT
-//            )
-//
-//            newEditText.layoutParams = RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.MATCH_PARENT,
-//                RelativeLayout.LayoutParams.MATCH_PARENT
-//            ).apply {
-//                setMargins(40, 0, 0, 0)
-//            }
-//
-//            newImageView.layoutParams = RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.WRAP_CONTENT,
-//                RelativeLayout.LayoutParams.WRAP_CONTENT
-//            ).apply {
-//                addRule(RelativeLayout.ALIGN_PARENT_END)
-//                addRule(RelativeLayout.ALIGN_PARENT_TOP)
-//                setMargins(0, 0, 0, 20)
-//
-//            }
-//
-//            newRelativeLayout.addView(newImageView)
-//            newRelativeLayout.addView(newEditText)
-//
-//            linearLayoutItems.addView(newRelativeLayout)
-//
-//            scrollView.post {
-//                scrollView.scrollTo(0, scrollView.bottom)
-//            }
-//
-//            binding.itemAdd.visibility = View.GONE
-        }
-
     }
 }

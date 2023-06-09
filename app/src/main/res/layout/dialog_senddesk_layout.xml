@@ -15,19 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:text="@string/KkalValue"
-        android:textColor="@color/text_orange"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/Title2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textKkal"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/timeValue"
+        android:text="@string/SetDesk"
         android:textColor="@color/text_orange"
         android:textSize="24sp" />
 
@@ -57,41 +45,25 @@
         android:textColor="@color/black_orange"/>
 
     <EditText
-        android:id="@+id/textKkal"
+        android:id="@+id/textDesk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Title"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
-        android:textColor="@color/white"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textColorLink="#FFFFFF"
-        android:textSize="24sp"
-        android:inputType="number"
-        android:gravity=""
-        android:autofillHints=""
-        tools:ignore="LabelFor" />
-
-    <EditText
-        android:id="@+id/textTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Title2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:gravity=""
-        android:inputType="number"
-        android:textColor="@color/white"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textColorLink="#FFFFFF"
-        android:textSize="24sp"
         android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:maxEms="3"
+        android:maxLines="11"
+        android:textColor="@color/white"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="24sp"
         tools:ignore="LabelFor" />
 
 </RelativeLayout>

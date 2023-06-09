@@ -6,17 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.FoodIepal.databinding.DialogSendkkalLayoutBinding
+import com.example.FoodIepal.databinding.DialogSenddeskLayoutBinding
 
-class DialogSetDetails: DialogFragment() {
-    private lateinit var binding: DialogSendkkalLayoutBinding
+class DialogSetDesk: DialogFragment() {
+    private lateinit var binding: DialogSenddeskLayoutBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogSendkkalLayoutBinding.inflate(inflater)
+        binding = DialogSenddeskLayoutBinding.inflate(inflater)
 
         onClick()
 
@@ -25,7 +25,7 @@ class DialogSetDetails: DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(1100,1000)
+        dialog?.window?.setLayout(1100, 1400)
     }
 
     private fun onClick() {
@@ -33,9 +33,8 @@ class DialogSetDetails: DialogFragment() {
             dismiss()
         }
         binding.textView16.setOnClickListener {
-            if (binding.textKkal.text.isNotEmpty() && binding.textTime.text.isNotEmpty()) {
+            if (binding.textDesk.text.isNotEmpty()){
                 dismiss()
-                DialogSetItems().show(parentFragmentManager, "")
             } else {
                 Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_SHORT).show()
             }

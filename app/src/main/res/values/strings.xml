@@ -33,5 +33,6 @@
     <string name="KkalValue">Общая каллорийность:</string>
     <string name="timeValue">Общее время:</string>
     <string name="ItemsValues">Ингредиенты и граммовки:</string>
+    <string name="SetDesk">Описание приготовления:</string>
 
 </resources>
