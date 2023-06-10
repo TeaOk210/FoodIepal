@@ -25,7 +25,7 @@ class DialogSetDetails: DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(1100,1000)
+        dialog?.window?.setLayout(1100,900)
     }
 
     private fun onClick() {
@@ -35,10 +35,24 @@ class DialogSetDetails: DialogFragment() {
         binding.textView16.setOnClickListener {
             if (binding.textKkal.text.isNotEmpty() && binding.textTime.text.isNotEmpty()) {
                 dismiss()
-                DialogSetItems().show(parentFragmentManager, "")
+                DialogSetPhoto.newInstance(arguments?.getString("name").toString(),
+                    arguments?.getString("prep").toString(),
+                    binding.textKkal.text.toString().toInt(),
+                    binding.textTime.text.toString().toInt()).show(parentFragmentManager, "")
             } else {
                 Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    companion object {
+        fun newInstance(name: String, prep: String): DialogSetDetails {
+            val args = Bundle()
+            args.putString("name", name)
+            args.putString("prep", prep)
+            val fragment = DialogSetDetails()
+            fragment.arguments = args
+            return fragment
         }
     }
 }

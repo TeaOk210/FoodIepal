@@ -35,10 +35,29 @@ class DialogSetItems: DialogFragment() {
         binding.textView16.setOnClickListener {
             if (binding.textItem.text.isNotEmpty()) {
                 dismiss()
-                DialogSetDesk().show(parentFragmentManager, "")
+                val name = arguments?.getString("name").toString()
+                val prep = arguments?.getString("prep").toString()
+                val Kkal = arguments?.getInt("Kkal")
+                val time = arguments?.getInt("time")
+                val photo = arguments?.getByteArray("image")
+                DialogSetDesk.newInstance(name, prep, Kkal!!, time!!, photo!!, binding.textItem.text.toString()).show(parentFragmentManager, "")
             } else {
                 Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    companion object {
+        fun newInstance(name: String, prep: String, Kkal: Int, time: Int, image: ByteArray): DialogSetItems {
+            val args = Bundle()
+            args.putString("name", name)
+            args.putString("prep", prep)
+            args.putInt("Kkal", Kkal)
+            args.putInt("time", time)
+            args.putByteArray("image", image)
+            val fragment = DialogSetItems()
+            fragment.arguments = args
+            return fragment
         }
     }
 }

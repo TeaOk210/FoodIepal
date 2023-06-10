@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.example.FoodIepal.Dialogs.DialogSetPhoto
+import com.example.FoodIepal.Dialogs.DialogSetName
 import com.example.FoodIepal.Fragments.*
 import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.Utils.MyPagerAdapter
@@ -87,7 +87,7 @@ class MainMenu : AppCompatActivity() {
     }
 
     fun onClickRecipeAdd(item: MenuItem) {
-        DialogSetPhoto().show(supportFragmentManager, "")
+        DialogSetName.newInstance().show(supportFragmentManager, "")
     }
 
     fun clearFilter(item: MenuItem) {

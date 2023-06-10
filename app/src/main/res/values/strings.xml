@@ -34,5 +34,7 @@
     <string name="timeValue">Общее время:</string>
     <string name="ItemsValues">Ингредиенты и граммовки:</string>
     <string name="SetDesk">Описание приготовления:</string>
+    <string name="SendPrep">Краткое описание:</string>
+    <string name="setName">Название:</string>
 
 </resources>

@@ -55,17 +55,21 @@ class FragmentFavorite : Fragment() {
     @SuppressLint("Range", "NotifyDataSetChanged")
     fun populateList() {
         RecipeItemList.clear()
-        val cursor = dbManager.fetchFavorite(sessionManager.getUserName())
 
-        if (cursor.moveToFirst()) {
+        val login= sessionManager.getUserName()
+
+        val cursorFV = dbManager.fetchFavorite(login)
+        val cursorPR =dbManager.fetchPersonal(login)
+
+        if (cursorPR.moveToFirst()) {
             do {
-                val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))
-                val text = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Description))
-                val items = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_Items))
-                val preparation = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Preparation))
-                val time = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Cook_time))
-                val kkal = cursor.getInt(cursor.getColumnIndex(DataBaseHalper.Calories))
-                val bytesImage = cursor.getBlob(cursor.getColumnIndex(DataBaseHalper.Image_parh))
+                val name = cursorPR.getString(cursorPR.getColumnIndex(DataBaseHalper.Recipe_NAme))
+                val text = cursorPR.getString(cursorPR.getColumnIndex(DataBaseHalper.Description))
+                val items = cursorPR.getString(cursorPR.getColumnIndex(DataBaseHalper.Recipe_Items))
+                val preparation = cursorPR.getString(cursorPR.getColumnIndex(DataBaseHalper.Preparation))
+                val time = cursorPR.getInt(cursorPR.getColumnIndex(DataBaseHalper.Cook_time))
+                val kkal = cursorPR.getInt(cursorPR.getColumnIndex(DataBaseHalper.Calories))
+                val bytesImage = cursorPR.getBlob(cursorPR.getColumnIndex(DataBaseHalper.Image_parh))
 
                 val recipeItem = RecipeItem(
                     name = name,
@@ -78,10 +82,36 @@ class FragmentFavorite : Fragment() {
                 )
 
                 RecipeItemList.add(recipeItem)
-            } while (cursor.moveToNext())
+            } while (cursorPR.moveToNext())
         }
+
+        if (cursorFV.moveToFirst()) {
+            do {
+                val name = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Recipe_NAme))
+                val text = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Description))
+                val items = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Recipe_Items))
+                val preparation = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Preparation))
+                val time = cursorFV.getInt(cursorFV.getColumnIndex(DataBaseHalper.Cook_time))
+                val kkal = cursorFV.getInt(cursorFV.getColumnIndex(DataBaseHalper.Calories))
+                val bytesImage = cursorFV.getBlob(cursorFV.getColumnIndex(DataBaseHalper.Image_parh))
+
+                val recipeItem = RecipeItem(
+                    name = name,
+                    text = text,
+                    time = time,
+                    Kkal = kkal,
+                    RecipeImage = bytesImage,
+                    recipeItems = items,
+                    Preparation = preparation
+                )
+
+                RecipeItemList.add(recipeItem)
+            } while (cursorFV.moveToNext())
+        }
+
         adapter.notifyDataSetChanged()
-        cursor.close()
+        cursorFV.close()
+        cursorPR.close()
     }
 
     private fun setUpAdapter() {

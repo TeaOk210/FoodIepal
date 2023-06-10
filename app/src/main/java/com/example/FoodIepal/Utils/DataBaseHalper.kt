@@ -11,6 +11,7 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
          const val Table_Name_Food = "Recipes"
          const val Table_Name_Favorite = "Favorite"
          const val Table_Name_Basket = "Basket"
+         const val Table_Name_Person_Food = "PersonFood"
 
          const val _ID = "_id"
          const val Login = "Login"
@@ -207,13 +208,15 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
 
 
          const val DB_NAME = "FoodIepal.db"
-         const val DB_VERSION = 29
+         const val DB_VERSION = 35
 
         const val CREATE_TABLE = "CREATE TABLE $Table_Name ($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $Login TEXT, $Password TEXT);"
-        const val CREATE_TABLE_FOOD = "CREATE TABLE $Table_Name_Food ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories INTEGET, $Cook_time INTEGER, $Image_parh INTEGER);"
+        const val CREATE_TABLE_FOOD = "CREATE TABLE $Table_Name_Food ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories INTEGER, $Cook_time INTEGER, $Image_parh INTEGER);"
         const val CREATE_TABLE_FAVORITE = "CREATE TABLE $Table_Name_Favorite ($ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                  " $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER, $Login TEXT, FOREIGN KEY ($Login) REFERENCES $Table_Name ($Login));"
         const val CREATE_TABLE_BASKET = "CREATE TABLE $Table_Name_Basket ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Item_name TEXT, $Item_Dose TEXT, $Login TEXT, FOREIGN KEY($Login) REFERENCES $Table_Name ($Login));"
+        const val CREATE_TABLE_PERSON_FOOD = "CREATE TABLE $Table_Name_Person_Food ($ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER, $Login TEXT, FOREIGN KEY ($Login) REFERENCES $Table_Name ($Login));"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -221,27 +224,13 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
         db.execSQL(CREATE_TABLE_FOOD)
         db.execSQL(CREATE_TABLE_FAVORITE)
         db.execSQL(CREATE_TABLE_BASKET)
+        db.execSQL(CREATE_TABLE_PERSON_FOOD)
 
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res1[0]}', '${Res1[1]}', '${Res1[2]}', '${Res1[3]}', ${Res1[4]}, ${Res1[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res2[0]}', '${Res2[1]}', '${Res2[2]}', '${Res2[3]}', ${Res2[4]}, ${Res2[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res3[0]}', '${Res3[1]}', '${Res3[2]}', '${Res3[3]}', ${Res3[4]}, ${Res3[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res4[0]}', '${Res4[1]}', '${Res4[2]}', '${Res4[3]}', ${Res4[4]}, ${Res4[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res5[0]}', '${Res5[1]}', '${Res5[2]}', '${Res5[3]}', ${Res5[4]}, ${Res5[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res6[0]}', '${Res6[1]}', '${Res6[2]}', '${Res6[3]}', ${Res6[4]}, ${Res6[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res7[0]}', '${Res7[1]}', '${Res7[2]}', '${Res7[3]}', ${Res7[4]}, ${Res7[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res8[0]}', '${Res8[1]}', '${Res8[2]}', '${Res8[3]}', ${Res8[4]}, ${Res8[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res9[0]}', '${Res9[1]}', '${Res9[2]}', '${Res9[3]}', ${Res9[4]}, ${Res9[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res10[0]}', '${Res10[1]}', '${Res10[2]}', '${Res10[3]}', ${Res10[4]}, ${Res10[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res11[0]}', '${Res11[1]}', '${Res11[2]}', '${Res11[3]}', ${Res11[4]}, ${Res11[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res12[0]}', '${Res12[1]}', '${Res12[2]}', '${Res12[3]}', ${Res12[4]}, ${Res12[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res13[0]}', '${Res13[1]}', '${Res13[2]}', '${Res13[3]}', ${Res13[4]}, ${Res13[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res14[0]}', '${Res14[1]}', '${Res14[2]}', '${Res14[3]}', ${Res14[4]}, ${Res14[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res15[0]}', '${Res15[1]}', '${Res15[2]}', '${Res15[3]}', ${Res15[4]}, ${Res15[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res16[0]}', '${Res16[1]}', '${Res16[2]}', '${Res16[3]}', ${Res16[4]}, ${Res16[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res17[0]}', '${Res17[1]}', '${Res17[2]}', '${Res17[3]}', ${Res17[4]}, ${Res17[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res18[0]}', '${Res18[1]}', '${Res18[2]}', '${Res18[3]}', ${Res18[4]}, ${Res18[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res19[0]}', '${Res19[1]}', '${Res19[2]}', '${Res19[3]}', ${Res19[4]}, ${Res19[5]})")
-        db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${Res20[0]}', '${Res20[1]}', '${Res20[2]}', '${Res20[3]}', ${Res20[4]}, ${Res20[5]})")
+        val recipes = listOf(Res1, Res2, Res3, Res4, Res5, Res6, Res7, Res8, Res9, Res10, Res11, Res12, Res13, Res14, Res15, Res16, Res17, Res18, Res19, Res20)
+
+        for (res in recipes) {
+            db.execSQL("INSERT INTO $Table_Name_Food($Recipe_NAme, $Description, $Recipe_Items, $Preparation, $Calories, $Cook_time) VALUES('${res[0]}', '${res[1]}', '${res[2]}', '${res[3]}', ${res[4]}, ${res[5]})")
+        }
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -249,6 +238,7 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
         db.execSQL("DROP TABLE IF EXISTS $Table_Name_Food")
         db.execSQL("DROP TABLE IF EXISTS $Table_Name_Favorite")
         db.execSQL("DROP TABLE IF EXISTS $Table_Name_Basket")
+        db.execSQL("DROP TABLE IF EXISTS $Table_Name_Person_Food")
         onCreate(db)
     }
 }
