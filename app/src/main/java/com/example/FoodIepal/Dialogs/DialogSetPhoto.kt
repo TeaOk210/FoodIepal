@@ -10,12 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.DialogSendimageLayoutBinding
 import java.io.ByteArrayOutputStream
 
 class DialogSetPhoto : DialogFragment() {
     private lateinit var binding: DialogSendimageLayoutBinding
     private lateinit var image: ImageView
+    private val dataModel: DataModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,12 +49,10 @@ class DialogSetPhoto : DialogFragment() {
         }
         binding.textView16.setOnClickListener {
             dismiss()
-            val name = arguments?.getString("name").toString()
-            val prep = arguments?.getString("prep").toString()
-            val Kkal = arguments?.getInt("Kkal")
-            val time = arguments?.getInt("time")
-            val photo: ByteArray = getBytesFromImageView(image)!!
-            DialogSetItems.newInstance(name, prep, Kkal!!, time!!, photo).show(parentFragmentManager, "")
+
+            dataModel.image.value = getBytesFromImageView(image)
+
+            DialogSetItems.newInstance().show(parentFragmentManager, "")
         }
     }
 
@@ -64,29 +65,42 @@ class DialogSetPhoto : DialogFragment() {
         }
     }
 
+//    private fun cropImage(bitmap: Bitmap, width: Int, height: Int): Bitmap {
+//        val imageWidth = bitmap.width
+//        val imageHeight = bitmap.height
+//
+//        val cropWidth = if (imageWidth >= width) width else imageWidth
+//        val cropHeight = if (imageHeight >= height) height else imageHeight
+//
+//        val cropX = (imageWidth - cropWidth) / 2
+//        val cropY = (imageHeight - cropHeight) / 2
+//
+//        val offsetX = (width - cropWidth) / 2
+//        val offsetY = (height - cropHeight) / 2
+//
+//        val croppedBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+//        val canvas = Canvas(croppedBitmap)
+//        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+//
+//        canvas.drawBitmap(bitmap, Rect(cropX, cropY, cropX + cropWidth, cropY + cropHeight), Rect(offsetX, offsetY, offsetX + cropWidth, offsetY + cropHeight), paint)
+//
+//        return croppedBitmap
+//    }
+
     private fun getBytesFromImageView(imageView: ImageView): ByteArray? {
         val drawable = imageView.drawable ?: return null
         val bitmap = (drawable as? BitmapDrawable)?.bitmap ?: return null
 
-        val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 300, 200, true)
+        val croppedBitmap = Bitmap.createScaledBitmap(bitmap, 1200, 1200, false)
+//        val croppedBitmap = cropImage(bitmap, binding.image.width, binding.image.height)
 
         val outputStream = ByteArrayOutputStream()
-        scaledBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        croppedBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
 
         return outputStream.toByteArray()
     }
 
-
-    companion object{
-        fun newInstance(name: String, prep: String, Kkal: Int, time: Int): DialogSetPhoto {
-            val args = Bundle()
-            args.putString("name", name)
-            args.putString("prep", prep)
-            args.putInt("Kkal", Kkal)
-            args.putInt("time", time)
-            val fragment = DialogSetPhoto()
-            fragment.arguments = args
-            return fragment
-        }
+    companion object {
+        fun newInstance(): DialogSetPhoto = DialogSetPhoto()
     }
 }

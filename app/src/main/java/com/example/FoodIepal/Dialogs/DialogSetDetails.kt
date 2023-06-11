@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.DialogSendkkalLayoutBinding
 
 class DialogSetDetails: DialogFragment() {
     private lateinit var binding: DialogSendkkalLayoutBinding
+    private val dataModel: DataModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,10 +38,11 @@ class DialogSetDetails: DialogFragment() {
         binding.textView16.setOnClickListener {
             if (binding.textKkal.text.isNotEmpty() && binding.textTime.text.isNotEmpty()) {
                 dismiss()
-                DialogSetPhoto.newInstance(arguments?.getString("name").toString(),
-                    arguments?.getString("prep").toString(),
-                    binding.textKkal.text.toString().toInt(),
-                    binding.textTime.text.toString().toInt()).show(parentFragmentManager, "")
+
+                dataModel.Kkal.value = binding.textKkal.text.toString().toInt()
+                dataModel.time.value = binding.textTime.text.toString().toInt()
+
+                DialogSetPhoto.newInstance().show(parentFragmentManager, "")
             } else {
                 Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_SHORT).show()
             }
@@ -46,13 +50,6 @@ class DialogSetDetails: DialogFragment() {
     }
 
     companion object {
-        fun newInstance(name: String, prep: String): DialogSetDetails {
-            val args = Bundle()
-            args.putString("name", name)
-            args.putString("prep", prep)
-            val fragment = DialogSetDetails()
-            fragment.arguments = args
-            return fragment
-        }
+        fun newInstance(): DialogSetDetails = DialogSetDetails()
     }
 }

@@ -19,4 +19,22 @@ open class DataModel: ViewModel() {
     val items: MutableLiveData<ArrayList<String>> by lazy {
         MutableLiveData<ArrayList<String>>()
     }
+    val name: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val prep: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val Kkal: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
+    }
+    val time: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
+    }
+    val image: MutableLiveData<ByteArray> by lazy {
+        MutableLiveData<ByteArray>()
+    }
+    val setItems: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 }

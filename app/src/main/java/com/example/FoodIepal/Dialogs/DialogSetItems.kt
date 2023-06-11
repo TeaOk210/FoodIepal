@@ -6,10 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import com.example.FoodIepal.Fragments.FragmentFavorite
+import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.DialogSenditemsLayoutBinding
 
 class DialogSetItems: DialogFragment() {
     private lateinit var binding: DialogSenditemsLayoutBinding
+    private val dataModel: DataModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,12 +39,10 @@ class DialogSetItems: DialogFragment() {
         binding.textView16.setOnClickListener {
             if (binding.textItem.text.isNotEmpty()) {
                 dismiss()
-                val name = arguments?.getString("name").toString()
-                val prep = arguments?.getString("prep").toString()
-                val Kkal = arguments?.getInt("Kkal")
-                val time = arguments?.getInt("time")
-                val photo = arguments?.getByteArray("image")
-                DialogSetDesk.newInstance(name, prep, Kkal!!, time!!, photo!!, binding.textItem.text.toString()).show(parentFragmentManager, "")
+
+                dataModel.setItems.value = binding.textItem.text.toString()
+
+                DialogSetDesk.newInstance().show(parentFragmentManager, "")
             } else {
                 Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_SHORT).show()
             }
@@ -48,16 +50,6 @@ class DialogSetItems: DialogFragment() {
     }
 
     companion object {
-        fun newInstance(name: String, prep: String, Kkal: Int, time: Int, image: ByteArray): DialogSetItems {
-            val args = Bundle()
-            args.putString("name", name)
-            args.putString("prep", prep)
-            args.putInt("Kkal", Kkal)
-            args.putInt("time", time)
-            args.putByteArray("image", image)
-            val fragment = DialogSetItems()
-            fragment.arguments = args
-            return fragment
-        }
+        fun newInstance(): DialogSetItems = DialogSetItems()
     }
 }

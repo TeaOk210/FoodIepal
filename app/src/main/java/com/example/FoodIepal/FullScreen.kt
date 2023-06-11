@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBaseHalper
@@ -68,8 +69,13 @@ class FullScreen : AppCompatActivity() {
         val bitmap = BitmapFactory.decodeByteArray(image, 0, image.size)
         binding.ImageView.setImageBitmap(bitmap)
 
+        val toolbarTitle = binding.toolbarTitle
+        toolbarTitle!!.text = name
+        toolbarTitle .isSelected = true
+
+
         supportActionBar?.apply {
-            title = name
+            displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.back_button)
         }
@@ -100,7 +106,7 @@ class FullScreen : AppCompatActivity() {
                     Toast.makeText(this, "Удалено из избранного", Toast.LENGTH_SHORT).show()
                 } else {
                     item.setIcon(R.drawable.baseline_star_24)
-                    dbManager.insertFavorite(name, text, items, Kkal, time, image, login, preparation)
+                    dbManager.insertFavorite(name, text, items, Kkal, time, image, login, preparation, "insert")
                     Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
                 }
 

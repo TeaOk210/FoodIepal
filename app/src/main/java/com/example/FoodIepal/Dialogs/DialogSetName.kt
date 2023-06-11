@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.DialogSendnameLayoutBinding
 
 class DialogSetName: DialogFragment() {
     private lateinit var binding: DialogSendnameLayoutBinding
+    private val dataModel: DataModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +38,11 @@ class DialogSetName: DialogFragment() {
         binding.textView16.setOnClickListener {
             if (binding.textName.text.isNotEmpty() && binding.textPrep.text.isNotEmpty()) {
                 dismiss()
-                DialogSetDetails.newInstance(binding.textName.text.toString(), binding.textPrep.text.toString()).show(parentFragmentManager, "")
+
+                dataModel.name.value = binding.textName.text.toString()
+                dataModel.prep.value = binding.textPrep.text.toString()
+
+                DialogSetDetails.newInstance().show(parentFragmentManager, "")
             } else {
                 Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_SHORT).show()
             }
@@ -43,6 +50,7 @@ class DialogSetName: DialogFragment() {
     }
 
     companion object {
+
         fun newInstance(): DialogSetName = DialogSetName()
     }
 }

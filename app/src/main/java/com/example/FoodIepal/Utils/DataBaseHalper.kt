@@ -11,7 +11,6 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
          const val Table_Name_Food = "Recipes"
          const val Table_Name_Favorite = "Favorite"
          const val Table_Name_Basket = "Basket"
-         const val Table_Name_Person_Food = "PersonFood"
 
          const val _ID = "_id"
          const val Login = "Login"
@@ -208,15 +207,13 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
 
 
          const val DB_NAME = "FoodIepal.db"
-         const val DB_VERSION = 35
+         const val DB_VERSION = 36
 
         const val CREATE_TABLE = "CREATE TABLE $Table_Name ($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $Login TEXT, $Password TEXT);"
         const val CREATE_TABLE_FOOD = "CREATE TABLE $Table_Name_Food ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories INTEGER, $Cook_time INTEGER, $Image_parh INTEGER);"
         const val CREATE_TABLE_FAVORITE = "CREATE TABLE $Table_Name_Favorite ($ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                  " $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER, $Login TEXT, FOREIGN KEY ($Login) REFERENCES $Table_Name ($Login));"
         const val CREATE_TABLE_BASKET = "CREATE TABLE $Table_Name_Basket ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $Item_name TEXT, $Item_Dose TEXT, $Login TEXT, FOREIGN KEY($Login) REFERENCES $Table_Name ($Login));"
-        const val CREATE_TABLE_PERSON_FOOD = "CREATE TABLE $Table_Name_Person_Food ($ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " $Recipe_NAme TEXT, $Description TEXT, $Preparation TEXT, $Recipe_Items TEXT, $Calories TEXT, $Cook_time TEXT, $Image_parh INTEGER, $Login TEXT, FOREIGN KEY ($Login) REFERENCES $Table_Name ($Login));"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -224,7 +221,6 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
         db.execSQL(CREATE_TABLE_FOOD)
         db.execSQL(CREATE_TABLE_FAVORITE)
         db.execSQL(CREATE_TABLE_BASKET)
-        db.execSQL(CREATE_TABLE_PERSON_FOOD)
 
         val recipes = listOf(Res1, Res2, Res3, Res4, Res5, Res6, Res7, Res8, Res9, Res10, Res11, Res12, Res13, Res14, Res15, Res16, Res17, Res18, Res19, Res20)
 
@@ -238,7 +234,6 @@ class DataBaseHalper (Context : Context) : SQLiteOpenHelper(Context, DB_NAME, nu
         db.execSQL("DROP TABLE IF EXISTS $Table_Name_Food")
         db.execSQL("DROP TABLE IF EXISTS $Table_Name_Favorite")
         db.execSQL("DROP TABLE IF EXISTS $Table_Name_Basket")
-        db.execSQL("DROP TABLE IF EXISTS $Table_Name_Person_Food")
         onCreate(db)
     }
 }

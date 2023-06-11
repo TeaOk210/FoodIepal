@@ -22,7 +22,7 @@ class DBManager(private val context: Context) {
         database.insert(DataBaseHalper.Table_Name, null, contentValue)
         Toast.makeText(context, "Вы успешно зарегистрировались", Toast.LENGTH_SHORT).show()
     }
-    fun insertFavorite(RecipeName: String, Description: String, Recipe_Items: String, Calories: Int, Cook_time: Int, Image_path: ByteArray, login: String, preparation: String){
+    fun insertFavorite(RecipeName: String, Description: String, Recipe_Items: String, Calories: Int, Cook_time: Int, Image_path: ByteArray, login: String, preparation: String, method: String){
         val contentValues = ContentValues()
         contentValues.put(DataBaseHalper.Recipe_NAme, RecipeName)
         contentValues.put(DataBaseHalper.Description, Description)
@@ -33,27 +33,16 @@ class DBManager(private val context: Context) {
         contentValues.put(DataBaseHalper.Login, login)
         contentValues.put(DataBaseHalper.Preparation, preparation)
 
-        database.insert(DataBaseHalper.Table_Name_Favorite, null, contentValues)
-    }
-    fun insertPersonal(RecipeName: String, Description: String, Recipe_Items: String, Calories: Int, Cook_time: Int, Image_path: ByteArray, login: String, preparation: String, method: Boolean){
-        val contentValues = ContentValues()
-        contentValues.put(DataBaseHalper.Recipe_NAme, RecipeName)
-        contentValues.put(DataBaseHalper.Description, Description)
-        contentValues.put(DataBaseHalper.Recipe_Items, Recipe_Items)
-        contentValues.put(DataBaseHalper.Calories, Calories)
-        contentValues.put(DataBaseHalper.Cook_time, Cook_time)
-        contentValues.put(DataBaseHalper.Image_parh, Image_path)
-        contentValues.put(DataBaseHalper.Login, login)
-        contentValues.put(DataBaseHalper.Preparation, preparation)
-
-        if (method) {
-            database.insert(DataBaseHalper.Table_Name_Person_Food, null, contentValues)
-        } else {
+        if (method == "insert") {
+            database.insert(DataBaseHalper.Table_Name_Favorite, null, contentValues)
+        }
+        if (method == "update") {
             val selection = "${DataBaseHalper.Login} = ?"
             val selectionArgs = arrayOf(login)
-            database.update(DataBaseHalper.Table_Name_Person_Food, contentValues, selection, selectionArgs)
+            database.update(DataBaseHalper.Table_Name_Favorite, contentValues, selection, selectionArgs)
         }
     }
+
     fun insertBasket(name: String, Dose: String, Login: String){
         val contentValues = ContentValues()
         contentValues.put(DataBaseHalper.Item_name, name)
@@ -115,31 +104,6 @@ class DBManager(private val context: Context) {
         cursor.moveToFirst()
         return cursor
     }
-    fun fetchPersonal(login: String): Cursor {
-        val columns: Array<String> = arrayOf(
-            DataBaseHalper.ID,
-            DataBaseHalper.Recipe_NAme,
-            DataBaseHalper.Description,
-            DataBaseHalper.Recipe_Items,
-            DataBaseHalper.Calories,
-            DataBaseHalper.Cook_time,
-            DataBaseHalper.Image_parh,
-            DataBaseHalper.Preparation
-        )
-        val selection = "${DataBaseHalper.Login} = ?"
-        val selectionArgs = arrayOf(login)
-        val cursor = database.query(
-            DataBaseHalper.Table_Name_Person_Food,
-            columns,
-            selection,
-            selectionArgs,
-            null,
-            null,
-            null
-        )
-        cursor.moveToFirst()
-        return cursor
-    }
     fun fetchBasket(login: String): Cursor{
         val colums : Array<String> = arrayOf(
             DataBaseHalper.Item_name,
@@ -169,10 +133,5 @@ class DBManager(private val context: Context) {
         val selection = "${DataBaseHalper.Recipe_NAme}=?"
         val selectionArgs = arrayOf(name)
         database.delete(DataBaseHalper.Table_Name_Favorite, selection, selectionArgs)
-    }
-    fun deletePersonal(name: String) {
-        val selection = "${DataBaseHalper.Recipe_NAme}=?"
-        val selectionArgs = arrayOf(name)
-        database.delete(DataBaseHalper.Table_Name_Person_Food, selection, selectionArgs)
     }
 }

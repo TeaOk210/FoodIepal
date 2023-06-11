@@ -120,31 +120,6 @@ class FragmentHome : Fragment(){
     @SuppressLint("Range", "NotifyDataSetChanged")
     private fun populateList() {
         val cursor = dbManager.fetchRecipe()
-        val cursorPR =dbManager.fetchPersonal(sessionManager.getUserName())
-
-        if (cursorPR.moveToFirst()) {
-            do {
-                val name = cursorPR.getString(cursorPR.getColumnIndex(DataBaseHalper.Recipe_NAme))
-                val text = cursorPR.getString(cursorPR.getColumnIndex(DataBaseHalper.Description))
-                val items = cursorPR.getString(cursorPR.getColumnIndex(DataBaseHalper.Recipe_Items))
-                val preparation = cursorPR.getString(cursorPR.getColumnIndex(DataBaseHalper.Preparation))
-                val time = cursorPR.getInt(cursorPR.getColumnIndex(DataBaseHalper.Cook_time))
-                val kkal = cursorPR.getInt(cursorPR.getColumnIndex(DataBaseHalper.Calories))
-                val bytesImage = cursorPR.getBlob(cursorPR.getColumnIndex(DataBaseHalper.Image_parh))
-
-                val recipeItem = RecipeItem(
-                    name = name,
-                    text = text,
-                    time = time,
-                    Kkal = kkal,
-                    RecipeImage = bytesImage,
-                    recipeItems = items,
-                    Preparation = preparation
-                )
-
-                RecipeItemList.add(recipeItem)
-            } while (cursorPR.moveToNext())
-        }
 
         val images = arrayOf(
             R.drawable.keks,
