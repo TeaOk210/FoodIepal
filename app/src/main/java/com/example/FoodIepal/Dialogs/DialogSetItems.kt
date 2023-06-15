@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.example.FoodIepal.Fragments.FragmentFavorite
 import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.DialogSenditemsLayoutBinding
 
-class DialogSetItems: DialogFragment() {
+class DialogSetItems : DialogFragment() {
     private lateinit var binding: DialogSenditemsLayoutBinding
     private val dataModel: DataModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +47,7 @@ class DialogSetItems: DialogFragment() {
                 Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     companion object {

@@ -17,8 +17,8 @@ import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 
 @Suppress("DEPRECATION")
-class MainMenu : AppCompatActivity() {
-    lateinit var binding : ActivityMainMenuBinding
+class MainMenu : AppCompatActivity(){
+    lateinit var binding: ActivityMainMenuBinding
     private val dataModel: DataModel by viewModels()
     private lateinit var sessionManager: SessionManager
     private lateinit var viewPager: ViewPager2
@@ -28,7 +28,7 @@ class MainMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         sessionManager = SessionManager(this)
-        if (!sessionManager.getLogin()){
+        if (!sessionManager.getLogin()) {
             startActivityForResult(Intent(this, MainActivity::class.java), 2)
         }
 
@@ -62,18 +62,20 @@ class MainMenu : AppCompatActivity() {
                     viewPager.currentItem = 0
                     true
                 }
+
                 R.id.bascet -> {
                     viewPager.currentItem = 1
                     true
                 }
+
                 R.id.favorites -> {
                     viewPager.currentItem = 2
                     true
                 }
+
                 else -> false
             }
         }
-
     }
 
     fun onClickFilterListener(view: View) {

@@ -9,7 +9,7 @@ import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.databinding.ActivitySignInBinding
 
 class SignIn : AppCompatActivity() {
-    lateinit var binding : ActivitySignInBinding
+    lateinit var binding: ActivitySignInBinding
     private lateinit var dbManager: DBManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,8 @@ class SignIn : AppCompatActivity() {
 
 
         binding.Up.setOnClickListener() {
-            val loginFragment = supportFragmentManager.findFragmentById(R.id.LoginLog) as FragmentLogin
+            val loginFragment =
+                supportFragmentManager.findFragmentById(R.id.LoginLog) as FragmentLogin
             loginFragment.checkLoginAndPassword()
         }
     }

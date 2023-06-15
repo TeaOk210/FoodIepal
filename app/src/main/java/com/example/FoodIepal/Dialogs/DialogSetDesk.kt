@@ -12,16 +12,14 @@ import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.DialogSenddeskLayoutBinding
 
-class DialogSetDesk: DialogFragment() {
+class DialogSetDesk : DialogFragment() {
     private lateinit var binding: DialogSenddeskLayoutBinding
     private lateinit var dbManager: DBManager
     private lateinit var sessionManager: SessionManager
     private val dataModel: DataModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DialogSenddeskLayoutBinding.inflate(inflater)
 
@@ -40,25 +38,17 @@ class DialogSetDesk: DialogFragment() {
         dialog?.window?.setLayout(1100, 1400)
     }
 
+
     private fun onClick() {
         binding.textView17.setOnClickListener {
             dismiss()
         }
         binding.textView16.setOnClickListener {
-            if (binding.textDesk.text.isNotEmpty()){
+            if (binding.textDesk.text.isNotEmpty()) {
+
+                dataModel.desk.value = binding.textDesk.text.toString()
+
                 dismiss()
-
-                val name = dataModel.name.value.toString()
-                val prep = dataModel.prep.value.toString()
-                val Kkal = dataModel.Kkal.value!!
-                val time = dataModel.time.value!!
-                val image = dataModel.image.value!!
-                val items = dataModel.setItems.value.toString()
-                val desk = binding.textDesk.text.toString()
-                val login = sessionManager.getUserName()
-                val method = "insert"
-
-                dbManager.insertFavorite(name, prep, items, Kkal, time, image, login, desk, method)
             } else {
                 Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_SHORT).show()
             }
@@ -67,5 +57,5 @@ class DialogSetDesk: DialogFragment() {
 
     companion object {
         fun newInstance() = DialogSetDesk()
-        }
+    }
 }

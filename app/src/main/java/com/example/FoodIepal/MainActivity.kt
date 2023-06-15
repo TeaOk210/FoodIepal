@@ -10,7 +10,7 @@ import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding : ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private lateinit var registrationFragment: FragmentRegistr
     private lateinit var sessionManager: SessionManager
 
@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         binding.Up.setOnClickListener() {
-            registrationFragment = supportFragmentManager.findFragmentById(R.id.Registr) as FragmentRegistr
+            registrationFragment =
+                supportFragmentManager.findFragmentById(R.id.Registr) as FragmentRegistr
             if (registrationFragment.checkRegistrationFields()) {
                 registrationFragment.registr()
                 setResult(Activity.RESULT_OK)

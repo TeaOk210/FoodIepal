@@ -36,7 +36,7 @@ class DialogSetPhoto : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(1100,900)
+        dialog?.window?.setLayout(1100,1000)
     }
 
     private fun onClick() {
@@ -65,34 +65,11 @@ class DialogSetPhoto : DialogFragment() {
         }
     }
 
-//    private fun cropImage(bitmap: Bitmap, width: Int, height: Int): Bitmap {
-//        val imageWidth = bitmap.width
-//        val imageHeight = bitmap.height
-//
-//        val cropWidth = if (imageWidth >= width) width else imageWidth
-//        val cropHeight = if (imageHeight >= height) height else imageHeight
-//
-//        val cropX = (imageWidth - cropWidth) / 2
-//        val cropY = (imageHeight - cropHeight) / 2
-//
-//        val offsetX = (width - cropWidth) / 2
-//        val offsetY = (height - cropHeight) / 2
-//
-//        val croppedBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-//        val canvas = Canvas(croppedBitmap)
-//        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-//
-//        canvas.drawBitmap(bitmap, Rect(cropX, cropY, cropX + cropWidth, cropY + cropHeight), Rect(offsetX, offsetY, offsetX + cropWidth, offsetY + cropHeight), paint)
-//
-//        return croppedBitmap
-//    }
-
     private fun getBytesFromImageView(imageView: ImageView): ByteArray? {
         val drawable = imageView.drawable ?: return null
         val bitmap = (drawable as? BitmapDrawable)?.bitmap ?: return null
 
-        val croppedBitmap = Bitmap.createScaledBitmap(bitmap, 1200, 1200, false)
-//        val croppedBitmap = cropImage(bitmap, binding.image.width, binding.image.height)
+        val croppedBitmap = Bitmap.createScaledBitmap(bitmap, 1000, 1000, false)
 
         val outputStream = ByteArrayOutputStream()
         croppedBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)

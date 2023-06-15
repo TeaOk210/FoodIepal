@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Filter"
-    android:background="@color/black">
+    android:background="@color/black"
+    tools:context=".Filter">
 
     <TextView
         android:id="@+id/KkalFilter"
@@ -39,14 +39,14 @@
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/textView5"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:text=""
         android:textColor="@color/white"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="24sp"
-        android:text=""
-        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <TextView
@@ -70,10 +70,10 @@
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/textView6"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="24sp"
-        android:text=""
         android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textSize="24sp"
         tools:ignore="LabelFor" />
 
     <TextView
@@ -136,14 +136,14 @@
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/textView10"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:text=""
         android:textColor="@color/white"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="24sp"
-        android:text=""
-        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <TextView
@@ -167,10 +167,10 @@
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/textView9"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="24sp"
-        android:text=""
         android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textSize="24sp"
         tools:ignore="LabelFor" />
 
     <TextView
@@ -194,14 +194,14 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:text=""
         android:textColor="@color/white"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="24sp"
-        android:text=""
-        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <EditText
@@ -213,14 +213,14 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:text=""
         android:textColor="@color/white"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="24sp"
-        android:text=""
-        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <EditText
@@ -232,6 +232,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:text=""
         android:textColor="@color/white"
@@ -239,7 +240,6 @@
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="24sp"
-        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
 </RelativeLayout>

@@ -46,7 +46,7 @@ class FullScreen : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    private fun getData(){
+    private fun getData() {
         name = intent.getStringExtra("name").toString()
         text = intent.getStringExtra("text").toString()
         items = intent.getStringExtra("items").toString()
@@ -71,7 +71,7 @@ class FullScreen : AppCompatActivity() {
 
         val toolbarTitle = binding.toolbarTitle
         toolbarTitle!!.text = name
-        toolbarTitle .isSelected = true
+        toolbarTitle.isSelected = true
 
 
         supportActionBar?.apply {
@@ -84,7 +84,7 @@ class FullScreen : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.custom_toolbar, menu)
         val item = menu?.findItem(R.id.addToFavorite)
-        if (checkFavorite()){
+        if (checkFavorite()) {
             item?.setIcon(R.drawable.baseline_star_24)
         } else {
             item?.setIcon(R.drawable.baseline_star_border_24)
@@ -99,6 +99,7 @@ class FullScreen : AppCompatActivity() {
                 finish()
                 return true
             }
+
             R.id.addToFavorite -> {
                 if (checkFavorite()) {
                     item.setIcon(R.drawable.baseline_star_border_24)
@@ -106,12 +107,23 @@ class FullScreen : AppCompatActivity() {
                     Toast.makeText(this, "Удалено из избранного", Toast.LENGTH_SHORT).show()
                 } else {
                     item.setIcon(R.drawable.baseline_star_24)
-                    dbManager.insertFavorite(name, text, items, Kkal, time, image, login, preparation, "insert")
+                    dbManager.insertFavorite(
+                        name,
+                        text,
+                        items,
+                        Kkal,
+                        time,
+                        image,
+                        login,
+                        preparation,
+                        "insert"
+                    )
                     Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
                 }
 
                 return true
             }
+
             else -> return super.onOptionsItemSelected(item)
         }
     }

@@ -8,14 +8,23 @@ import com.example.FoodIepal.Fragments.FragmentFavorite
 import com.example.FoodIepal.Fragments.FragmentHome
 
 class MyPagerAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
-    override fun getItemCount() = 3
+    private val fragmentList = arrayListOf<Fragment>()
 
-    override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> FragmentHome.newInstance()
-            1 -> FragmentBascet.newInstance()
-            2 -> FragmentFavorite.newInstance()
-            else -> FragmentHome.newInstance()
+    init {
+        fragmentList.add(FragmentHome.newInstance())
+        fragmentList.add(FragmentBascet.newInstance())
+        fragmentList.add(FragmentFavorite.newInstance())
+    }
+
+    override fun getItemCount(): Int = fragmentList.size
+
+    override fun createFragment(position: Int): Fragment = fragmentList[position]
+
+    fun getFragment(position: Int): Fragment? {
+        return if (position in 0 until fragmentList.size) {
+            fragmentList[position]
+        } else {
+            null
         }
     }
 }

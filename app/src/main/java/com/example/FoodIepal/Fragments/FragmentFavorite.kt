@@ -26,6 +26,7 @@ class FragmentFavorite : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
     private lateinit var dbManager: DBManager
     private val dataModel: DataModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +35,22 @@ class FragmentFavorite : Fragment() {
         dbManager.open()
 
         sessionManager = SessionManager(requireContext())
+
+        dataModel.desk.observe(viewLifecycleOwner) {
+            val name = dataModel.name.value.toString()
+            val prep = dataModel.prep.value.toString()
+            val Kkal = dataModel.Kkal.value!!
+            val time = dataModel.time.value!!
+            val image = dataModel.image.value!!
+            val items = dataModel.setItems.value.toString()
+            val desk = dataModel.desk.value.toString()
+            val login = sessionManager.getUserName()
+            val method = "insert"
+
+            dbManager.insertFavorite(name, prep, items, Kkal, time, image, login, desk, method)
+
+            populateList()
+        }
 
         binding = FragmentFavoriteBinding.inflate(inflater)
 
@@ -54,9 +71,10 @@ class FragmentFavorite : Fragment() {
 
     @SuppressLint("Range", "NotifyDataSetChanged")
     fun populateList() {
+
         RecipeItemList.clear()
 
-        val login= sessionManager.getUserName()
+        val login = sessionManager.getUserName()
 
         val cursorFV = dbManager.fetchFavorite(login)
 
@@ -65,10 +83,12 @@ class FragmentFavorite : Fragment() {
                 val name = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Recipe_NAme))
                 val text = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Description))
                 val items = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Recipe_Items))
-                val preparation = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Preparation))
+                val preparation =
+                    cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Preparation))
                 val time = cursorFV.getInt(cursorFV.getColumnIndex(DataBaseHalper.Cook_time))
                 val kkal = cursorFV.getInt(cursorFV.getColumnIndex(DataBaseHalper.Calories))
-                val bytesImage = cursorFV.getBlob(cursorFV.getColumnIndex(DataBaseHalper.Image_parh))
+                val bytesImage =
+                    cursorFV.getBlob(cursorFV.getColumnIndex(DataBaseHalper.Image_parh))
 
                 val recipeItem = RecipeItem(
                     name = name,
@@ -89,21 +109,24 @@ class FragmentFavorite : Fragment() {
     }
 
     private fun setUpAdapter() {
-        adapter = RecipeAdapter(requireActivity(), RecipeItemList, object : RecipeAdapter.OnItemClickListener{
-            override fun onItemClick(data: RecipeItem){
-                val intent = Intent(requireContext(), FullScreen::class.java)
+        adapter = RecipeAdapter(
+            requireActivity(),
+            RecipeItemList,
+            object : RecipeAdapter.OnItemClickListener {
+                override fun onItemClick(data: RecipeItem) {
+                    val intent = Intent(requireContext(), FullScreen::class.java)
 
-                intent.putExtra("Kkal", data.Kkal)
-                intent.putExtra("time", data.time)
-                intent.putExtra("name", data.name)
-                intent.putExtra("text", data.text)
-                intent.putExtra("image", data.RecipeImage)
-                intent.putExtra("items", data.recipeItems)
-                intent.putExtra("preparation", data.Preparation)
+                    intent.putExtra("Kkal", data.Kkal)
+                    intent.putExtra("time", data.time)
+                    intent.putExtra("name", data.name)
+                    intent.putExtra("text", data.text)
+                    intent.putExtra("image", data.RecipeImage)
+                    intent.putExtra("items", data.recipeItems)
+                    intent.putExtra("preparation", data.Preparation)
 
-                startActivityForResult(intent, 1)
-            }
-        })
+                    startActivityForResult(intent, 1)
+                }
+            })
         binding.FavoriteList.adapter = adapter
         binding.FavoriteList.layoutManager = LinearLayoutManager(requireActivity())
     }

@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.FoodIepal.databinding.RecipeItemLayoutBinding
 
 @SuppressLint("NotifyDataSetChanged")
-class RecipeAdapter(private val context: Context, private var recipeItemList:ArrayList<RecipeItem>, private val listener: OnItemClickListener)
-    : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+class RecipeAdapter(
+    private val context: Context,
+    private var recipeItemList: ArrayList<RecipeItem>,
+    private val listener: OnItemClickListener
+) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
-        val binding = RecipeItemLayoutBinding.inflate(LayoutInflater.from(context),parent,false)
+        val binding = RecipeItemLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
         return RecipeViewHolder(binding)
     }
 
@@ -21,7 +24,7 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
         val RecipeItem = recipeItemList[position]
         holder.bind(RecipeItem)
 
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             listener.onItemClick(RecipeItem)
         }
     }
@@ -35,8 +38,8 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
         return recipeItemList.size
     }
 
-    class RecipeViewHolder(private val binding: RecipeItemLayoutBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+    class RecipeViewHolder(private val binding: RecipeItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(RecipeItem: RecipeItem) {
             binding.RecipeName.text = RecipeItem.name
@@ -46,7 +49,11 @@ class RecipeAdapter(private val context: Context, private var recipeItemList:Arr
             binding.RecipeTime.text = RecipeItem.time.toString()
             binding.RecipeKkal.text = RecipeItem.Kkal.toString()
 
-            val bitmap = BitmapFactory.decodeByteArray(RecipeItem.RecipeImage, 0, RecipeItem.RecipeImage.size)
+            val bitmap = BitmapFactory.decodeByteArray(
+                RecipeItem.RecipeImage,
+                0,
+                RecipeItem.RecipeImage.size
+            )
             binding.RecipePhoto.setImageBitmap(bitmap)
         }
     }

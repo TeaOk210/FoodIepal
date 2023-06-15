@@ -1,7 +1,15 @@
 package com.example.FoodIepal.Utils
 
 
-data class RecipeItem(var name: String, var text: String, var time: Int, var Kkal: Int, var RecipeImage: ByteArray, var recipeItems: String, var Preparation: String) {
+data class RecipeItem(
+    var name: String,
+    var text: String,
+    var time: Int,
+    var Kkal: Int,
+    var RecipeImage: ByteArray,
+    var recipeItems: String,
+    var Preparation: String
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

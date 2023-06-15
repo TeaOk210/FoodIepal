@@ -29,7 +29,7 @@ class ItemAdd : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    fun onClickExit(view: View){
+    fun onClickExit(view: View) {
         finish()
     }
 
@@ -41,7 +41,7 @@ class ItemAdd : AppCompatActivity() {
         if (name.isNotEmpty() && dose.isNotEmpty()) {
             dbManager.insertBasket(name, dose, login)
             finish()
-        } else{
+        } else {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
         }
     }

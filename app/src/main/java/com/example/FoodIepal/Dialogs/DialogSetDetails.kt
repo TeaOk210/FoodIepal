@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.DialogSendkkalLayoutBinding
 
-class DialogSetDetails: DialogFragment() {
+class DialogSetDetails : DialogFragment() {
     private lateinit var binding: DialogSendkkalLayoutBinding
     private val dataModel: DataModel by activityViewModels()
 
@@ -28,7 +28,7 @@ class DialogSetDetails: DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(1100,900)
+        dialog?.window?.setLayout(1100, 900)
     }
 
     private fun onClick() {

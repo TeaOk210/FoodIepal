@@ -3,7 +3,7 @@ package com.example.FoodIepal.Utils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-open class DataModel: ViewModel() {
+open class DataModel : ViewModel() {
     val minKk: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>()
     }
@@ -35,6 +35,9 @@ open class DataModel: ViewModel() {
         MutableLiveData<ByteArray>()
     }
     val setItems: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val desk: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 }
