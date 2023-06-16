@@ -39,8 +39,10 @@ class DialogSetDetails : DialogFragment() {
             if (binding.textKkal.text.isNotEmpty() && binding.textTime.text.isNotEmpty()) {
                 dismiss()
 
-                dataModel.Kkal.value = binding.textKkal.text.toString().toInt()
-                dataModel.time.value = binding.textTime.text.toString().toInt()
+                dataModel.apply {
+                    Kkal.value = binding.textKkal.text.toString().toInt()
+                    time.value = binding.textTime.text.toString().toInt()
+                }
 
                 DialogSetPhoto.newInstance().show(parentFragmentManager, "")
             } else {

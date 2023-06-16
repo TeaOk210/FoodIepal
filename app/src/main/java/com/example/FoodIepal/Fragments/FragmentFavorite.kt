@@ -37,6 +37,7 @@ class FragmentFavorite : Fragment() {
         sessionManager = SessionManager(requireContext())
 
         dataModel.desk.observe(viewLifecycleOwner) {
+
             val name = dataModel.name.value.toString()
             val prep = dataModel.prep.value.toString()
             val Kkal = dataModel.Kkal.value!!

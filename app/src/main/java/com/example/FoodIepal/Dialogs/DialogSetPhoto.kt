@@ -21,9 +21,7 @@ class DialogSetPhoto : DialogFragment() {
     private val dataModel: DataModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DialogSendimageLayoutBinding.inflate(inflater)
 
@@ -36,7 +34,7 @@ class DialogSetPhoto : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(1100,1000)
+        dialog?.window?.setLayout(1100, 1000)
     }
 
     private fun onClick() {
@@ -69,13 +67,25 @@ class DialogSetPhoto : DialogFragment() {
         val drawable = imageView.drawable ?: return null
         val bitmap = (drawable as? BitmapDrawable)?.bitmap ?: return null
 
-        val croppedBitmap = Bitmap.createScaledBitmap(bitmap, 1000, 1000, false)
-
         val outputStream = ByteArrayOutputStream()
-        croppedBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+
+        val maxSizeBytes = 1024 * 1024
+        val quality = 100
+
+        val scaledBitmap = if (bitmap.byteCount > maxSizeBytes) {
+            val scale = kotlin.math.sqrt(maxSizeBytes.toDouble() / bitmap.byteCount.toDouble()).toFloat()
+            val scaledWidth = (bitmap.width * scale).toInt()
+            val scaledHeight = (bitmap.height * scale).toInt()
+            Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, false)
+        } else {
+            bitmap
+        }
+
+        scaledBitmap.compress(Bitmap.CompressFormat.PNG, quality, outputStream)
 
         return outputStream.toByteArray()
     }
+
 
     companion object {
         fun newInstance(): DialogSetPhoto = DialogSetPhoto()

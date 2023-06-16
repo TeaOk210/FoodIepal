@@ -342,7 +342,7 @@ class DataBaseHalper(Context: Context) : SQLiteOpenHelper(Context, DB_NAME, null
 
 
         const val DB_NAME = "FoodIepal.db"
-        const val DB_VERSION = 37
+        const val DB_VERSION = 38
 
         const val CREATE_TABLE =
             "CREATE TABLE $Table_Name ($_ID INTEGER PRIMARY KEY AUTOINCREMENT, $Login TEXT, $Password TEXT);"
