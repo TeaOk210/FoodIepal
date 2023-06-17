@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataModel
-import com.example.FoodIepal.Utils.SessionManager
+import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.databinding.DialogSenddeskLayoutBinding
 
 class DialogSetDesk : DialogFragment() {

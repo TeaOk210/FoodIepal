@@ -1,4 +1,4 @@
-package com.example.FoodIepal.Utils
+package com.example.FoodIepal.VIew
 
 import android.annotation.SuppressLint
 import android.content.Context

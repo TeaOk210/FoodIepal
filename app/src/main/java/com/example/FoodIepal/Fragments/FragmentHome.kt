@@ -10,9 +10,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.FoodIepal.FullScreen
+import com.example.FoodIepal.Activities.FullScreen
 import com.example.FoodIepal.R
+import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.Utils.*
+import com.example.FoodIepal.VIew.RecipeAdapter
+import com.example.FoodIepal.VIew.RecipeItem
 import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
 import java.io.ByteArrayOutputStream
 

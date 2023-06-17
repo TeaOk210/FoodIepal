@@ -1,4 +1,4 @@
-package com.example.FoodIepal
+package com.example.FoodIepal.Activities
 
 import android.app.Activity
 import android.content.Intent
@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.FoodIepal.Fragments.FragmentRegistr
-import com.example.FoodIepal.Utils.SessionManager
+import com.example.FoodIepal.R
+import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.FoodIepal.Utils
+package com.example.FoodIepal
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBaseHalper
-import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.FragmentRegistrBinding
 
 class FragmentRegistr : Fragment() {

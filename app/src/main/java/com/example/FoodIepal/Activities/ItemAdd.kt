@@ -1,26 +1,22 @@
-package com.example.FoodIepal
+package com.example.FoodIepal.Activities
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.Utils.DBManager
-import com.example.FoodIepal.Utils.MyPagerAdapter
-import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.ActivityItemAddBinding
 
 class ItemAdd : AppCompatActivity() {
     lateinit var binding: ActivityItemAddBinding
     private lateinit var dbManager: DBManager
     private lateinit var sessionManager: SessionManager
-    private lateinit var adapter: MyPagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         dbManager = DBManager(this)
         dbManager.open()
-
-        adapter = MyPagerAdapter(this)
 
         binding = ActivityItemAddBinding.inflate(layoutInflater)
 
@@ -39,7 +35,7 @@ class ItemAdd : AppCompatActivity() {
         val login = sessionManager.getUserName()
 
         if (name.isNotEmpty() && dose.isNotEmpty()) {
-            dbManager.insertBasket(name, dose, login)
+
             finish()
         } else {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()

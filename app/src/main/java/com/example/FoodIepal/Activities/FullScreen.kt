@@ -1,4 +1,4 @@
-package com.example.FoodIepal
+package com.example.FoodIepal.Activities
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
@@ -8,9 +8,10 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import com.example.FoodIepal.R
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBaseHalper
-import com.example.FoodIepal.Utils.SessionManager
+import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.databinding.ActivityFullScreenBinding
 import kotlin.properties.Delegates
 

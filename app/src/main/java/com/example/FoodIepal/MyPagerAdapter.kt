@@ -1,4 +1,4 @@
-package com.example.FoodIepal.Utils
+package com.example.FoodIepal
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

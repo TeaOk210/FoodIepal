@@ -9,14 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.FoodIepal.FullScreen
+import com.example.FoodIepal.Activities.FullScreen
 import com.example.FoodIepal.R
+import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBaseHalper
 import com.example.FoodIepal.Utils.DataModel
-import com.example.FoodIepal.Utils.RecipeAdapter
-import com.example.FoodIepal.Utils.RecipeItem
-import com.example.FoodIepal.Utils.SessionManager
+import com.example.FoodIepal.VIew.RecipeAdapter
+import com.example.FoodIepal.VIew.RecipeItem
 import com.example.FoodIepal.databinding.FragmentFavoriteBinding
 
 class FragmentFavorite : Fragment() {

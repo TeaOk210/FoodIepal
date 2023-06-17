@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:backgroundTint="#000000"
-    tools:context="com.example.FoodIepal.SignIn">
+    tools:context="com.example.FoodIepal.Activities.SignIn">
 
     <TextView
         android:id="@+id/textView4"

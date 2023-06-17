@@ -1,4 +1,4 @@
-package com.example.FoodIepal
+package com.example.FoodIepal.Activities
 
 import android.app.Activity
 import android.content.Intent
@@ -11,9 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.FoodIepal.Dialogs.DialogSetName
 import com.example.FoodIepal.Fragments.*
+import com.example.FoodIepal.MyPagerAdapter
+import com.example.FoodIepal.R
+import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.Utils.DataModel
-import com.example.FoodIepal.Utils.MyPagerAdapter
-import com.example.FoodIepal.Utils.SessionManager
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 
 @Suppress("DEPRECATION")

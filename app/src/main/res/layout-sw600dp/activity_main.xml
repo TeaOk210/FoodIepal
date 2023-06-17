@@ -7,7 +7,7 @@
     android:background="#000000"
     android:backgroundTint="#000000"
     android:theme="@style/Theme.AppCompat.NoActionBar"
-    tools:context="com.example.FoodIepal.MainActivity">
+    tools:context="com.example.FoodIepal.Activities.MainActivity">
 
     <FrameLayout
         android:id="@+id/Registr"

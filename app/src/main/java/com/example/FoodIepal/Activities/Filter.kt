@@ -1,4 +1,4 @@
-package com.example.FoodIepal
+package com.example.FoodIepal.Activities
 
 import android.app.Activity
 import android.os.Bundle
