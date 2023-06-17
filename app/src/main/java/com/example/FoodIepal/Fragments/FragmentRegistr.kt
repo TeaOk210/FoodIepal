@@ -7,20 +7,33 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.example.FoodIepal.Entities.User
 import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.Utils.DBManager
+import com.example.FoodIepal.Utils.DataBase
 import com.example.FoodIepal.Utils.DataBaseHalper
+import com.example.FoodIepal.Utils.UserDao
 import com.example.FoodIepal.databinding.FragmentRegistrBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FragmentRegistr : Fragment() {
     lateinit var binding: FragmentRegistrBinding
     private lateinit var dbManager: DBManager
     private lateinit var sessionManager: SessionManager
+    private lateinit var db: DataBase
+    private lateinit var dao: UserDao
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegistrBinding.inflate(inflater)
+
+        db = DataBase.getDatabase(requireContext())
+        dao = db.getUserDao()
 
         dbManager = DBManager(requireActivity())
         dbManager.open()
@@ -74,7 +87,11 @@ class FragmentRegistr : Fragment() {
         sessionManager.setLogin(true)
         sessionManager.setUserName(login)
 
-        dbManager.insertReg(login, password)
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                dao.insertUser(User(login, password))
+            }
+        }
     }
 }
 

@@ -18,13 +18,12 @@ import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 
 @Suppress("DEPRECATION")
-class MainMenu : AppCompatActivity(){
+class MainMenu : AppCompatActivity() {
     lateinit var binding: ActivityMainMenuBinding
     private val dataModel: DataModel by viewModels()
     private lateinit var sessionManager: SessionManager
     private lateinit var viewPager: ViewPager2
     private lateinit var adapter: MyPagerAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

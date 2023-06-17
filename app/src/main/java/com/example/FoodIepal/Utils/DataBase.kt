@@ -4,27 +4,28 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.FoodIepal.Entities.Bascet
-import com.example.FoodIepal.Entities.Person
+import com.example.FoodIepal.Entities.Basket
 import com.example.FoodIepal.Entities.Recipe
+import com.example.FoodIepal.Entities.User
 
 @Database(
-    version = 1,
+    version = 4,
     entities = [
-        Person::class,
-        Bascet::class,
+        User::class,
+        Basket::class,
         Recipe::class
     ]
 )
 abstract class DataBase : RoomDatabase() {
 
     abstract fun getBascetDao(): BascetDao
+    abstract fun getUserDao(): UserDao
 
     companion object {
         @Volatile
         private var INSTANCE: DataBase? = null
 
-        private const val DB_NAME = "recipe_database.db"
+        private const val DB_NAME = "recipesDatabase.db"
 
         fun getDatabase(context: Context): DataBase {
             return INSTANCE ?: synchronized(this) {
@@ -32,7 +33,8 @@ abstract class DataBase : RoomDatabase() {
                     context.applicationContext,
                     DataBase::class.java,
                     DB_NAME
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

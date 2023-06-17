@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
     indices = [Index("username")],
     foreignKeys = [
         ForeignKey(
-            entity = Person::class,
+            entity = User::class,
             parentColumns = ["username"],
             childColumns = ["username"]
         )

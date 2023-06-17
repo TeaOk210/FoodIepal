@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.FoodIepal.Entities.Bascet
+import com.example.FoodIepal.Entities.Basket
 import com.example.FoodIepal.Utils.BascetRepository
 import com.example.FoodIepal.Utils.DataBase
 import kotlinx.coroutines.Dispatchers
@@ -14,8 +14,8 @@ class BascetViewModel(
     application: Application
 ): AndroidViewModel (application) {
 
-    val allBascet: LiveData<List<Bascet>>
-    val repository: BascetRepository
+    val allBascet: LiveData<List<Basket>>
+    private val repository: BascetRepository
 
     init {
         val dao = DataBase.getDatabase(application).getBascetDao()
@@ -23,7 +23,7 @@ class BascetViewModel(
         allBascet = repository.getAllBascet()
     }
 
-    fun insertBascet(bascet: Bascet) =
+    fun insertBascet(bascet: Basket) =
         viewModelScope.launch(Dispatchers.IO) { repository.insertBascet(bascet) }
 
     fun deleteBascet(name: String) =

@@ -9,7 +9,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.FoodIepal.Entities.Bascet
+import com.example.FoodIepal.Entities.Basket
 import com.example.FoodIepal.R
 import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.Utils.*
@@ -38,13 +38,14 @@ class FragmentBascet : Fragment(), BascetAdapter.OnDeleteListener {
         )[BascetViewModel::class.java]
 
         adapter = BascetAdapter(this)
+
         observeEvents()
         getToolbar()
 
         return binding.root
     }
 
-    private fun getToolbar(){
+    private fun getToolbar() {
         binding.toolbar3.apply {
             title = "Корзина"
             subtitle = sessionManager.getUserName()
@@ -52,33 +53,13 @@ class FragmentBascet : Fragment(), BascetAdapter.OnDeleteListener {
         }
     }
 
-//    @SuppressLint("Range", "NotifyDataSetChanged")
-//    fun populateList(){
-//        ItemList.clear()
-//        val cursor = dbManager.fetchBasket(sessionManager.getUserName())
-//        if (cursor.moveToFirst()){
-//            do {
-//                val name = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Item_name))
-//                val dose = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Item_Dose))
-//
-//                val basketItem = ItemItem(
-//                    ItemName = name,
-//                    ItemDose = dose
-//                )
-//                ItemList.add(basketItem)
-//            } while (cursor.moveToNext())
-//        }
-//        adapter.notifyDataSetChanged()
-//        cursor.close()
-//    }
-
     private fun observeEvents() {
         viewModel.allBascet.observe(viewLifecycleOwner) {
             adapter.updateList(it)
         }
     }
 
-    override fun onDelete(data: Bascet) {
+    override fun onDelete(data: Basket) {
         Toast.makeText(requireContext(), "Удалено!", Toast.LENGTH_SHORT).show()
         viewModel.deleteBascet(data.name)
     }
