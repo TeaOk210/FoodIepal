@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.Entities.Basket
 import com.example.FoodIepal.R
 import com.example.FoodIepal.SessionManager
@@ -34,6 +35,7 @@ class FragmentBascet : Fragment(), BascetAdapter.OnDeleteListener {
         adapter = BascetAdapter(this)
 
         binding.Bascet.adapter = adapter
+        binding.Bascet.layoutManager = LinearLayoutManager(requireActivity())
 
         observeEvents()
         getToolbar()
