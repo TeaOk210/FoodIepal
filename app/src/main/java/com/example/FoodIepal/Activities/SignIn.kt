@@ -6,23 +6,15 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.FoodIepal.Fragments.FragmentLogin
 import com.example.FoodIepal.R
-import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.databinding.ActivitySignInBinding
 
 class SignIn : AppCompatActivity() {
     lateinit var binding: ActivitySignInBinding
-    private lateinit var dbManager: DBManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySignInBinding.inflate(layoutInflater)
-
-        dbManager = DBManager(this)
-
         setContentView(binding.root)
-
-        dbManager.open()
-
 
         supportFragmentManager
             .beginTransaction()
@@ -41,6 +33,5 @@ class SignIn : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
-
 }
  

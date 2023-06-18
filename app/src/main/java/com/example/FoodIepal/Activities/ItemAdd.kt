@@ -34,10 +34,10 @@ class ItemAdd : AppCompatActivity() {
     fun onAddListener(view: View) {
         val name = binding.NameInput.text.toString()
         val dose = binding.DoseInput.text.toString()
-//        val login = sessionManager.getUserName()
+        val login = sessionManager.getUserName()
 
         if (name.isNotEmpty() && dose.isNotEmpty()) {
-            viewModel.insertBascet(Basket(name, dose))
+            viewModel.insertBascet(Basket(name, dose, login))
             finish()
         } else {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()

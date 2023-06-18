@@ -13,8 +13,8 @@ interface BasketDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertBasket(item: Basket)
 
-    @Query("SELECT * FROM Basket")
-    fun getAllBasket(): LiveData<List<Basket>>
+    @Query("SELECT * FROM Basket WHERE username = :username")
+    fun getAllBasket(username: String): LiveData<List<Basket>>
 
     @Query("DELETE FROM Basket WHERE name = :name")
     suspend fun deleteBasket(name: String)

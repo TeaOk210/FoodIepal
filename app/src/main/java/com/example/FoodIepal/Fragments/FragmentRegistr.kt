@@ -7,18 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.example.FoodIepal.Entities.User
 import com.example.FoodIepal.SessionManager
-import com.example.FoodIepal.Utils.DBManager
 import com.example.FoodIepal.Utils.DataBase
-import com.example.FoodIepal.Utils.DataBaseHalper
+import com.example.FoodIepal.Utils.UserRepository
 import com.example.FoodIepal.databinding.FragmentRegistrBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FragmentRegistr : Fragment() {
     lateinit var binding: FragmentRegistrBinding
-    private lateinit var dbManager: DBManager
     private lateinit var sessionManager: SessionManager
     private lateinit var db: DataBase
-//    private lateinit var dao:
+    private lateinit var repository: UserRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,11 +29,8 @@ class FragmentRegistr : Fragment() {
     ): View {
         binding = FragmentRegistrBinding.inflate(inflater)
 
-//        db = DataBase.getDatabase(requireContext())
-//        dao = db.getUserDao()
-
-        dbManager = DBManager(requireActivity())
-        dbManager.open()
+        db = DataBase.getDatabase(requireContext())
+        repository = UserRepository(db.getUserDao())
 
         sessionManager = SessionManager(requireContext())
 
@@ -56,36 +56,34 @@ class FragmentRegistr : Fragment() {
             Toast.makeText(activity, "Пароли не совпадают!", Toast.LENGTH_SHORT).show()
             return false
         }
-
-        val cursor = dbManager.fetchReg()
-        if (cursor.moveToFirst()) {
-            do {
-                val dbLogin = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Login))
-                if (dbLogin == login) {
-                    Toast.makeText(activity, "Пользователь с таким логином уже зарегистрирован", Toast.LENGTH_SHORT).show()
-                    return false
+        lifecycleScope.launch(Dispatchers.IO) {
+            val result = repository.checkUserName(login)
+            withContext(Dispatchers.Main) {
+                if (result) {
+                    Toast.makeText(
+                        activity,
+                        "Пользователь с таким логином уже зарегистрирован",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    registr(login, password)
+                    activity?.finish()
                 }
-            } while (cursor.moveToNext())
+            }
         }
-
         return true
     }
 
 
-
-
-    fun registr() {
-        val login = binding.LogTxt.text.toString()
-        val password = binding.passTXT.text.toString()
-
+    fun registr(login: String, password: String) {
         sessionManager.setLogin(true)
         sessionManager.setUserName(login)
 
-//        lifecycleScope.launch {
-//            withContext(Dispatchers.IO) {
-//                dao.insertUser(User(login, password))
-//            }
-//        }
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                repository.insertUser(User(null, login, password))
+            }
+        }
     }
 }
 

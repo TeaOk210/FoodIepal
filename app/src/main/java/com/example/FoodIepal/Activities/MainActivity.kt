@@ -31,11 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding.Up.setOnClickListener() {
             registrationFragment =
                 supportFragmentManager.findFragmentById(R.id.Registr) as FragmentRegistr
-            if (registrationFragment.checkRegistrationFields()) {
-                registrationFragment.registr()
-                setResult(Activity.RESULT_OK)
-                finish()
-            }
+            registrationFragment.checkRegistrationFields()
         }
     }
 

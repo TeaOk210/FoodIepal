@@ -8,7 +8,7 @@ class BasketRepository(
 ) {
     suspend fun insertBasket(item: Basket) = dao.insertBasket(item)
 
-    fun getAllbasket(): LiveData<List<Basket>> = dao.getAllBasket()
+    fun getAllbasket(user: String): LiveData<List<Basket>> = dao.getAllBasket(user)
 
     suspend fun deleteBasket(name: String) = dao.deleteBasket(name)
 }

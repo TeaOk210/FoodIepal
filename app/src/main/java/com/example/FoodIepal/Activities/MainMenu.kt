@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.FoodIepal.Dialogs.DialogSetName
 import com.example.FoodIepal.Fragments.*
-import com.example.FoodIepal.MyPagerAdapter
+import com.example.FoodIepal.VIew.MyPagerAdapter
 import com.example.FoodIepal.R
 import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.Utils.DataModel
@@ -38,10 +38,10 @@ class MainMenu : AppCompatActivity() {
 
         viewPager = binding.PagerView
         viewPager.adapter = MyPagerAdapter(this)
+
         adapter = MyPagerAdapter(this)
 
         viewPager.currentItem = 0
-
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 val menuItem = when (position) {
@@ -55,7 +55,6 @@ class MainMenu : AppCompatActivity() {
                 }
             }
         })
-
         binding.BottomMenu.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.Homebtn -> {
@@ -72,7 +71,6 @@ class MainMenu : AppCompatActivity() {
                     viewPager.currentItem = 2
                     true
                 }
-
                 else -> false
             }
         }
@@ -111,7 +109,6 @@ class MainMenu : AppCompatActivity() {
                 val maxKk = data?.getIntExtra("maxKk", 0) ?: Int.MAX_VALUE
                 val timeMax = data?.getIntExtra("timeMax", 0) ?: Int.MAX_VALUE
                 val items = data?.getStringArrayListExtra("items")
-
                 dataModel.minKk.value = minKk
                 dataModel.maxKk.value = maxKk
                 dataModel.minTt.value = timeMin
