@@ -1,9 +1,6 @@
-@file:Suppress("UNREACHABLE_CODE")
-
 package com.example.FoodIepal.Fragments
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -32,12 +29,11 @@ class FragmentBascet : Fragment(), BascetAdapter.OnDeleteListener {
 
         sessionManager = SessionManager(requireContext())
 
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
-        )[BascetViewModel::class.java]
+        viewModel = ViewModelProvider(this)[BascetViewModel::class.java]
 
         adapter = BascetAdapter(this)
+
+        binding.Bascet.adapter = adapter
 
         observeEvents()
         getToolbar()
@@ -53,9 +49,13 @@ class FragmentBascet : Fragment(), BascetAdapter.OnDeleteListener {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun observeEvents() {
-        viewModel.allBascet.observe(viewLifecycleOwner) {
-            adapter.updateList(it)
+        viewModel.allBascet.observe(viewLifecycleOwner) { list ->
+            list?.let {
+                adapter.updateList(it as ArrayList<Basket>)
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 

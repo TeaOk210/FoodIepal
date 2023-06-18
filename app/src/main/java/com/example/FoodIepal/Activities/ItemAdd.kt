@@ -4,24 +4,21 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import com.example.FoodIepal.Entities.Basket
 import com.example.FoodIepal.SessionManager
-import com.example.FoodIepal.Utils.DataBase
+import com.example.FoodIepal.VIew.BascetViewModel
 import com.example.FoodIepal.databinding.ActivityItemAddBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ItemAdd : AppCompatActivity() {
     lateinit var binding: ActivityItemAddBinding
     private lateinit var sessionManager: SessionManager
-    private lateinit var db: DataBase
+    private lateinit var viewModel: BascetViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        db = DataBase.getDatabase(this)
+        viewModel = ViewModelProvider(this)[BascetViewModel::class.java]
 
         binding = ActivityItemAddBinding.inflate(layoutInflater)
 
@@ -37,14 +34,10 @@ class ItemAdd : AppCompatActivity() {
     fun onAddListener(view: View) {
         val name = binding.NameInput.text.toString()
         val dose = binding.DoseInput.text.toString()
-        val login = sessionManager.getUserName()
+//        val login = sessionManager.getUserName()
 
         if (name.isNotEmpty() && dose.isNotEmpty()) {
-            lifecycleScope.launch {
-                withContext(Dispatchers.IO) {
-                    db.getBascetDao().insertBascet(Basket(name, dose, login))
-                }
-            }
+            viewModel.insertBascet(Basket(name, dose))
             finish()
         } else {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()

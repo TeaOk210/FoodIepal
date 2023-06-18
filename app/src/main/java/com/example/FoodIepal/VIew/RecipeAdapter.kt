@@ -29,8 +29,8 @@ class RecipeAdapter(
         }
     }
 
-    fun filter(filterList: ArrayList<RecipeItem>) {
-        recipeItemList = filterList
+    fun filter(filterList: List<RecipeItem>) {
+        recipeItemList = ArrayList(filterList)
         notifyDataSetChanged()
     }
 

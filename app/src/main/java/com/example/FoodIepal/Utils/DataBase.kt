@@ -5,27 +5,22 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.FoodIepal.Entities.Basket
-import com.example.FoodIepal.Entities.Recipe
-import com.example.FoodIepal.Entities.User
 
 @Database(
-    version = 4,
+    version = 2,
     entities = [
-        User::class,
-        Basket::class,
-        Recipe::class
+        Basket::class
     ]
 )
 abstract class DataBase : RoomDatabase() {
 
-    abstract fun getBascetDao(): BascetDao
-    abstract fun getUserDao(): UserDao
+    abstract fun getBascetDao(): BasketDao
 
     companion object {
         @Volatile
         private var INSTANCE: DataBase? = null
 
-        private const val DB_NAME = "recipesDatabase.db"
+        private const val DB_NAME = "recipesDataase_val2.db"
 
         fun getDatabase(context: Context): DataBase {
             return INSTANCE ?: synchronized(this) {

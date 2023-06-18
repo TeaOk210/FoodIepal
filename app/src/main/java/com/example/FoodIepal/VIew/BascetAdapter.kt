@@ -8,11 +8,12 @@ import com.example.FoodIepal.Entities.Basket
 import com.example.FoodIepal.databinding.ItemItemLayoutBinding
 
 
+@SuppressLint("NotifyDataSetChanged")
 class BascetAdapter(
     private val onDeleteListener: OnDeleteListener
 ) : RecyclerView.Adapter<BascetAdapter.BascetViewHolder>() {
 
-    private val allBascet = ArrayList<Basket>()
+    private var allBascet = ArrayList<Basket>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BascetViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,18 +25,15 @@ class BascetAdapter(
         return allBascet.size
     }
 
-    override fun onBindViewHolder(holder: BascetViewHolder, position: Int) {
-        val bascetItem = allBascet[position]
-        holder.bind(bascetItem)
+    fun updateList(newLIst: ArrayList<Basket>) {
+        allBascet = newLIst
+        notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newList: List<Basket>) {
-        allBascet.clear()
+    override fun onBindViewHolder(holder: BascetViewHolder, position: Int) {
+        val bascetItem = allBascet[position]
 
-        allBascet.addAll(newList)
-
-        notifyDataSetChanged()
+        holder.bind(bascetItem)
     }
 
     class BascetViewHolder(
@@ -43,11 +41,13 @@ class BascetAdapter(
         private val listener: OnDeleteListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Basket) {
-            binding.TextName.text = item.name
-            binding.TextDose.text = item.dose
+            binding.apply {
+                TextName.text = item.name
+                TextDose.text = item.dose
 
-            binding.deleteButton.setOnClickListener {
-                listener.onDelete(item)
+                deleteButton.setOnClickListener {
+                    listener.onDelete(item)
+                }
             }
         }
     }
