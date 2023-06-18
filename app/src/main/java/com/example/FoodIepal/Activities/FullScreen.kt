@@ -8,17 +8,23 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.FoodIepal.Entities.RecipeType
 import com.example.FoodIepal.R
-import com.example.FoodIepal.Utils.DBManager
-import com.example.FoodIepal.Utils.DataBaseHalper
 import com.example.FoodIepal.SessionManager
+import com.example.FoodIepal.Utils.DataBase
+import com.example.FoodIepal.Utils.RecipeRepository
 import com.example.FoodIepal.databinding.ActivityFullScreenBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.properties.Delegates
 
 class FullScreen : AppCompatActivity() {
     private lateinit var binding: ActivityFullScreenBinding
     private lateinit var sessionManager: SessionManager
-    private lateinit var dbManager: DBManager
+
+    private lateinit var repository: RecipeRepository
 
     private lateinit var name: String
     private lateinit var text: String
@@ -29,6 +35,7 @@ class FullScreen : AppCompatActivity() {
     private var time by Delegates.notNull<Int>()
     private var Kkal by Delegates.notNull<Int>()
     private var image by Delegates.notNull<ByteArray>()
+    private lateinit var type: RecipeType
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +43,9 @@ class FullScreen : AppCompatActivity() {
 
         sessionManager = SessionManager(this)
 
-        dbManager = DBManager(this)
+        repository = RecipeRepository(DataBase.getDatabase(application).getRecipeDao())
 
         binding = ActivityFullScreenBinding.inflate(layoutInflater)
-
-        dbManager.open()
 
         setSupportActionBar(binding.toolbar)
         getData()
@@ -48,32 +53,42 @@ class FullScreen : AppCompatActivity() {
     }
 
     private fun getData() {
-        name = intent.getStringExtra("name").toString()
-        text = intent.getStringExtra("text").toString()
-        items = intent.getStringExtra("items").toString()
-        preparation = intent.getStringExtra("preparation").toString()
+        intent.apply {
+            name = getStringExtra("name").toString()
+            text = getStringExtra("text").toString()
+            items = getStringExtra("items").toString()
+            preparation = getStringExtra("preparation").toString()
 
-        time = intent.getIntExtra("time", 0)
-        Kkal = intent.getIntExtra("Kkal", 0)
+            time = getIntExtra("time", 0)
+            Kkal = getIntExtra("Kkal", 0)
 
-        image = (intent.getByteArrayExtra("image") ?: byteArrayOf())
+            image = getByteArrayExtra("image") ?: byteArrayOf()
+        }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            val result = repository.getRecipeType(name, login)
+            withContext(Dispatchers.Main) {
+                type = result!!
+            }
+        }
 
         login = sessionManager.getUserName()
 
-        binding.KkalView.text = Kkal.toString()
-        binding.TimeView.text = time.toString()
-
-        binding.DeskView.text = preparation
-
-        binding.ItemsView.text = items
-
         val bitmap = BitmapFactory.decodeByteArray(image, 0, image.size)
-        binding.ImageView.setImageBitmap(bitmap)
 
-        val toolbarTitle = binding.toolbarTitle
-        toolbarTitle!!.text = name
-        toolbarTitle.isSelected = true
+        binding.apply {
+            KkalView.text = Kkal.toString()
+            TimeView.text = time.toString()
+            DeskView.text = preparation
+            ItemsView.text = items
 
+            ImageView.setImageBitmap(bitmap)
+
+            toolbarTitle.apply {
+                text = name
+                this!!.isSelected = true
+            }
+        }
 
         supportActionBar?.apply {
             displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
@@ -84,8 +99,9 @@ class FullScreen : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.custom_toolbar, menu)
+
         val item = menu?.findItem(R.id.addToFavorite)
-        if (checkFavorite()) {
+        if (checkFavorite(type)) {
             item?.setIcon(R.drawable.baseline_star_24)
         } else {
             item?.setIcon(R.drawable.baseline_star_border_24)
@@ -102,26 +118,29 @@ class FullScreen : AppCompatActivity() {
             }
 
             R.id.addToFavorite -> {
-                if (checkFavorite()) {
+                if (checkFavorite(type)) {
                     item.setIcon(R.drawable.baseline_star_border_24)
-                    dbManager.deleteRecipe(name)
+
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        repository.updateRecipeType(
+                            name,
+                            RecipeType.DEFAULT
+                        )
+                    }
+
                     Toast.makeText(this, "Удалено из избранного", Toast.LENGTH_SHORT).show()
                 } else {
                     item.setIcon(R.drawable.baseline_star_24)
-                    dbManager.insertFavorite(
-                        name,
-                        text,
-                        items,
-                        Kkal,
-                        time,
-                        image,
-                        login,
-                        preparation,
-                        "insert"
-                    )
+
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        repository.updateRecipeType(
+                            name,
+                            RecipeType.FAVORITE
+                        )
+                    }
+
                     Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
                 }
-
                 return true
             }
 
@@ -129,18 +148,7 @@ class FullScreen : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("Range")
-    private fun checkFavorite(): Boolean {
-        val cursor = dbManager.fetchFavorite(login)
-
-        if (cursor.moveToFirst()) {
-            do {
-                val recipeName = cursor.getString(cursor.getColumnIndex(DataBaseHalper.Recipe_NAme))
-                if (recipeName.equals(name, ignoreCase = true)) {
-                    return true
-                }
-            } while (cursor.moveToNext())
-        }
-        return false
+    private fun checkFavorite(type: RecipeType): Boolean {
+        return type == RecipeType.FAVORITE
     }
 }
