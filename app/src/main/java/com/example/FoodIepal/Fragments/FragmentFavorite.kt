@@ -27,8 +27,7 @@ class FragmentFavorite : Fragment(), RecipeAdapter.OnItemClickListener {
     private lateinit var viewModel: RecipeViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         sessionManager = SessionManager(requireContext())
 
@@ -45,8 +44,11 @@ class FragmentFavorite : Fragment(), RecipeAdapter.OnItemClickListener {
             val desk = dataModel.desk.value.toString()
             val login = sessionManager.getUserName()
 
-            viewModel.insertRecipe(Recipe(null, name, prep, desk, items, Kkal, time, image, RecipeType.CUSTOM, login))
-
+            viewModel.insertRecipe(
+                Recipe(
+                    null, name, prep, desk, items, Kkal, time, image, RecipeType.CUSTOM, login
+                )
+            )
         }
 
         binding = FragmentFavoriteBinding.inflate(inflater)
@@ -80,8 +82,8 @@ class FragmentFavorite : Fragment(), RecipeAdapter.OnItemClickListener {
         startActivityForResult(intent, 1)
     }
 
-    fun populateList() {
-        viewModel.allRecipes.observe(viewLifecycleOwner) { list ->
+    private fun populateList() {
+        viewModel.allFavoriteRecipes.observe(viewLifecycleOwner) { list ->
             list?.let {
                 adapter.filter(list as ArrayList<Recipe>)
             }

@@ -48,8 +48,6 @@ class DialogSetPhoto : DialogFragment() {
         binding.textView16.setOnClickListener {
             dismiss()
 
-            dataModel.image.value = getBytesFromImageView(image)
-
             DialogSetItems.newInstance().show(parentFragmentManager, "")
         }
     }
@@ -60,6 +58,7 @@ class DialogSetPhoto : DialogFragment() {
         if (requestCode == 1 && data != null) {
             val selectedPhotoURL = data.data
             image.setImageURI(selectedPhotoURL)
+            dataModel.image.value = getBytesFromImageView(image)
         }
     }
 

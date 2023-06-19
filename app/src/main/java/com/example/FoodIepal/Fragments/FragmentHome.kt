@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -55,6 +56,11 @@ class FragmentHome : Fragment(), RecipeAdapter.OnItemClickListener{
                     dataModel.maxTt.observe(viewLifecycleOwner) { maxTt ->
                         dataModel.items.observe(viewLifecycleOwner) { items ->
                             filter(IntRange(minKk, maxkK), IntRange(minTt, maxTt), items)
+                            Log.e("test", minKk.toString())
+                            Log.e("test", maxkK.toString())
+                            Log.e("test", minTt.toString())
+                            Log.e("test", maxTt.toString())
+                            Log.e("test", items.toString())
                         }
                     }
                 }
@@ -62,16 +68,16 @@ class FragmentHome : Fragment(), RecipeAdapter.OnItemClickListener{
         }
 
             binding.SearchEditText.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
 
-            override fun afterTextChanged(s: Editable?) {
-                search(s.toString())
-            }
-        })
+                override fun afterTextChanged(s: Editable?) {
+                    search(s.toString())
+                }
+            })
         return binding.root
     }
 
@@ -103,7 +109,6 @@ class FragmentHome : Fragment(), RecipeAdapter.OnItemClickListener{
                     recipe.cookTime in timeRange &&
                     (items.isEmpty() || items.all { recipe.recipeItems.contains(it) })
         }
-
         adapter.filter(filteredList as ArrayList<Recipe>?)
     }
 
@@ -119,7 +124,6 @@ class FragmentHome : Fragment(), RecipeAdapter.OnItemClickListener{
 
         adapter.filter((searchedList as ArrayList<Recipe>?)!!)
     }
-
 
     private fun setAdapter() {
         adapter = RecipeAdapter(this)

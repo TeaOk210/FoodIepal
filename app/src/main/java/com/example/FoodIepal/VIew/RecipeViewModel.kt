@@ -17,6 +17,7 @@ class RecipeViewModel(
 ): AndroidViewModel(application) {
 
     val allRecipes: LiveData<List<Recipe>>
+    val allFavoriteRecipes: LiveData<List<Recipe>>
     private val repository: RecipeRepository
     private val sessionManager: SessionManager
 
@@ -25,6 +26,7 @@ class RecipeViewModel(
         repository = RecipeRepository(dao)
         sessionManager = SessionManager(application)
         allRecipes = repository.getAllRecipes(sessionManager.getUserName())
+        allFavoriteRecipes = repository.getRecipesByType(RecipeType.FAVORITE, RecipeType.CUSTOM)
     }
 
     fun updateRecipeType(name: String, type: RecipeType) =

@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.example.FoodIepal.Utils.DBManager
-import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.SessionManager
+import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.databinding.DialogSenddeskLayoutBinding
 
 class DialogSetDesk : DialogFragment() {
     private lateinit var binding: DialogSenddeskLayoutBinding
-    private lateinit var dbManager: DBManager
     private lateinit var sessionManager: SessionManager
     private val dataModel: DataModel by activityViewModels()
 
@@ -23,13 +21,10 @@ class DialogSetDesk : DialogFragment() {
     ): View {
         binding = DialogSenddeskLayoutBinding.inflate(inflater)
 
-        dbManager = DBManager(requireContext())
-
         sessionManager = SessionManager(requireContext())
 
         onClick()
 
-        dbManager.open()
         return binding.root
     }
 

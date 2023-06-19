@@ -108,7 +108,8 @@ class MainMenu : AppCompatActivity() {
                 val timeMin = data?.getIntExtra("timeMin", 0) ?: 0
                 val maxKk = data?.getIntExtra("maxKk", 0) ?: Int.MAX_VALUE
                 val timeMax = data?.getIntExtra("timeMax", 0) ?: Int.MAX_VALUE
-                val items = data?.getStringArrayListExtra("items")
+                val items = data?.getStringArrayListExtra("items") ?: ArrayList()
+
                 dataModel.minKk.value = minKk
                 dataModel.maxKk.value = maxKk
                 dataModel.minTt.value = timeMin

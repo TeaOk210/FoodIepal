@@ -147,6 +147,6 @@ class FullScreen : AppCompatActivity() {
     }
 
     private fun checkFavorite(type: RecipeType): Boolean {
-        return type == RecipeType.FAVORITE
+        return type == RecipeType.FAVORITE || type == RecipeType.CUSTOM
     }
 }
