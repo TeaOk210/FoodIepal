@@ -82,6 +82,7 @@ class FragmentRegistr : Fragment() {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
                 repository.insertUser(User(null, login, password))
+                DataBase.insertDefaultRecipes(requireContext())
             }
         }
     }

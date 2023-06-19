@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.FoodIepal.Dialogs.DialogSetName
 import com.example.FoodIepal.Fragments.*
-import com.example.FoodIepal.VIew.MyPagerAdapter
 import com.example.FoodIepal.R
 import com.example.FoodIepal.SessionManager
 import com.example.FoodIepal.Utils.DataModel
+import com.example.FoodIepal.VIew.MyPagerAdapter
 import com.example.FoodIepal.databinding.ActivityMainMenuBinding
 
 @Suppress("DEPRECATION")

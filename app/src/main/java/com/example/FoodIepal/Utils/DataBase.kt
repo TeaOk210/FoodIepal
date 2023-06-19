@@ -4,19 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.FoodIepal.Entities.Basket
 import com.example.FoodIepal.Entities.Recipe
 import com.example.FoodIepal.Entities.RecipeType
 import com.example.FoodIepal.Entities.User
 import com.example.FoodIepal.R
 import com.example.FoodIepal.SessionManager
-import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
-import java.io.InputStreamReader
 
 @Database(
-    version = 2,
+    version = 1,
     entities = [
         Basket::class,
         User::class,
@@ -33,7 +30,7 @@ abstract class DataBase : RoomDatabase() {
         @Volatile
         private var INSTANCE: DataBase? = null
 
-        private const val DB_NAME = "new_test_database.db"
+        private const val DB_NAME = "database.db"
 
         fun getDatabase(context: Context): DataBase {
             return INSTANCE ?: synchronized(this) {
@@ -43,53 +40,17 @@ abstract class DataBase : RoomDatabase() {
                     DB_NAME
                 )
                     .fallbackToDestructiveMigration()
-//                    .addCallback()
                     .build()
                 INSTANCE = instance
                 instance
             }
         }
 
-        private class DatabaseCallback(private val context: Context) : Callback() {
-            override fun onCreate(db: SupportSQLiteDatabase) {
-                super.onCreate(db)
-                val recipeDao = INSTANCE?.getRecipeDao()
-                val sessionManager = SessionManager(context)
+        fun insertDefaultRecipes(context: Context) {
+            val recipeDao = INSTANCE?.getRecipeDao()
+            val sessionManager = SessionManager(context)
 
-                val fileContent = readRecipesFromFile(context)
-                val recipes = parseRecipeData(fileContent, context)
-
-                for (recipe in recipes) {
-                    val recipeEntity = Recipe(
-                        recipe.id,
-                        recipe.recipeName,
-                        recipe.description,
-                        recipe.recipeItems,
-                        recipe.preparation,
-                        recipe.calories,
-                        recipe.cookTime,
-                        recipe.imagePath,
-                        recipe.recipeType,
-                        sessionManager.getUserName()
-                    )
-                    recipeDao?.insertRecipe(recipeEntity)
-                }
-            }
-
-            private fun readRecipesFromFile(context: Context): String {
-                val fileInputStream = context.assets.open("recipes.txt")
-                val bufferedReader = BufferedReader(InputStreamReader(fileInputStream))
-                val stringBuilder = StringBuilder()
-                var line: String?
-                while (bufferedReader.readLine().also { line = it } != null) {
-                    stringBuilder.append(line).append("\n")
-                }
-                bufferedReader.close()
-                return stringBuilder.toString()
-            }
-
-            private fun parseRecipeData(fileContent: String, context: Context): List<Recipe> {
-
+            if (sessionManager.isFirstRun()) {
                 val images = arrayOf(
                     R.drawable.keks,
                     R.drawable.okroshca,
@@ -113,51 +74,371 @@ abstract class DataBase : RoomDatabase() {
                     R.drawable.ovosh_ragu
                 ).map { resourceId -> getBytesFromResource(resourceId, context) }
 
-                val recipeList = mutableListOf<Recipe>()
-                val recipeEntries = fileContent.trim().split("\n\n")
+                val recipeList = listOf(
+                    Res1,
+                    Res2,
+                    Res3,
+                    Res4,
+                    Res5,
+                    Res6,
+                    Res7,
+                    Res8,
+                    Res9,
+                    Res10,
+                    Res11,
+                    Res12,
+                    Res13,
+                    Res14,
+                    Res15,
+                    Res16,
+                    Res17,
+                    Res18,
+                    Res19,
+                    Res20
+                )
 
                 var index = 0
-                for (entry in recipeEntries) {
-                    val lines = entry.split("\n")
-                    if (lines.size >= 7) {
-
-                        index = (index + 1) % images.size
-                        val name = lines[0]
-                        val description = lines[1]
-                        val ingredients = lines.subList(2, lines.size - 3).joinToString("\n")
-                        val instructions = lines[lines.size - 3]
-                        val time = lines[lines.size - 2].toInt()
-                        val Kkal = lines[lines.size - 1].toInt()
-
-                        val recipe = Recipe(
-                            null,
-                            name,
-                            description,
-                            instructions,
-                            ingredients,
-                            Kkal,
-                            time,
-                            images[index],
-                            RecipeType.DEFAULT,
-                            ""
-                        )
-                        recipeList.add(recipe)
-                    }
+                for (recipe in recipeList) {
+                    val Res = Recipe(
+                        null,
+                        recipe[0].toString(),
+                        recipe[1].toString(),
+                        recipe[3].toString(),
+                        recipe[2].toString(),
+                        recipe[4].toString().toInt(),
+                        recipe[5].toString().toInt(),
+                        images[index],
+                        RecipeType.DEFAULT,
+                        sessionManager.getUserName()
+                    )
+                    index = (index + 1) % images.size
+                    recipeDao?.insertRecipe(Res)
                 }
-                return recipeList
-            }
 
-            private fun getBytesFromResource(resourceId: Int, context: Context): ByteArray {
-                val inputStream = context.resources.openRawResource(resourceId)
-                val outputStream = ByteArrayOutputStream()
-                val buffer = ByteArray(4096)
-                var bytesRead: Int
-
-                while (inputStream.read(buffer).also { bytesRead = it } >= 0) {
-                    outputStream.write(buffer, 0, bytesRead)
-                }
-                return outputStream.toByteArray()
+                sessionManager.setFirstRun(false)
             }
         }
+
+    private fun getBytesFromResource(resourceId: Int, context: Context): ByteArray {
+        val inputStream = context.resources.openRawResource(resourceId)
+        val outputStream = ByteArrayOutputStream()
+        val buffer = ByteArray(4096)
+        var bytesRead: Int
+
+        while (inputStream.read(buffer).also { bytesRead = it } >= 0) {
+            outputStream.write(buffer, 0, bytesRead)
+        }
+        return outputStream.toByteArray()
     }
+
+    val Res1 = listOf(
+        "Белковые Кексы",
+        "Мягкая и влажная выпечка",
+        "20 г мука ржаная цельнозерновая\n" +
+                "20 г сывороточный протеин двойной шоколад\n" +
+                "50 г хлопья рисовые\n" +
+                "50 г чёрная смородина\n" +
+                "60 г белок яичный",
+        "Смешать все ингредиенты, добавляя смородину в последнюю очередь.\n" +
+                "Вылить в слегка смазанные формы для маффинов.\n" +
+                "Выпекать в предварительно разогретой до 180°С духовке 25 минут.",
+        60,
+        50
+    )
+    val Res2 = listOf(
+        "Окрошка",
+        "Холодный суп, от которого вы почувствуете себя сытым.\n",
+        "200 г майонез\n" +
+                "350 г картошка вареная\n" +
+                "405 г колбаса докторская\n" +
+                "413 мл сметана 10%\n" +
+                "1,385 литры вода газированная\n" +
+                "460 г вареное яйцо\n" +
+                "313 г укроп\n" +
+                "425 г огурец (с кожурой)\n" +
+                "458 г редис",
+        "Нарежьте яйца, колбасу и овощи.\n" +
+                "Смешайте воду, сметану и майонез.\n" +
+                "Добавьте нарезанные ингредиенты и перемешайте.",
+        370,
+        30
+    )
+    val Res3 = listOf(
+        "Яичная Лапша С Креветками\n",
+        "Просто и легко готовить.\n",
+        "3 г растительное масло\n" +
+                "10 мл соевый соус\n" +
+                "40 г соус терияки\n" +
+                "75 г лапша яичная\n" +
+                "90 г креветки (вареные или на пару)\n" +
+                "25 г морковь\n" +
+                "30 г цукини\n" +
+                "77 г сладкий красный перец",
+        "Отварить лапшу.\n" +
+                "Нарезать овощи соломкой.\n" +
+                "Обжарить овощи на сковороде с маслом.\n" +
+                "Добавить лапшу и креветки к овощам.\n" +
+                "Добавить соус и варить на медленном огне еще 5 минут.",
+        172,
+        45
+    )
+    val Res4 = listOf(
+        "Картофельная Запеканка С Грибами И Фаршем\n",
+        "Вкусный и очень сытный.\n",
+        "80 г масло сливочное\n" +
+                "200 мл молоко 2,5%\n" +
+                "500 г куриный фарш\n" +
+                "1 кг картофель\n" +
+                "500 г шампиньоны\n" +
+                "200 г сыр голландский\n" +
+                "150 г лук",
+        "Отварить картофель и сделать пюре. Добавьте молоко и масло.\n" +
+                "Отдельно обжарить лук с грибами и отдельно обжарить фарш. Приправить по вкусу.\n" +
+                "В форму выкладываем слоями пюре, фарш, грибы с луком. Сверху посыпьте сыром.\n" +
+                "Выпекать при 180°С 15 минут.",
+        476,
+        60
+    )
+    val Res5 = listOf(
+        "Шоколадные Венские Вафли\n",
+        "Простой, вкусный и легкий рецепт завтрака.\n",
+        "7 г разрыхлитель теста\n" +
+                "14 г масло подсолнечное с добавлением оливкового масла и масла зародышей пшеницы\n" +
+                "100 мл молоко 3,2%\n" +
+                "150 г рисовая мука\n" +
+                "25 г какао\n" +
+                "1 большой яйцо (целое)\n" +
+                "100 г сахарный песок",
+        "Смешайте все сухие ингредиенты.\n" +
+                "Добавьте яйцо и молоко. Взбейте миксером сначала на низкой скорости, затем на средней скорости. Тесто должно быть консистенции 20% сметаны.\n" +
+                "Добавьте масло и перемешайте.\n" +
+                "В разогретую вафельницу выливаем 1,5 столовые ложки теста. Варить 5-7 минут.",
+        104,
+        55
+    )
+    val Res6 = listOf(
+        "Сырная Лепёшка\n",
+        "Легкая, вкусная и низкоуглеводная закуска.\n",
+        "15 г топлёное масло\n" +
+                "1 средний яйцо\n" +
+                "180 г сыр сулугуни\n" +
+                "180 г творог 9%",
+        "Натереть сыр.\n" +
+                "Смешать все ингредиенты вместе, кроме сливочного масла.\n" +
+                "Выложить массу в виде круглой лепешки и смазать верх растопленным сливочным маслом.\n" +
+                "Выпекать в духовке при температуре 180°C в течение 20 минут или до золотистого цвета.\n" +
+                "Разрезать торт на 6 частей.",
+        163,
+        30
+    )
+    val Res7 = listOf(
+        "Гречка Тушеная С Овощами\n",
+        "Простое, но вкусное блюдо.\n",
+        "200 г крупа гречневая ядрица\n" +
+                "314 г консервы свинина тушеная\n" +
+                "30 г морковь\n" +
+                "113 г лук\n" +
+                "383 г кабачок",
+        "Лук и морковь обжарить на слегка смазанной маслом сковороде 3-5 минут.\n" +
+                "Добавьте кабачки и перемешайте.\n" +
+                "Добавьте гречку, свинина тушеная и немного воды.\n" +
+                "Варить 35 минут.",
+        154,
+        70
+    )
+    val Res8 = listOf(
+        "Удон С Свиной Вырезкой И Овощами По Конадски\n",
+        "Вкусный и простой рецепт обеда.\n",
+        "1 порция рубленый чеснок\n" +
+                "10 мл соевый соус\n" +
+                "250 г канадская смесь\n" +
+                "100 г вырезка свиная\n" +
+                "100 г лапша удон (вареная)",
+        "На сковороде обжарить овощи со свиной вырезкой без добавления масла.\n" +
+                "Добавьте лапшу и обжарьте. В конце добавить соевый соус и чеснок.\n" +
+                "По желанию можно украсить сверху свежим огурцом при подаче на стол.",
+        389,
+        30
+    )
+    val Res9 = listOf(
+        "Салат Греческий\n",
+        "Идеально подходит для обеда или ужина.\n",
+        "13 мл оливковое масло\n" +
+                "28 г оливки черные без косточек\n" +
+                "66 г фета\n" +
+                "100 г помидоры\n" +
+                "150 г огурец (с кожурой)\n" +
+                "124 г болгарский перец",
+        "Нарезать фету и овощи.\n" +
+                "Смешайте все в миске.\n" +
+                "Приправить по вкусу.",
+        332,
+        15
+    )
+    val Res10 = listOf(
+        "Блины Из Рисовой Муки\n",
+        "Быстрый, вкусный и безглютеновый рецепт.\n",
+        "6 г крахмал картофельный\n" +
+                "71 г рисовая мука\n" +
+                "100 мл молоко 2,5%\n" +
+                "108 г яйцо",
+        "Смешайте все ингредиенты вместе.\n" +
+                "Подготовить разогретую сковороду.\n" +
+                "Вылить достаточное количество смеси и жарить до золотистого цвета с обеих сторон.",
+        96,
+        30
+    )
+    val Res11 = listOf(
+        "Бананово-Овсяные Оладьи\n",
+        "Натурально подслащенный, вкусный и простой в приготовлении.\n",
+        "20 г мука рисовая\n" +
+                "30 мл молоко 2,5%\n" +
+                "150 г банан\n" +
+                "45 г хлопья овсяные геркулес\n" +
+                "1 средний яйцо",
+        "Размять банан.\n" +
+                "Добавить взбитое яйцо и остальные ингредиенты.\n" +
+                "Выпекать на сковороде с антипригарным покрытием с обеих сторон до золотистого цвета.",
+        433,
+        30
+    )
+    val Res12 = listOf(
+        "Котлеты Куриные\n",
+        "Легкий, вкусный и простой рецепт.\n",
+        "1 ст л растительное масло\n" +
+                "53 г яйцо\n" +
+                "500 г куриная грудка\n" +
+                "15 г укроп\n" +
+                "85 г лук\n" +
+                "26 г петрушка\n" +
+                "180 г кабачок",
+        "Все ингредиенты, кроме яиц, измельчить на мясорубке.\n" +
+                "Выложите его в миску, добавьте яйцо и желаемые специи по вкусу.\n" +
+                "Сформировать котлеты и выложить их на смазанный маслом противень. Выпекать при 180°С 25 минут.",
+        140,
+        40
+    )
+    val Res13 = listOf(
+        "Треугольники Лаваша С Творогом\n",
+        "Отличный рецепт для перекуса.\n",
+        "50 г яйцо\n" +
+                "65 г сыр российский 50%\n" +
+                "1 небольшая щепотка соль\n" +
+                "10 г укроп\n" +
+                "200 г лаваш тонкий\n" +
+                "253 г творог 9%\n" +
+                "1 долька чеснок",
+        "Лаваш нарезать полосками около 10 см на 8 частей.\n" +
+                "Приготовить начинку: смешать творог, яйцо, соль, мелко нарезанный укроп, чеснок и тертый сыр и все хорошо перемешать в однородную массу.\n" +
+                "Выкладываем на полоску столовую ложку начинки и складываем треугольниками.\n" +
+                "Обжарить на сухой сковороде, гриле или обычном электрогриле до румяной корочки.",
+        296,
+        20
+    )
+    val Res14 = listOf(
+        "Сырники",
+        "Кремовый, но не такой сладкий.\n",
+        "2 г ванилин\n" +
+                "5 г заменитель сахара\n" +
+                "10 г разрыхлитель теста\n" +
+                "60 г рисовая мука\n" +
+                "1 средний яйцо\n" +
+                "10 г кокосовое масло\n" +
+                "600 г творог 9%",
+        "Яйцо взбить с творогом и сахарозаменителем.\n" +
+                "Добавить муку, разрыхлитель и ванилин.\n" +
+                "Обжарить на сковороде с кокосовым маслом под крышкой до золотистого цвета.",
+        334,
+        30
+    )
+    val Res15 = listOf(
+        "Куриный Салат\n", "Здоровое блюдо на обед.\n", "10 г горчица русская\n" +
+                "100 г авокадо\n" +
+                "120 г йогурт греческий 2,5%\n" +
+                "2 большой сваренное вкрутую яйца\n" +
+                "1 небольшая щепотка соль\n" +
+                "180 г куриная грудка отварная\n" +
+                "200 г огурец (с кожурой)\n" +
+                "50 г зеленый листовой салат", "Нарежьте курицу, яйца и овощи.\n" +
+                "Смешать все ингридиенты в одной миске.\n" +
+                "Приправить по вкусу.", 112, 20
+    )
+    val Res16 = listOf(
+        "Чизкейк Из Рисовой Муки\n",
+        "Рецепт вкусного и безглютенового завтрака.\n",
+        "1 г ванилин\n" +
+                "3 г заменитель сахара\n" +
+                "25 г мука рисовая\n" +
+                "1 средний яйцо\n" +
+                "250 г творог 5%",
+        "Смешать все ингредиенты.\n" +
+                "Сформировать сырники.\n" +
+                "Обжарить с двух сторон на антипригарной сковороде с закрытой крышкой до готовности.",
+        229,
+        25
+    )
+    val Res17 = listOf(
+        "Салат С Креветками\n",
+        "Низкокалорийное блюдо.\n",
+        "2 ст л растительное масло\n" +
+                "50 г креветки\n" +
+                "70 г салат месклам\n" +
+                "1 небольшая щепотка соль\n" +
+                "200 г огурец (с кожурой)\n" +
+                "150 г помидоры черри",
+        "Бланшируйте креветки в кипящей воде в течение 5 минут.\n" +
+                "Нарезать помидоры и огурцы.\n" +
+                "Смешайте все в миске.",
+        88,
+        20
+    )
+    val Res18 = listOf(
+        "Булгурский Плов С Курицей\n",
+        "Сытное блюдо на обед или ужин.\n",
+        "1 ч.л. подсолнечное масло\n" +
+                "512 г филе бедра куриное\n" +
+                "111 г морковь\n" +
+                "125 г лук\n" +
+                "400 г булгур",
+        "Нарезанные лук и морковь обжарить на сковороде с маслом 3-5 минут.\n" +
+                "Добавьте курицу, приправьте и готовьте 5 минут.\n" +
+                "Положите в мультиварку булгур, курицу и овощи, затем влейте 500 мл воды.\n" +
+                "Варить до готовности и мягкости.",
+        406,
+        60
+    )
+    val Res19 = listOf(
+        "Печенье Творожное\n",
+        "Легкий, простой и вкусный рецепт.\n",
+        "2 средний яйца\n" +
+                "100 г сахар\n" +
+                "300 г пшеничная мука\n" +
+                "1 небольшая щепотка соль\n" +
+                "5 г пищевая сода\n" +
+                "200 г творог 9%",
+        "Смешать 1 яйцо, сахар, творог и соль и взбить миксером.\n" +
+                "Добавить муку и соду и взбить.\n" +
+                "Раскатать тесто до 1 см и разрезать на 8 частей.\n" +
+                "Разложите их на противне и смажьте яйцом. Выпекать при 180°С 25 минут.",
+        233,
+        40
+    )
+    val Res20 = listOf(
+        "Овощное Рагу\n",
+        "Здоровое блюдо без использования масла.\n",
+        "124 г болгарский перец\n" +
+                "143 г помидоры\n" +
+                "186 г баклажан\n" +
+                "163 г картофель\n" +
+                "14 г укроп\n" +
+                "38 г лук\n" +
+                "30 г зеленый лук\n" +
+                "362 г кабачок",
+        "Нарезать все ингредиенты.\n" +
+                "Тушить в толстостенной кастрюле или сковороде.\n" +
+                "Приправить по вкусу. Варить до мягкости, но не переваривать.",
+        74,
+        50
+    )
+}
 }

@@ -12,7 +12,7 @@ class RecipeRepository(private val dao: RecipeDao) {
 
     suspend fun updateRecipeType(name: String, type: RecipeType) = dao.updateRecipeType(name, type)
 
-    suspend fun getRecipesByType(vararg types: RecipeType): LiveData<List<Recipe>> =
+    fun getRecipesByType(vararg types: RecipeType): LiveData<List<Recipe>> =
         dao.getRecipesByType(
             *types
         )

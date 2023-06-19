@@ -1,6 +1,5 @@
 package com.example.FoodIepal.Fragments
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,33 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.FoodIepal.Activities.FullScreen
+import com.example.FoodIepal.Entities.Recipe
+import com.example.FoodIepal.Entities.RecipeType
 import com.example.FoodIepal.R
 import com.example.FoodIepal.SessionManager
-import com.example.FoodIepal.Utils.DBManager
-import com.example.FoodIepal.Utils.DataBaseHalper
 import com.example.FoodIepal.Utils.DataModel
 import com.example.FoodIepal.VIew.RecipeAdapter
-import com.example.FoodIepal.VIew.RecipeItem
+import com.example.FoodIepal.VIew.RecipeViewModel
 import com.example.FoodIepal.databinding.FragmentFavoriteBinding
 
-class FragmentFavorite : Fragment() {
-    private var RecipeItemList = ArrayList<RecipeItem>()
+class FragmentFavorite : Fragment(), RecipeAdapter.OnItemClickListener {
     private lateinit var sessionManager: SessionManager
     private lateinit var adapter: RecipeAdapter
     private lateinit var binding: FragmentFavoriteBinding
-    private lateinit var dbManager: DBManager
     private val dataModel: DataModel by activityViewModels()
+    private lateinit var viewModel: RecipeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dbManager = DBManager(requireActivity())
-        dbManager.open()
-
         sessionManager = SessionManager(requireContext())
+
+        viewModel = ViewModelProvider(this)[RecipeViewModel::class.java]
 
         dataModel.desk.observe(viewLifecycleOwner) {
 
@@ -46,11 +44,9 @@ class FragmentFavorite : Fragment() {
             val items = dataModel.setItems.value.toString()
             val desk = dataModel.desk.value.toString()
             val login = sessionManager.getUserName()
-            val method = "insert"
 
-            dbManager.insertFavorite(name, prep, items, Kkal, time, image, login, desk, method)
+            viewModel.insertRecipe(Recipe(null, name, prep, desk, items, Kkal, time, image, RecipeType.CUSTOM, login))
 
-            populateList()
         }
 
         binding = FragmentFavoriteBinding.inflate(inflater)
@@ -70,64 +66,30 @@ class FragmentFavorite : Fragment() {
         populateList()
     }
 
-    @SuppressLint("Range", "NotifyDataSetChanged")
+    override fun onItemClick(data: Recipe) {
+        val intent = Intent(requireContext(), FullScreen::class.java)
+
+        intent.putExtra("Kkal", data.calories)
+        intent.putExtra("time", data.cookTime)
+        intent.putExtra("name", data.recipeName)
+        intent.putExtra("text", data.description)
+        intent.putExtra("image", data.imagePath)
+        intent.putExtra("items", data.recipeItems)
+        intent.putExtra("preparation", data.preparation)
+
+        startActivityForResult(intent, 1)
+    }
+
     fun populateList() {
-
-        RecipeItemList.clear()
-
-        val login = sessionManager.getUserName()
-
-        val cursorFV = dbManager.fetchFavorite(login)
-
-        if (cursorFV.moveToFirst()) {
-            do {
-                val name = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Recipe_NAme))
-                val text = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Description))
-                val items = cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Recipe_Items))
-                val preparation =
-                    cursorFV.getString(cursorFV.getColumnIndex(DataBaseHalper.Preparation))
-                val time = cursorFV.getInt(cursorFV.getColumnIndex(DataBaseHalper.Cook_time))
-                val kkal = cursorFV.getInt(cursorFV.getColumnIndex(DataBaseHalper.Calories))
-                val bytesImage =
-                    cursorFV.getBlob(cursorFV.getColumnIndex(DataBaseHalper.Image_parh))
-
-                val recipeItem = RecipeItem(
-                    name = name,
-                    text = text,
-                    time = time,
-                    Kkal = kkal,
-                    RecipeImage = bytesImage,
-                    recipeItems = items,
-                    Preparation = preparation
-                )
-
-                RecipeItemList.add(recipeItem)
-            } while (cursorFV.moveToNext())
+        viewModel.allRecipes.observe(viewLifecycleOwner) { list ->
+            list?.let {
+                adapter.filter(list as ArrayList<Recipe>)
+            }
         }
-
-        adapter.notifyDataSetChanged()
-        cursorFV.close()
     }
 
     private fun setUpAdapter() {
-        adapter = RecipeAdapter(
-            requireActivity(),
-            RecipeItemList,
-            object : RecipeAdapter.OnItemClickListener {
-                override fun onItemClick(data: RecipeItem) {
-                    val intent = Intent(requireContext(), FullScreen::class.java)
-
-                    intent.putExtra("Kkal", data.Kkal)
-                    intent.putExtra("time", data.time)
-                    intent.putExtra("name", data.name)
-                    intent.putExtra("text", data.text)
-                    intent.putExtra("image", data.RecipeImage)
-                    intent.putExtra("items", data.recipeItems)
-                    intent.putExtra("preparation", data.Preparation)
-
-                    startActivityForResult(intent, 1)
-                }
-            })
+        adapter = RecipeAdapter(this)
         binding.FavoriteList.adapter = adapter
         binding.FavoriteList.layoutManager = LinearLayoutManager(requireActivity())
     }

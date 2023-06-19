@@ -30,4 +30,12 @@ class SessionManager(context: Context) {
     fun getUserName(): String {
         return sharedPreferences.getString("username", false.toString()).toString()
     }
+
+    fun isFirstRun(): Boolean {
+        return sharedPreferences.getBoolean("run", true)
+    }
+
+    fun setFirstRun(firstRun: Boolean) {
+        sharedPreferences.edit().putBoolean("run", firstRun).apply()
+    }
 }

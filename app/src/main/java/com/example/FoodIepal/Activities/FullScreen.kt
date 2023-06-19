@@ -84,10 +84,8 @@ class FullScreen : AppCompatActivity() {
 
             ImageView.setImageBitmap(bitmap)
 
-            toolbarTitle.apply {
-                text = name
-                this!!.isSelected = true
-            }
+            toolbarTitle?.text = name
+            toolbarTitle?.isSelected = true
         }
 
         supportActionBar?.apply {
