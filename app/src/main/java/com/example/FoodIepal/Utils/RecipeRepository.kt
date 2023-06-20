@@ -18,4 +18,6 @@ class RecipeRepository(private val dao: RecipeDao) {
         )
 
     suspend fun getRecipeType(name: String, user: String): RecipeType? = dao.getRecipeType(name, user)
+
+    suspend fun deleteCustomRecipe(name: String) = dao.deleteCustomRecipeByName(name)
 }

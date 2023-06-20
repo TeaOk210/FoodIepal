@@ -25,4 +25,7 @@ interface RecipeDao {
 
     @Query("SELECT recipe_type FROM Recipe WHERE recipe_name = :recipeName AND username = :user")
     suspend fun getRecipeType(recipeName: String, user: String): RecipeType?
+
+    @Query("DELETE FROM Recipe WHERE recipe_name = :name AND recipe_type = 'CUSTOM'")
+    suspend fun deleteCustomRecipeByName(name: String)
 }

@@ -1,17 +1,17 @@
 package com.example.FoodIepal.Fragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.FoodIepal.Activities.Filter
 import com.example.FoodIepal.Activities.FullScreen
 import com.example.FoodIepal.Entities.Recipe
 import com.example.FoodIepal.R
@@ -26,7 +26,6 @@ import com.example.FoodIepal.databinding.FragmentHomeMenuBinding
 class FragmentHome : Fragment(), RecipeAdapter.OnItemClickListener{
     private lateinit var adapter: RecipeAdapter
     private lateinit var binding: FragmentHomeMenuBinding
-    private val dataModel: DataModel by activityViewModels()
     private lateinit var sessionManager: SessionManager
     private lateinit var viewModel: RecipeViewModel
 
@@ -43,29 +42,23 @@ class FragmentHome : Fragment(), RecipeAdapter.OnItemClickListener{
             title = "Главная"
             subtitle = sessionManager.getUserName()
             inflateMenu(R.menu.custom_toolvar_menu)
+            setOnMenuItemClickListener {
+                when(it.itemId) {
+                    R.id.clearButton -> {
+                        filter(IntRange(0, Int.MAX_VALUE), IntRange(0, Int.MAX_VALUE), ArrayList())
+                        Toast.makeText(requireContext(), "Фильтр очищен!", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
 
         viewModel = ViewModelProvider(this)[RecipeViewModel::class.java]
 
+        filterStart()
         setAdapter()
         populateList()
-
-        dataModel.minKk.observe(viewLifecycleOwner) { minKk ->
-            dataModel.maxKk.observe(viewLifecycleOwner) { maxkK ->
-                dataModel.minTt.observe(viewLifecycleOwner) { minTt ->
-                    dataModel.maxTt.observe(viewLifecycleOwner) { maxTt ->
-                        dataModel.items.observe(viewLifecycleOwner) { items ->
-                            filter(IntRange(minKk, maxkK), IntRange(minTt, maxTt), items)
-                            Log.e("test", minKk.toString())
-                            Log.e("test", maxkK.toString())
-                            Log.e("test", minTt.toString())
-                            Log.e("test", maxTt.toString())
-                            Log.e("test", items.toString())
-                        }
-                    }
-                }
-            }
-        }
 
             binding.SearchEditText.addTextChangedListener(object: TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -103,6 +96,12 @@ class FragmentHome : Fragment(), RecipeAdapter.OnItemClickListener{
         }
     }
 
+    private fun filterStart() {
+        binding.imageButton.setOnClickListener {
+            startActivityForResult(Intent(requireContext(), Filter::class.java), 1)
+        }
+    }
+
     private fun filter(kkalRange: IntRange, timeRange: IntRange, items: ArrayList<String>) {
         val filteredList = viewModel.allRecipes.value?.filter { recipe ->
             recipe.calories in kkalRange &&
@@ -129,6 +128,20 @@ class FragmentHome : Fragment(), RecipeAdapter.OnItemClickListener{
         adapter = RecipeAdapter(this)
         binding.RecipeList.adapter = adapter
         binding.RecipeList.layoutManager = LinearLayoutManager(requireActivity())
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            val minKk = data?.getIntExtra("minKk", 0) ?: 0
+            val timeMin = data?.getIntExtra("timeMin", 0) ?: 0
+            val maxKk = data?.getIntExtra("maxKk", 0) ?: Int.MAX_VALUE
+            val timeMax = data?.getIntExtra("timeMax", 0) ?: Int.MAX_VALUE
+            val items = data?.getStringArrayListExtra("items") ?: ArrayList()
+
+            filter(IntRange(minKk, maxKk), IntRange(timeMin, timeMax), items)
+        }
     }
 
     companion object {

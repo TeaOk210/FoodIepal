@@ -6,7 +6,6 @@
         android:id="@+id/clearButton"
         android:title=""
         android:icon="@drawable/clear24"
-        app:showAsAction="ifRoom"
-        android:onClick="clearFilter"/>
+        app:showAsAction="ifRoom" />
 
 </menu>

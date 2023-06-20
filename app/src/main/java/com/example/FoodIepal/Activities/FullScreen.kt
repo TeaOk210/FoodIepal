@@ -96,7 +96,11 @@ class FullScreen : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.custom_toolbar, menu)
+        if (type == RecipeType.CUSTOM) {
+            menuInflater.inflate(R.menu.custom_toolbar_personal, menu)
+        } else {
+            menuInflater.inflate(R.menu.custom_toolbar, menu)
+        }
 
         val item = menu?.findItem(R.id.addToFavorite)
         if (checkFavorite(type)) {
@@ -139,6 +143,18 @@ class FullScreen : AppCompatActivity() {
 
                     Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
                 }
+                return true
+            }
+
+            R.id.deleteRecipe -> {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    repository.deleteCustomRecipe(name)
+                }
+
+                Toast.makeText(this, "Удалено!", Toast.LENGTH_SHORT).show()
+
+                finish()
+
                 return true
             }
 

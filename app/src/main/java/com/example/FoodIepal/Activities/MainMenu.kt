@@ -1,11 +1,8 @@
 package com.example.FoodIepal.Activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -55,6 +52,7 @@ class MainMenu : AppCompatActivity() {
                 }
             }
         })
+
         binding.BottomMenu.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.Homebtn -> {
@@ -76,11 +74,6 @@ class MainMenu : AppCompatActivity() {
         }
     }
 
-    fun onClickFilterListener(view: View) {
-        val intent = Intent(this@MainMenu, Filter::class.java)
-        startActivityForResult(intent, 1)
-    }
-
     fun onClickItemAdd(item: MenuItem) {
         val intent = Intent(this@MainMenu, ItemAdd::class.java)
         startActivityForResult(intent, 3)
@@ -88,34 +81,5 @@ class MainMenu : AppCompatActivity() {
 
     fun onClickRecipeAdd(item: MenuItem) {
         DialogSetName.newInstance().show(supportFragmentManager, "")
-    }
-
-    fun clearFilter(item: MenuItem) {
-        dataModel.minKk.value = 0
-        dataModel.maxKk.value = Int.MAX_VALUE
-        dataModel.minTt.value = 0
-        dataModel.maxTt.value = Int.MAX_VALUE
-        dataModel.items.value = ArrayList()
-        Toast.makeText(this, "Фильтр очищен!", Toast.LENGTH_SHORT).show()
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK) {
-                val minKk = data?.getIntExtra("minKk", 0) ?: 0
-                val timeMin = data?.getIntExtra("timeMin", 0) ?: 0
-                val maxKk = data?.getIntExtra("maxKk", 0) ?: Int.MAX_VALUE
-                val timeMax = data?.getIntExtra("timeMax", 0) ?: Int.MAX_VALUE
-                val items = data?.getStringArrayListExtra("items") ?: ArrayList()
-
-                dataModel.minKk.value = minKk
-                dataModel.maxKk.value = maxKk
-                dataModel.minTt.value = timeMin
-                dataModel.maxTt.value = timeMax
-                dataModel.items.value = items
-            }
-        }
     }
 }
